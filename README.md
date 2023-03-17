@@ -1,6 +1,6 @@
 # k12-booter
 
-Frei nach dem Motto: "Rom ist euer Pruter" - A GUI to set up K12 macOS labs
+Frei nach dem Motto: "Rom ist euer Pruter" - A GUI to set up K12 macOS labs, i.e. one or more computer.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/WHm0_qGdhTw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
