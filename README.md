@@ -2,6 +2,67 @@
 
 Frei nach dem Motto: "Rom ist euer Pruter" - A GUI to set up K12 macOS labs, i.e. one or more computer.
 
+## Status
+
+Intial #Pamphlet
+
+<script src="https://gist.github.com/schnoddelbotz/ae1bd69cec3cd28f82e680f4c612d705.js"></script>
+
+Second thought
+
+![Introducing HashiCorp](IMG_1969.JPG)
+
+## What will k12-booter do, maybe?
+
+It's a GUI app. Native. For PC and Mac. Same. Qt or whatever. Smooth. Intuitive. Non-VERBOSE.
+
+1. On first start-up, meaning NO LOCAL CONFIG FILES FOUND, an Assistant or, even better,
+   a wizard will lead one, two or three teachers (or so) into the adventure of setting
+   up a computer lab, securely AND easily. By integrating a HELL of OpenSource components, smoothly.
+   The assistant will
+
+   1. Collect basic information about school and available infrastructure
+   2. Provide a list of government-supported cloud providers for secure data storage
+   3. Will aid in cloud account setup as far as possible, best practices implemented by aws/google/yandex/huaweicloud
+   4. Will ensure master account data is stored on encrypted USB sticks
+   5. Will use KMS or equivalent EXCLUSIVELY. One central keystore, logging on access.
+   6. Do further security-related ground work and DOCUMENT it automatically (HCL => S3 or so)
+
+2. k12booter aids further in account setup, based on ROLES. Every school has some secretaries.
+   We don't want creative paths here, intruders would find "hidden" files anyway. /home it is, say.
+
+3. k12booter supports ANY kind of IT infra available, even the future ones, then. Cool. Meaning:
+   After supplying data, k12booter instructs the user how to automate setup of these devices,
+   providing all options available; example: Replaceable disks in a set up RaspberryPi s? Then
+   support imaging the CF cards for manual distribution. Network boot environment using Cisco
+   switches? Help setting up DHCP helpers (that CAN be a Mac thing if crossing network boundries).
+   The complexity behind it must be hidden from the user. In conclusion, EXISTING OSS tools
+   will be used -- but we replace their BAZILLIONS of horrible CLI interfaces with ONE
+   well-INTEGRATED interface.
+
+4. Assuming a fleet of Macs or PCs running Linux or Windows - k12booter shall then help to
+   MAINTAIN the highes level of workstation security possible by
+   1. Implementing ConfigManagement so changes can be detected, reversed ...
+   2. Educating users that local "root" is NOT wanted, unless debugging OS/HW issues;
+      Changes to system configuration MUST GO THROUGH the config management system.
+   3. Installing [Telegraf](https://github.com/influxdata/telegraf) or equivalent on
+      workstations, if needed, extended to monitor OS patch-level #SecurityUpdates.
+      Accordingly, k12booter aids in setup of Prometheus and Grafana including
+      matching dashboards accordingly. For government reporting, digest data is
+      gathered and submitted to S3 buckets as defined by NSACyber/FBI.
+   4. Ensuring userland applications are up-to-date as well. Simple on debian, ubuntu,
+      RedHat - any good Linux distro. On Mac: [homebrew](https://brew.sh/), [munki](https://github.com/munki/munki). On Windows: [chocolatey](https://chocolatey.org/). The
+      selection of packages is the only COMMON thing users get to see here.
+      Nobody wants to explain people why `apt` is good while an `APT` es evil.
+      We CAN agree on a CURATED LIST of software, SCHOOLS - pupils SHOULD take a look at.
+      Starting with FUN things like Blender, Image editing, ... etc.
+
+
+I might want to rethink this. Alone is a bit boring. PEACE.
+References: e.g. This [tweet](https://twitter.com/x4e_ch/status/1638711985012441088)
+
+## Meanwhile ...
+
 <iframe width="560" height="315" src="https://www.youtube.com/embed/WHm0_qGdhTw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/IwHotyPnSgc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
