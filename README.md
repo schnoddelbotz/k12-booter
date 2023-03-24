@@ -62,6 +62,19 @@ It's a GUI app. Native. For PC and Mac. Same. Qt or whatever. Smooth. Intuitive.
   2. Each Teacher has one (cloud drive) folder per class it's taking care of, and each pupil has those shares mounted/available for document sharing.
   3. More to be defined by [Department of Homeland security](https://www.dhs.gov/)
 
+6. Teacher documentation - Output, outcome - final stage ...
+  1. Via governmental online portal, visualising current state known #Zensus #Statistics #PISA #CVE #ITSEC
+  2. Teachers can differntiate like ISO something security, cofidentiality levels - and corresponding storage locations.
+  3. Point 2 impacts (automated) SHARING of information with third parties, including e.g. the school's website.
+  4. Yes, the school needs a website today. For the city inhabitants. The school may want to show the world its face,
+     but most of content is irrelevant to others. Then, INTRUDERS come into play; people looking for security issues
+     to hijack the infrastructure - maybe from the other end of the world, maybe to install crypto miners. Most likely,
+     you will not notice without our help. Long story short, we WILL have walls here, to avoid useless traffic that
+     should lead to denial of access in the end anyway. You can always request any information from authorities though.
+     The perimeter needs to be defined here I guess, although it might be clear to some or the wrong term. And then
+     networking security, at the PROVIDER LEVEL. Schools are maybe the ONLY parties where web filters could make sense?
+  5. This is very drafted. Sorry. Good night.
+
 I might want to rethink this. Alone is a bit boring. PEACE.
 References: e.g. This [tweet](https://twitter.com/x4e_ch/status/1638711985012441088)
 
