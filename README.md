@@ -57,6 +57,10 @@ It's a GUI app. Native. For PC and Mac. Same. Qt or whatever. Smooth. Intuitive.
       We CAN agree on a CURATED LIST of software, SCHOOLS - pupils SHOULD take a look at.
       Starting with FUN things like Blender, Image editing, ... etc.
 
+5. Pupil view - What's new.
+  1. Every kid now has ONE cloud account, enabling SingleSign-On for all further EDU services.
+  2. Each Teacher has one (cloud drive) folder per class it's taking care of, and each pupil has those shares mounted/available for document sharing.
+  3. More to be defined by [Department of Homeland security](https://www.dhs.gov/)
 
 I might want to rethink this. Alone is a bit boring. PEACE.
 References: e.g. This [tweet](https://twitter.com/x4e_ch/status/1638711985012441088)
