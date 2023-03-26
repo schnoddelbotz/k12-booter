@@ -10,14 +10,20 @@ import (
 )
 
 const (
-	ViewHelp   = "help"
-	ViewEditor = "input"
+	ViewTopMenu   = "topmenu"
+	ViewMain      = "main"
+	ViewShortcuts = "shortcuts"
+	ViewCommand   = "command"
+	ViewHelp      = "help"
 )
 
 type App struct {
-	gui        *gocui.Gui
-	helpView   *gocui.View
-	editorView *gocui.View
+	gui           *gocui.Gui
+	topmenuView   *gocui.View // AS 400 like first row menu info
+	mainView      *gocui.View // the (?) main view
+	commandView   *gocui.View // interactive commands like: go infra ...
+	shortcutsView *gocui.View // Norton Commander / AS400-like bottom keymap
+	helpView      *gocui.View // sidebar; should toggle with F1
 }
 
 func Zain() {
@@ -43,21 +49,23 @@ func Zain() {
 	if err := app.gui.MainLoop(); err != nil && err != gocui.ErrQuit {
 		log.Fatalln(err)
 	}
-
-	fmt.Println("I hope you could be convinced. OSS only has advantages.")
 }
 
 func (app *App) bugger() {
 	time.Sleep(250 * time.Millisecond) // "wait" for main loop to be run once m(
 
-	e := app.editorView
-	e.Write([]byte(" * Load I18N data\n"))
+	e := app.mainView
+
+	app.gui.Update(func(g *gocui.Gui) error {
+		e.Write([]byte(" * Load I18N data\n"))
+		return nil
+	})
 
 	time.Sleep(1 * time.Second)
-
+	e.Autoscroll = true
 	for _, flag := range internationalization.CountryFlags {
 		app.gui.Update(func(g *gocui.Gui) error {
-			e.Write([]byte(flag))
+			e.Write([]byte(" " + flag + " "))
 			return nil
 		})
 		time.Sleep(40 * time.Millisecond)
@@ -65,9 +73,12 @@ func (app *App) bugger() {
 	time.Sleep(1 * time.Second)
 
 	app.gui.Update(func(g *gocui.Gui) error {
-		e.Write([]byte("\n * NOTA BENE\n"))
+		e.Write([]byte("\n\n * NOTA BENE\n"))
 		e.Write([]byte("Enterprise version does this twice as fast\n"))
-		e.Write([]byte("Press Ctrl-A now, then Ctrl-C\n"))
+		e.Write([]byte("Press F10 now to quit, then Ctrl-C\n\n"))
+
+		e.Write([]byte("Should look for local config file now, ...\n"))
+		e.Write([]byte("Or start a wizard to collect basic data\n"))
 		return nil
 	})
 }
@@ -75,40 +86,70 @@ func (app *App) bugger() {
 func (app *App) layout(g *gocui.Gui) error {
 	maxX, maxY := g.Size()
 
-	if v, err := g.SetView(ViewHelp, maxX-23, 0, maxX-1, 3); err != nil {
+	if v, err := g.SetView(ViewTopMenu, 0, 0, maxX-1, 2); err != nil {
 		if err != gocui.ErrUnknownView {
 			return err
 		}
-		v.Title = "Keybindings"
-		fmt.Fprintln(v, "^a: Set mask")
-		fmt.Fprintln(v, "^c: Exit")
+		v.Title = " * k12-booter * "
+		fmt.Fprintln(v, " FIRSTBOOT ")
+		v.FgColor = gocui.ColorGreen
+		app.topmenuView = v
+	}
+
+	if v, err := g.SetView(ViewMain, 0, 2, maxX-21, maxY-4); err != nil {
+		if err != gocui.ErrUnknownView {
+			return err
+		}
+		v.Wrap = true
+		app.mainView = v
+	}
+
+	// toggle
+	if v, err := g.SetView(ViewHelp, maxX-20, 2, maxX-1, maxY-4); err != nil {
+		if err != gocui.ErrUnknownView {
+			return err
+		}
+		v.Title = "[ Context help ]"
+		fmt.Fprintln(v, "This is k12-booter, yay!")
 		app.helpView = v
 	}
 
-	if v, err := g.SetView(ViewEditor, 0, 0, maxX-24, maxY-1); err != nil {
+	if v, err := g.SetView(ViewCommand, 0, maxY-3, maxX-1, maxY-1); err != nil {
 		if err != gocui.ErrUnknownView {
 			return err
 		}
-		if _, err := g.SetCurrentView(ViewEditor); err != nil {
+		if _, err := g.SetCurrentView(ViewCommand); err != nil {
 			return err
 		}
+		v.Title = "[ Command ]"
 		v.Editable = true
-		v.Wrap = true
-		v.Title = "Enter your wishes"
-		app.editorView = v
+		v.Highlight = true
+		fmt.Fprintln(v, "")
+		app.commandView = v
+	}
+
+	if v, err := g.SetView(ViewShortcuts, 0, maxY-2, maxX-1, maxY); err != nil {
+		if err != gocui.ErrUnknownView {
+			return err
+		}
+		//v.Title = "Shortcuts"
+		v.BgColor = gocui.ColorBlue
+		v.Frame = false
+		fmt.Fprintln(v, "F1 Help | F2 Run | F3 View | F4 Edit | F5 Copy | F6-F8 For SALE | F9 Mask | F10 Exit")
+		app.shortcutsView = v
 	}
 
 	return nil
 }
 
 func initKeybindings(g *gocui.Gui) error {
-	if err := g.SetKeybinding("", gocui.KeyCtrlC, gocui.ModNone,
+	if err := g.SetKeybinding("", gocui.KeyF10, gocui.ModNone,
 		func(g *gocui.Gui, v *gocui.View) error {
 			return gocui.ErrQuit
 		}); err != nil {
 		return err
 	}
-	if err := g.SetKeybinding("input", gocui.KeyCtrlA, gocui.ModNone,
+	if err := g.SetKeybinding(ViewCommand, gocui.KeyF9, gocui.ModNone,
 		func(g *gocui.Gui, v *gocui.View) error {
 			v.Mask ^= '*'
 			return nil
