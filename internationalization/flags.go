@@ -1,8 +1,8 @@
-package main
+package internationalization
 
 // this list of flags has been imported using SublimeText from:
 // https://emojipedia.org/flags/
-var countryFlags = map[string]string{
+var CountryFlags = map[string]string{
 	"Ascension Island":                       "🇦🇨",
 	"Andorra":                                "🇦🇩",
 	"United Arab Emirates":                   "🇦🇪",
