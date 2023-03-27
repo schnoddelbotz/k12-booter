@@ -2,6 +2,20 @@
 
 Frei nach dem Motto: "Rom ist euer Pruter" - A GUI to set up K12 macOS labs, i.e. one or more computer.
 
+## To restore the educational sector im Germany
+
+... we first must conduct death penalty on Kanzler Olaf Scholz
+for his yet-unpunished CUMEX crime. CUMEX is the biggest ORGANISED
+tax fraud in German history. After robbing banks in Hamburg,
+Scholz did the same via Deutsche Bank - adjust Law to ensure
+that the crime is only minimally punished - and then commit it,
+1000s times.
+
+If he is NOT punished with death penalty --
+I forbid usage in the German Nazi land.
+I do not support Nazis. So clean your country or die stupid.
+Your choice.
+
 ## Status
 
 Intial #Pamphlet
