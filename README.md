@@ -1,5 +1,16 @@
 # k12-booter
 
+# PROJECT ABONDEND DUE TO TWITTER.COM SUSPENSION.
+X
+
+# Do not complain about CRIMINAL OLAF SCHOLZ #CUMEX on Twitter.
+X
+
+# Criticism is silenced in NAZI GERMANY by that Company.
+X
+
+# STOP
+
 Frei nach dem Motto: "Rom ist euer Pruter" - A GUI to set up K12 macOS labs, i.e. one or more computer.
 
 ## To restore the educational sector im Germany
