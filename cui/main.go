@@ -24,6 +24,7 @@ type App struct {
 	commandView   *gocui.View // interactive commands like: go infra ...
 	shortcutsView *gocui.View // Norton Commander / AS400-like bottom keymap
 	helpView      *gocui.View // sidebar; should toggle with F1
+	showHelp      bool
 }
 
 func Zain() {
@@ -37,10 +38,12 @@ func Zain() {
 	}
 	defer app.gui.Close()
 	app.gui.Cursor = true
+	app.gui.Mouse = true
+	app.gui.ASCII = true
 
 	app.gui.SetManagerFunc(app.layout)
 
-	if err := initKeybindings(app.gui); err != nil {
+	if err := app.initKeybindings(app.gui); err != nil {
 		log.Fatalln(err)
 	}
 
@@ -52,23 +55,24 @@ func Zain() {
 }
 
 func (app *App) bugger() {
-	time.Sleep(250 * time.Millisecond) // "wait" for main loop to be run once m(
+	time.Sleep(25 * time.Millisecond) // "wait" for main loop to be run once m(
 
 	e := app.mainView
 
 	app.gui.Update(func(g *gocui.Gui) error {
-		e.Write([]byte(" * Load I18N data\n"))
+		fmt.Fprintln(e, " * Loading I18N data (fake) ...")
 		return nil
 	})
 
 	time.Sleep(1 * time.Second)
 	e.Autoscroll = true
-	for _, flag := range internationalization.CountryFlags {
+	for country := range internationalization.CountryFlags {
 		app.gui.Update(func(g *gocui.Gui) error {
-			e.Write([]byte(" " + flag + " "))
+			//e.Write([]byte(flag + " "))
+			fmt.Fprintf(e, "%s ", country)
 			return nil
 		})
-		time.Sleep(40 * time.Millisecond)
+		time.Sleep(20 * time.Millisecond)
 	}
 	time.Sleep(1 * time.Second)
 
@@ -79,39 +83,55 @@ func (app *App) bugger() {
 
 		e.Write([]byte("Should look for local config file now, ...\n"))
 		e.Write([]byte("Or start a wizard to collect basic data\n"))
+
+		fmt.Fprintf(e, "%s", ` ____________ 
+		< k12-booter >
+		 ------------ 
+				\   ^__^
+				 \  (oo)\_______
+					(__)\       )\/\
+						||----w |
+						||     ||`)
+
 		return nil
 	})
 }
 
 func (app *App) layout(g *gocui.Gui) error {
 	maxX, maxY := g.Size()
+	helpWidth := 0
 
 	if v, err := g.SetView(ViewTopMenu, 0, 0, maxX-1, 2); err != nil {
 		if err != gocui.ErrUnknownView {
 			return err
 		}
-		v.Title = " * k12-booter * "
-		fmt.Fprintln(v, " FIRSTBOOT ")
+		v.Title = "[ k12-booter ]"
+		fmt.Fprintln(v, " * FIRSTBOOT ")
 		v.FgColor = gocui.ColorGreen
 		app.topmenuView = v
 	}
 
-	if v, err := g.SetView(ViewMain, 0, 2, maxX-21, maxY-4); err != nil {
+	// toggle
+	if app.showHelp {
+		helpWidth = 30
+		if v, err := g.SetView(ViewHelp, maxX-helpWidth-1, 2, maxX-1, maxY-4); err != nil {
+			if err != gocui.ErrUnknownView {
+				return err
+			}
+			v.Title = "[ Context help ]"
+			fmt.Fprintln(v, "This is k12-booter, yay!")
+			app.helpView = v
+		}
+	} else {
+		g.DeleteView(ViewHelp)
+	}
+
+	if v, err := g.SetView(ViewMain, 0, 2, maxX-helpWidth-1, maxY-4); err != nil {
 		if err != gocui.ErrUnknownView {
 			return err
 		}
 		v.Wrap = true
 		app.mainView = v
-	}
-
-	// toggle
-	if v, err := g.SetView(ViewHelp, maxX-20, 2, maxX-1, maxY-4); err != nil {
-		if err != gocui.ErrUnknownView {
-			return err
-		}
-		v.Title = "[ Context help ]"
-		fmt.Fprintln(v, "This is k12-booter, yay!")
-		app.helpView = v
 	}
 
 	if v, err := g.SetView(ViewCommand, 0, maxY-3, maxX-1, maxY-1); err != nil {
@@ -135,14 +155,20 @@ func (app *App) layout(g *gocui.Gui) error {
 		//v.Title = "Shortcuts"
 		v.BgColor = gocui.ColorBlue
 		v.Frame = false
-		fmt.Fprintln(v, "F1 Help | F2 Run | F3 View | F4 Edit | F5 Copy | F6-F8 For SALE | F9 Mask | F10 Exit")
+		// https://github.com/gczgcz2015/gocui/blob/master/_examples/colors256.go
+		// NC was: black empty bg instead of | char
+		fmt.Fprintf(v, "F1 Help | F2 CMD | F3 View | F4 Edit | F5 Search | F9 Mask | F10 Exit")
 		app.shortcutsView = v
 	}
 
 	return nil
 }
 
-func initKeybindings(g *gocui.Gui) error {
+func (app *App) initKeybindings(g *gocui.Gui) error {
+	// they must depend on current view ...?
+	// ESC should ...? Get into main view and let it consume further ESCs.
+	// F2 in mainview should select CMD as active win
+
 	if err := g.SetKeybinding("", gocui.KeyF10, gocui.ModNone,
 		func(g *gocui.Gui, v *gocui.View) error {
 			return gocui.ErrQuit
@@ -152,6 +178,13 @@ func initKeybindings(g *gocui.Gui) error {
 	if err := g.SetKeybinding(ViewCommand, gocui.KeyF9, gocui.ModNone,
 		func(g *gocui.Gui, v *gocui.View) error {
 			v.Mask ^= '*'
+			return nil
+		}); err != nil {
+		return err
+	}
+	if err := g.SetKeybinding("", gocui.KeyF1, gocui.ModNone,
+		func(g *gocui.Gui, v *gocui.View) error {
+			app.showHelp = !app.showHelp // toggle
 			return nil
 		}); err != nil {
 		return err
