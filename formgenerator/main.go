@@ -29,6 +29,8 @@ const (
 	TypeClosingElement
 )
 
+var formNode *html.Node
+
 func QueryFormParamsFromUser(doit bool) *Form {
 	// dialog-driven, add elems, ask for filename to write to or stdout?
 	if !doit {
@@ -78,13 +80,13 @@ func ReadFormFromHTMLFile(filename string) *Form {
 		log.Panicf("don't panic. html parser error. return err...")
 	}
 
-	formctx := zf(doc)
-	if formctx == nil {
-		log.Panicf("bad html file: %v", err)
+	zf(doc)
+	if formNode == nil {
+		log.Print(renderNode(doc))
+		log.Panicf("bad html file (no form node found): %v", err)
 	}
-	log.Print(renderNode(formctx))
 
-	htmlform, err := html.ParseFragment(data, formctx)
+	htmlform, err := html.ParseFragment(data, formNode)
 	if err != nil {
 		log.Fatalf("parseFragment failed on form: %v", err)
 	}
@@ -92,28 +94,24 @@ func ReadFormFromHTMLFile(filename string) *Form {
 		log.Printf("parseFragment found: %v -> %v", x, r.Data)
 	}
 
-	n := htmlform[0]
+	n := formNode
 	for c := n.FirstChild; c != nil; c = c.NextSibling {
 		log.Printf(" C= %+v ", c)
+		log.Print(renderNode(c))
 	}
 	f.complete = true
 	return f
 }
 
-func zf(n *html.Node) *html.Node {
-	res := &html.Node{}
+func zf(n *html.Node) {
 	if n.Type == html.ElementNode && n.Data == "form" {
 		log.Printf("Found form. Form Attributes: %+v", n.Attr)
 		log.Print(renderNode(n))
-		res = n
+		formNode = n
 	}
 	for c := n.FirstChild; c != nil; c = c.NextSibling {
 		zf(c)
 	}
-	// log.Printf("finally ... urgs")
-	// log.Printf("XFound form. Form Attributes: %+v", res.Attr)
-	// log.Print(renderNode(res))
-	return res
 }
 
 func CreateFormGO(f *Form) {
