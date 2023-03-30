@@ -80,24 +80,19 @@ func ReadFormFromHTMLFile(filename string) *Form {
 		log.Panicf("don't panic. html parser error. return err...")
 	}
 
+	// block of evil global usage. fixme if you need this in parallel somehow.
+	formNode = nil
 	zf(doc)
 	if formNode == nil {
 		log.Print(renderNode(doc))
 		log.Panicf("bad html file (no form node found): %v", err)
 	}
 
-	htmlform, err := html.ParseFragment(data, formNode)
-	if err != nil {
-		log.Fatalf("parseFragment failed on form: %v", err)
-	}
-	for x, r := range htmlform {
-		log.Printf("parseFragment found: %v -> %v", x, r.Data)
-	}
-
-	n := formNode
-	for c := n.FirstChild; c != nil; c = c.NextSibling {
-		log.Printf(" C= %+v ", c)
-		log.Print(renderNode(c))
+	for c := formNode.FirstChild; c != nil; c = c.NextSibling {
+		if c.Type != html.ElementNode {
+			continue
+		}
+		log.Printf("Element: %s", renderNode(c))
 	}
 	f.complete = true
 	return f
@@ -107,6 +102,7 @@ func zf(n *html.Node) {
 	if n.Type == html.ElementNode && n.Data == "form" {
 		log.Printf("Found form. Form Attributes: %+v", n.Attr)
 		log.Print(renderNode(n))
+		// This is a side-effect. No, no, no! Fixme.
 		formNode = n
 	}
 	for c := n.FirstChild; c != nil; c = c.NextSibling {
