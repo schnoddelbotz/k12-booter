@@ -7,5 +7,6 @@ require (
 	github.com/mattn/go-runewidth v0.0.9 // indirect
 	github.com/nicksnyder/go-i18n/v2 v2.2.1 // indirect
 	github.com/nsf/termbox-go v1.1.1 // indirect
-	golang.org/x/text v0.4.0 // indirect
+	golang.org/x/net v0.8.0 // indirect
+	golang.org/x/text v0.8.0 // indirect
 )
