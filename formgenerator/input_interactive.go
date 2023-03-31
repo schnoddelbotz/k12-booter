@@ -17,7 +17,7 @@ func QueryFormParamsFromUser(doit bool) *Form {
 		if input == "" {
 			form.Complete = true
 		} else {
-			fElement.labelText = input
+			fElement.name = input
 			fElement.elementType = FormElementType(FT_Input)
 			form.Elements = append(form.Elements, *fElement)
 		}

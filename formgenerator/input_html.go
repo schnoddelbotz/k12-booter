@@ -56,7 +56,7 @@ func ReadFormFromString(htmlInput string) *Form {
 		if c.Type != html.ElementNode {
 			continue
 		}
-		log.Printf("Element: %s", renderNode(c))
+		// log.Printf("Element: %s", renderNode(c))
 		f.AddHTMLNodeAsElement(c)
 	}
 	f.Complete = true
