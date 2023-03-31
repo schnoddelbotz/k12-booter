@@ -1,0 +1,3 @@
+package formgenerator
+
+// todo lynx-like html rendering of form, eases debugging hopefully ...

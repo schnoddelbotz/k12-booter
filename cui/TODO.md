@@ -33,3 +33,20 @@ Assumption: I look at my screen to deal with ice cold data. Roses or so distract
 - show nerdy status info like terminal emulator: CAPS_LOCK RXTX CLOCK LOCALE
 - introduce color scheme before it hurts to do so
 - given standard UIs SHOULD make this even easier, look into braille support; text-to-speech?
+
+# k12-booter menu example
+
+read dumb simple ascii file, example, feels like markdown?
+this was the idea before thinking about HTML forms as input ...
+
+```
+# Main screen
+1. Basic local PC k12-booter settings
+2. Basic school settings
+3. IT Inventory and orders - Hardware
+4. IT Inventory and orders - Software
+5. IT Configuration management & deployment
+6. IT Monitoring, alerting and telemetry
+7. Settings report & system documentation
+8. Introduction and access to services
+```
