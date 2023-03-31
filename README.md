@@ -1,15 +1,14 @@
 # k12-booter
 
-# PROJECT ABONDEND DUE TO TWITTER.COM SUSPENSION.
-X
+## PROJECT WITH REDUCED AMBITION DUE TO TWITTER.COM SUSPENSION.
+Do not complain about CRIMINAL OLAF SCHOLZ #CUMEX on Twitter.
+Germany has severe problems with online censorship.
+While true large scale crimes are on the rise.
+The previous version of this document contained a more clear
+statement, but it does not help anyway. What could help schools,
+or supposed to do so, is outlined above.
 
-# Do not complain about CRIMINAL OLAF SCHOLZ #CUMEX on Twitter.
-X
-
-# Criticism is silenced in NAZI GERMANY by that Company.
-X
-
-# STOP
+# Introduction
 
 Frei nach dem Motto: "Rom ist euer Pruter" - A GUI to set up K12 macOS labs, i.e. one or more computer.
 
