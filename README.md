@@ -102,6 +102,11 @@ It's a GUI app. Native. For PC and Mac. Same. Qt or whatever. Smooth. Intuitive.
 I might want to rethink this. Alone is a bit boring. PEACE.
 References: e.g. This [tweet](https://twitter.com/x4e_ch/status/1638711985012441088)
 
+## One more TODO list 
+
+- At startup, figure out locale, try to guess country, select correct translation.
+- Provide "Welcome" message translated to all languages so all I18n files exist ... :shrug:
+
 ## Meanwhile ...
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/WHm0_qGdhTw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
