@@ -2,6 +2,7 @@ package formgenerator
 
 import (
 	"log"
+	"strings"
 
 	"golang.org/x/net/html"
 )
@@ -22,8 +23,9 @@ type FormElement struct {
 }
 
 type FormSelectOption struct {
-	value string
-	label string
+	value    string
+	label    string
+	selected bool
 }
 
 const (
@@ -89,8 +91,7 @@ func (f *Form) AddHTMLNodeAsElement(n *html.Node) {
 			}
 			elem.inputType = FormElementInputType(iType)
 		case FT_Select:
-			// log.Printf("TODO: Add SELECT and!!! options %v", n)
-			// ...
+			elem.selectOptions = getFormSelectOptions(n)
 		// a.href ...
 		default:
 			log.Panicf("Can't deal with this element in forms yet: %v", n)
@@ -111,4 +112,48 @@ func getElementAttributeValue(attrs []html.Attribute, elementName string) string
 	}
 	// fixme silent failure :/
 	return result
+}
+
+func elementAttributeExists(attrs []html.Attribute, elementName string) bool {
+	// fixme silent failure :/ ... continued / part 2
+	for _, v := range attrs {
+		if v.Key == elementName {
+			return true
+		}
+	}
+	return false
+}
+
+func getFormSelectOptions(n *html.Node) []FormSelectOption {
+	options := []FormSelectOption{}
+	for c := n.FirstChild; c != nil; c = c.NextSibling {
+		if c.Type != html.ElementNode {
+			continue
+		}
+		if c.Data != "option" {
+			continue
+		}
+		option := FormSelectOption{}
+
+		if c.FirstChild != nil {
+			option.label = trimNewlinesAndWhitespace(renderNode(c.FirstChild))
+		}
+
+		option.value = getElementAttributeValue(c.Attr, "value")
+
+		if elementAttributeExists(c.Attr, "selected") {
+			option.selected = true
+		}
+
+		options = append(options, option)
+	}
+
+	return options
+}
+
+func trimNewlinesAndWhitespace(txt string) string {
+	txt = strings.TrimSuffix(txt, "\n")
+	txt = strings.TrimPrefix(txt, "\n")
+	txt = strings.TrimSpace(txt)
+	return txt
 }
