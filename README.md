@@ -106,6 +106,9 @@ References: e.g. This [tweet](https://twitter.com/x4e_ch/status/1638711985012441
 
 - At startup, figure out locale, try to guess country, select correct translation.
 - Provide "Welcome" message translated to all languages so all I18n files exist ... :shrug:
+- [HTML form docs MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) #AutoComplete
+  Any data available in choosers should be feed to an application-wide [bleve](https://github.com/blevesearch/bleve) instance.
+  That could then serve nicely as source for autocomplete/sugester/type-ahead in form fields.
 
 ## Meanwhile ...
 
