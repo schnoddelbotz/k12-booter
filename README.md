@@ -109,6 +109,8 @@ References: e.g. This [tweet](https://twitter.com/x4e_ch/status/1638711985012441
 - [HTML form docs MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) #AutoComplete
   Any data available in choosers should be feed to an application-wide [bleve](https://github.com/blevesearch/bleve) instance.
   That could then serve nicely as source for autocomplete/sugester/type-ahead in form fields.
+- `input_html.go` - support HTML checkboxes (and radio buttons, yes)
+- formgenerator: give each element (that earns it) a tabindex.
 
 ## Meanwhile ...
 
