@@ -37,6 +37,7 @@ func CreateFormAsNeeded(byQuery bool, byFilename string) bool {
 		// HTML for now to debug import into *Form, Go later
 		// This should reflect the original input form structure. Test...
 		CreateFormHTML(form)
+		CreateFormPlainText(form)
 		return true
 	}
 	return false

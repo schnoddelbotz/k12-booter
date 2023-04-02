@@ -28,7 +28,7 @@ func ReadFormFromHTMLFile(filename string) *Form {
 
 // ReadFormFromString translates an input (HTML+) <FORM> into internal *Form representation
 func ReadFormFromString(htmlInput string) *Form {
-	f := &Form{}
+	f := NewForm()
 	htmlInputReader := strings.NewReader(htmlInput)
 	doc, err := html.Parse(htmlInputReader)
 	if err != nil {
@@ -53,12 +53,20 @@ func ReadFormFromString(htmlInput string) *Form {
 
 	// process all elements inside the <FORM> tag, add them to Form.Elements[]
 	for c := formNode.FirstChild; c != nil; c = c.NextSibling {
+		if c.Type == html.TextNode {
+			nodeText := trimNewlinesAndWhitespace(renderNode(c))
+			if nodeText != "" {
+				f.AddTextAsElement(nodeText)
+			}
+			continue
+		}
 		if c.Type != html.ElementNode {
 			continue
 		}
 		// log.Printf("Element: %s", renderNode(c))
 		f.AddHTMLNodeAsElement(c)
 	}
+	f.SetLabelTextPerID()
 	f.Complete = true
 	return f
 }

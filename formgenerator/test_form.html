@@ -4,8 +4,14 @@
         <h1>Test form for formgenerator import purposes</h1>
         <p>The form below contains all elements that can be translated to menu pages in k12-booter (by producing cui GUI boilerplate code for it)</p>
         <form method="ignored" anything="goes anywhere">
-            <input type="text" name="FirstName" />
-            <select name="SelectOne">
+            <!-- Both variants (implicit and explicit via for) SHOULD be supported... -->
+            <!-- https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label -->
+            <!-- But they (implicit ones) are NOT. Only a very limited subset works right now :/ -->
+            <label for="firstName">First name:</label>
+            <input type="text" id="firstName" name="FirstName" />
+            Last name: <input type="text" name="LastName" />
+            <br>            
+            <select name="SelectOne" id="select1">
                 <option value="1">One</option>
                 <option value="2" selected>
                     Two
@@ -14,6 +20,8 @@
                     
                 </OPTION>
             </select>
+            <label for="select1">Select 1 .. 3:</label>
+            <br>
             <INPUT type="submit" />
         </form>
         <h2>TODO / ideas</h2>
