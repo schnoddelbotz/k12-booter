@@ -20,7 +20,24 @@
                     
                 </OPTION>
             </select>
-            <label for="select1">Select 1 .. 3:</label>
+            <label for="select1">Select drop-down</label>
+            <br>
+            <!-- todo: radios should work within a <fieldset> ... -->
+            <!-- <legend>header ...</legend> + this comments yields a textnode...? / br -->
+            Radio buttons Go vs HTML 
+            <input type="radio" id="html" name="language" value="HTML">
+            <label for="html">HTML</label>
+            <input type="radio" id="go" name="language" value="Go" checked>
+            <label for="go">Go</label>
+            <br>
+
+            Checkboxes for feature selection
+            <input type="checkbox" name="feature1" value="TypeSafe" id="check1" checked>
+            <label for="check1">TypeSafe</label>
+            <input type="checkbox" name="feature1" value="Fast" id="check2" checked>
+            <label for="check2">Fast, Furious and Secure</label>
+            <input type="checkbox" name="feature1" value="solid" id="check3">
+            <label for="check3">rock-solid</label>
             <br>
             <INPUT type="submit" />
         </form>

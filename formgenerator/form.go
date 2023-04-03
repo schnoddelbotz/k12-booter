@@ -29,6 +29,7 @@ type FormElement struct {
 type FormSelectOption struct {
 	value    string
 	label    string
+	id       string // for checkbox and radio ~ labels
 	selected bool
 }
 
@@ -43,6 +44,8 @@ const (
 	InputType_Text FormElementInputType = iota
 	InputType_Number
 	InputType_Submit
+	InputType_Radio
+	InputType_Checkbox
 )
 
 var HTMLElementTypeMap = map[string]FormElementType{
@@ -54,9 +57,11 @@ var HTMLElementTypeMap = map[string]FormElementType{
 }
 
 var HTMLElementInputTypeMap = map[string]FormElementInputType{
-	"text":   InputType_Text,
-	"number": InputType_Number,
-	"submit": InputType_Submit,
+	"text":     InputType_Text,
+	"number":   InputType_Number,
+	"submit":   InputType_Submit,
+	"radio":    InputType_Radio,
+	"checkbox": InputType_Checkbox,
 }
 
 func NewForm() *Form {
@@ -93,38 +98,62 @@ func (e *FormElement) GetInputTypeName() string {
 func (f *Form) AddHTMLNodeAsElement(n *html.Node) {
 	// todo: move to output_html.go
 	eType, exists := HTMLElementTypeMap[n.Data]
-	if exists {
-		elem := &FormElement{}
-		elem.elementType = eType
-		elem.name = getElementAttributeValue(n.Attr, "name")
-		elem.id = getElementAttributeValue(n.Attr, "id")
-
-		switch eType {
-		case FT_Input:
-			inputType := getElementAttributeValue(n.Attr, "type")
-			iType, exists := HTMLElementInputTypeMap[inputType]
-			if !exists {
-				log.Panicf("Failed to look up element type %v", inputType)
-			}
-			elem.inputType = FormElementInputType(iType)
-		case FT_Select:
-			elem.selectOptions = getFormSelectOptions(n)
-		case FT_LineBreak:
-		case FT_Label:
-			forid := getElementAttributeValue(n.Attr, "for")
-			labelText := renderNode(n.FirstChild)
-			f.labels[forid] = labelText
-			// only append to f.Labels, not f.Elements - thus early:
-			return
-		// a.href ...
-		default:
-			log.Panicf("Can't deal with this element in forms yet: %v", n)
-		}
-
-		f.Elements = append(f.Elements, *elem)
-	} else {
+	if !exists {
 		log.Printf("Form contains element I cannot work with yet: %s", n.Data)
+		return
 	}
+	elem := &FormElement{}
+	elem.elementType = eType
+	elem.name = getElementAttributeValue(n.Attr, "name")
+	elem.id = getElementAttributeValue(n.Attr, "id")
+	inputType := getElementAttributeValue(n.Attr, "type")
+
+	switch eType {
+	case FT_Input:
+		iType, exists := HTMLElementInputTypeMap[inputType]
+		if !exists {
+			log.Panicf("Unsupported HTML <input> type=%v", inputType)
+		}
+		elem.inputType = FormElementInputType(iType)
+	case FT_Select:
+		elem.selectOptions = getFormSelectOptions(n)
+	case FT_LineBreak:
+	case FT_Label:
+		forid := getElementAttributeValue(n.Attr, "for")
+		labelText := renderNode(n.FirstChild)
+		f.labels[forid] = labelText
+		// only append to f.Labels, not f.Elements - thus early:
+		return
+	// a.href ...
+	default:
+		log.Panicf("Can't deal with this element in forms yet: %v", n)
+	}
+
+	if eType == FT_Input && inputType == "radio" || inputType == "checkbox" {
+		sopt := FormSelectOption{
+			value:    getElementAttributeValue(n.Attr, "value"),
+			label:    elem.name,
+			id:       elem.id,
+			selected: elementAttributeExists(n.Attr, "checked"),
+		}
+		existingId := f.getInternalElementId(elem.name)
+		if existingId != nil {
+			f.Elements[*existingId].selectOptions = append(f.Elements[*existingId].selectOptions, sopt)
+			return
+		}
+		elem.selectOptions = append(elem.selectOptions, sopt)
+	}
+
+	f.Elements = append(f.Elements, *elem)
+}
+
+func (f *Form) getInternalElementId(inputName string) *int {
+	for id, fdata := range f.Elements {
+		if fdata.name == inputName {
+			return &id
+		}
+	}
+	return nil
 }
 
 func (f *Form) SetLabelTextPerID() {
