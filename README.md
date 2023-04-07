@@ -112,6 +112,17 @@ References: e.g. This [tweet](https://twitter.com/x4e_ch/status/1638711985012441
 - `input_html.go` - support HTML checkboxes (and radio buttons, yes)
 - formgenerator: give each element (that earns it) a tabindex.
 
+- k12booter could serve as info terminal. it is aware of infra details, so ..
+  - help lecturerers: "How to connect my PC to the beamer in room X?",
+  - the above, believe it or not, requires support at universities, too.
+  - "How to share a work file with class 7", "How to message colleagues"...
+
+I18N ...
+
+- imagine k12booter was a globally translated app, availble in any school (as it is FREE)...
+- roaming teachers from one country to another would find a known working-environment, with "cloud" behind abstracted away, ideally
+- k12booter should be able to switch locale (display language) at runtime => gives globally consistent experience (well LTR/RTL...)
+
 ## Meanwhile ...
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/WHm0_qGdhTw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
