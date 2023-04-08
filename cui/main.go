@@ -40,6 +40,9 @@ func Zain() {
 	app.gui.Cursor = true
 	app.gui.Mouse = true
 	app.gui.ASCII = true
+	// next two lines will enable color upon g.SetCurrentView(nextview)
+	app.gui.Highlight = true
+	app.gui.FgColor = gocui.ColorRed
 
 	app.gui.SetManagerFunc(app.layout)
 

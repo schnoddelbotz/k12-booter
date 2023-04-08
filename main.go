@@ -7,7 +7,6 @@ import (
 	"schnoddelbotz/k12-booter/cui"
 	"schnoddelbotz/k12-booter/formgenerator"
 	"schnoddelbotz/k12-booter/internationalization"
-	"time"
 )
 
 type flags struct {
@@ -18,7 +17,6 @@ type flags struct {
 
 func main() {
 	fmt.Println("Welcome to nc-booter K12 EDU OSS IT Wizard. Please wait ... :)")
-	time.Sleep(1 * time.Second)
 
 	options := &flags{}
 	flag.BoolVar(&options.formByQuery, "formByQuery", false, "generate form code interactively")

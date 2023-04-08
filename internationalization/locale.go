@@ -35,6 +35,9 @@ func GetLocaleInfo() LocaleInfo {
 	info.Script, info.ScriptConfidence = lang.Script()
 
 	log.Printf("%+v", info.LanguageTag)
+	log.Printf("Parent of %s: %s", lang, lang.Parent().String())
+	log.Printf("Parent of %s extensions: %s", lang, lang.Parent().Extensions())
+	log.Printf("Extensions of %s: %+v", lang, lang.Extensions())
 
 	//x := display.Scripts(lang)
 	log.Printf("XXX %+v", display.Scripts(lang)) // LATIN
