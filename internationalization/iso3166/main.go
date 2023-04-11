@@ -8,6 +8,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"regexp"
 	"strings"
 
 	"golang.org/x/net/html"
@@ -55,6 +56,8 @@ func produceGo1(data []iso3166) {
 	fmt.Println(`
 package internationalization
 
+// this file is auto-generated. do not hand-edit. Use Makefile to re-generate.
+
 type CountryData struct {
 	CountryName       string
 	OfficialStateName string
@@ -66,10 +69,11 @@ type CountryData struct {
 	InternetccTLD     string 
 	Flag string
 }`)
-	fmt.Printf("var ISO2CountryName = []CountryData{\n")
+	fmt.Printf("var Cultures = []CountryData{\n")
 	for _, country := range data {
 		fmt.Printf(`{  
 			Alpha2Code: "%s",
+			Alpha3Code: "%s",
 			CountryName: "%s",
 			OfficialStateName: "%s",
 			NumericCode: "%s",
@@ -77,7 +81,9 @@ type CountryData struct {
 			Flag: Flag_%s,
 		},
 		`, country.Alpha2Code,
+			country.Alpha3Code,
 			country.CountryName,
+			//strings.Replace(country.OfficialStateName, "&#39;", "'", 1),
 			country.OfficialStateName,
 			country.NumericCode,
 			country.InternetccTLD,
@@ -87,51 +93,24 @@ type CountryData struct {
 }
 
 func CountryNameToFlagConstant(cn string) string {
-	cn = strings.Replace(cn, "(", "", 1)
-	cn = strings.Replace(cn, ")", "", 1)
-	return strings.Replace(cn, " ", "", 9)
-}
-
-func produceGo0(data []iso3166) {
-	fmt.Printf("var ISO2CountryName = map[string]string{\n")
-	for _, country := range data {
-		fmt.Printf(`  "%s": "%s",`+"\n", country.Alpha2Code, country.CountryName)
-	}
-	fmt.Printf("}\n\n")
-
-	fmt.Printf("var ISO2OfficialStateName = map[string]string{\n")
-	for _, country := range data {
-		fmt.Printf(`  "%s": "%s",`+"\n", country.Alpha2Code, country.OfficialStateName)
-	}
-	fmt.Printf("}\n\n")
-
-	fmt.Printf("var TLD2ISO2 = map[string]string{\n")
-	for _, country := range data {
-		fmt.Printf(`  "%s": "%s",`+"\n", country.InternetccTLD, country.Alpha2Code)
-	}
-	fmt.Printf("}\n\n")
-
-	fmt.Printf("var ISO3Name = map[string]string{\n")
-	for _, country := range data {
-		fmt.Printf(`  "%s": "%s",`+"\n", country.Alpha3Code, country.Alpha2Code)
-	}
-	fmt.Printf("}\n\n")
-
-	fmt.Printf("var ISO2Numeric = map[string]string{\n")
-	for _, country := range data {
-		fmt.Printf(`  "%s": "%s",`+"\n", country.Alpha2Code, country.NumericCode)
-	}
-	fmt.Printf("}\n\n")
-
-	fmt.Printf("var Country2Sovereignity = map[string]string{\n")
-	for _, country := range data {
-		fmt.Printf(`  "%s": "%s",`+"\n", country.CountryName, country.Sovereignty)
-	}
-	fmt.Printf("}\n\n")
-
-	// ~~~~~~~
-	// dumpTableToStringMap(1,3) // i.e. provide column numbers, construct map name based on column name?
-	// dumpTableToMap(1,[2,4,5,6]) // i.e. create a struct with "correct" automatic names
+	// no politics intended here - just to match our Go constant names for FLAGS #PEACE.
+	cn = strings.Replace(cn, ", the United Republic of", "", 1)
+	cn = strings.Replace(cn, "(", "", 2)
+	cn = strings.Replace(cn, ")", "", 2)
+	cn = strings.Replace(cn, " and ", "_", 1)
+	cn = strings.Replace(cn, " the", "", 2)
+	cn = strings.Replace(cn, " Federated States of", "", 1)
+	cn = strings.Replace(cn, " Republic of", "", 1)
+	cn = strings.Replace(cn, ", State of", "", 1)
+	//cn = strings.Replace(cn, " State of", "", 1)
+	cn = regexp.MustCompile(`\([^)]+\)`).ReplaceAllString(cn, "")
+	cn = strings.Replace(cn, "-", "_", 1)
+	cn = strings.Replace(cn, " ", "_", 9)
+	cn = strings.Replace(cn, "'", "", 1) // e.g. Cote d'Ivoire
+	cn = strings.Replace(cn, "Saint_", "St", 1)
+	cn = strings.Replace(cn, ".", "", 2)           // U.S.
+	cn = strings.Replace(cn, "_[Malvinas]", "", 1) // Falkland Islands
+	return cn
 }
 
 func readhtml(file string) []iso3166 {
@@ -196,8 +175,14 @@ func readrow(tablerow *html.Node) *iso3166 {
 		switch tdCounter {
 		case 0:
 			result.CountryName = renderNode(deepest(td.LastChild.PrevSibling.FirstChild))
+			if string(result.CountryName[0]) == "[" {
+				result.CountryName = renderNode(td.LastChild.PrevSibling.PrevSibling.PrevSibling.FirstChild)
+				result.CountryName = strings.Replace(result.CountryName, "&#39;", "'", 1)
+			}
+
 		case 1:
 			result.OfficialStateName = renderNode(deepest(td))
+			result.OfficialStateName = strings.Replace(result.OfficialStateName, "&#39;", "'", 1)
 		case 2:
 			result.Sovereignty = strings.TrimSuffix(renderNode(deepest(td)), "\n")
 		case 3:
@@ -210,6 +195,9 @@ func readrow(tablerow *html.Node) *iso3166 {
 			result.SubdivisionCode = renderNode(deepest(td))
 		case 7:
 			result.InternetccTLD = renderNode(deepest(td))
+			if string(result.InternetccTLD[0]) == "[" {
+				result.InternetccTLD = "???"
+			}
 		}
 		tdCounter++
 	}

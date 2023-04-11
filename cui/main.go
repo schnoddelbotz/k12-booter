@@ -78,7 +78,8 @@ func (app *App) bugger() {
 	for _, country := range internationalization.Cultures {
 		app.gui.Update(func(g *gocui.Gui) error {
 			//e.Write([]byte(flag + " "))
-			fmt.Fprintf(e, "%4s %s %s %s\n", country.Flag, country.Alpha2Code, country.InternetccTLD, country.CountryName)
+			fmt.Fprintf(e, "%4s %s %s %s %s\n",
+				country.Flag, country.Alpha2Code, country.Alpha3Code, country.InternetccTLD, country.CountryName)
 			return nil
 		})
 		time.Sleep(20 * time.Millisecond)

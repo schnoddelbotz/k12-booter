@@ -1,5 +1,7 @@
 package internationalization
 
+// this file is auto-generated. do not hand-edit. Use Makefile to re-generate.
+
 type CountryData struct {
 	CountryName       string
 	OfficialStateName string
@@ -15,6 +17,7 @@ type CountryData struct {
 var Cultures = []CountryData{
 	{
 		Alpha2Code:        "AF",
+		Alpha3Code:        "AFG",
 		CountryName:       "Afghanistan",
 		OfficialStateName: "The Islamic Republic of Afghanistan",
 		NumericCode:       "004",
@@ -23,14 +26,16 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "AX",
+		Alpha3Code:        "ALA",
 		CountryName:       "Åland Islands",
 		OfficialStateName: "Åland",
 		NumericCode:       "248",
 		InternetccTLD:     ".ax",
-		Flag:              Flag_FIXME_TODO,
+		Flag:              Flag_Åland_Islands,
 	},
 	{
 		Alpha2Code:        "AL",
+		Alpha3Code:        "ALB",
 		CountryName:       "Albania",
 		OfficialStateName: "The Republic of Albania",
 		NumericCode:       "008",
@@ -39,14 +44,16 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "DZ",
+		Alpha3Code:        "DZA",
 		CountryName:       "Algeria",
-		OfficialStateName: "The People&#39;s Democratic Republic of Algeria",
+		OfficialStateName: "The People's Democratic Republic of Algeria",
 		NumericCode:       "012",
 		InternetccTLD:     ".dz",
 		Flag:              Flag_Algeria,
 	},
 	{
 		Alpha2Code:        "AS",
+		Alpha3Code:        "ASM",
 		CountryName:       "American Samoa",
 		OfficialStateName: "The Territory of American Samoa",
 		NumericCode:       "016",
@@ -55,6 +62,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "AD",
+		Alpha3Code:        "AND",
 		CountryName:       "Andorra",
 		OfficialStateName: "The Principality of Andorra",
 		NumericCode:       "020",
@@ -63,6 +71,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "AO",
+		Alpha3Code:        "AGO",
 		CountryName:       "Angola",
 		OfficialStateName: "The Republic of Angola",
 		NumericCode:       "024",
@@ -71,6 +80,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "AI",
+		Alpha3Code:        "AIA",
 		CountryName:       "Anguilla",
 		OfficialStateName: "Anguilla",
 		NumericCode:       "660",
@@ -79,14 +89,16 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "AQ",
-		CountryName:       "[b]",
+		Alpha3Code:        "ATA",
+		CountryName:       "Antarctica",
 		OfficialStateName: "All land and ice shelves south of the ",
 		NumericCode:       "010",
 		InternetccTLD:     ".aq",
-		Flag:              Flag_FIXME_TODO,
+		Flag:              Flag_Antarctica,
 	},
 	{
 		Alpha2Code:        "AG",
+		Alpha3Code:        "ATG",
 		CountryName:       "Antigua and Barbuda",
 		OfficialStateName: "Antigua and Barbuda",
 		NumericCode:       "028",
@@ -95,6 +107,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "AR",
+		Alpha3Code:        "ARG",
 		CountryName:       "Argentina",
 		OfficialStateName: "The Argentine Republic",
 		NumericCode:       "032",
@@ -103,6 +116,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "AM",
+		Alpha3Code:        "ARM",
 		CountryName:       "Armenia",
 		OfficialStateName: "The Republic of Armenia",
 		NumericCode:       "051",
@@ -111,6 +125,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "AW",
+		Alpha3Code:        "ABW",
 		CountryName:       "Aruba",
 		OfficialStateName: "Aruba",
 		NumericCode:       "533",
@@ -119,6 +134,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "AU",
+		Alpha3Code:        "AUS",
 		CountryName:       "Australia",
 		OfficialStateName: "The Commonwealth of Australia",
 		NumericCode:       "036",
@@ -127,6 +143,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "AT",
+		Alpha3Code:        "AUT",
 		CountryName:       "Austria",
 		OfficialStateName: "The Republic of Austria",
 		NumericCode:       "040",
@@ -135,6 +152,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "AZ",
+		Alpha3Code:        "AZE",
 		CountryName:       "Azerbaijan",
 		OfficialStateName: "The Republic of Azerbaijan",
 		NumericCode:       "031",
@@ -143,6 +161,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "BS",
+		Alpha3Code:        "BHS",
 		CountryName:       "Bahamas (the)",
 		OfficialStateName: "The Commonwealth of The Bahamas",
 		NumericCode:       "044",
@@ -151,6 +170,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "BH",
+		Alpha3Code:        "BHR",
 		CountryName:       "Bahrain",
 		OfficialStateName: "The Kingdom of Bahrain",
 		NumericCode:       "048",
@@ -159,14 +179,16 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "BD",
+		Alpha3Code:        "BGD",
 		CountryName:       "Bangladesh",
-		OfficialStateName: "The People&#39;s Republic of Bangladesh",
+		OfficialStateName: "The People's Republic of Bangladesh",
 		NumericCode:       "050",
 		InternetccTLD:     ".bd",
 		Flag:              Flag_Bangladesh,
 	},
 	{
 		Alpha2Code:        "BB",
+		Alpha3Code:        "BRB",
 		CountryName:       "Barbados",
 		OfficialStateName: "Barbados",
 		NumericCode:       "052",
@@ -175,6 +197,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "BY",
+		Alpha3Code:        "BLR",
 		CountryName:       "Belarus",
 		OfficialStateName: "The Republic of Belarus",
 		NumericCode:       "112",
@@ -183,6 +206,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "BE",
+		Alpha3Code:        "BEL",
 		CountryName:       "Belgium",
 		OfficialStateName: "The Kingdom of Belgium",
 		NumericCode:       "056",
@@ -191,6 +215,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "BZ",
+		Alpha3Code:        "BLZ",
 		CountryName:       "Belize",
 		OfficialStateName: "Belize",
 		NumericCode:       "084",
@@ -199,6 +224,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "BJ",
+		Alpha3Code:        "BEN",
 		CountryName:       "Benin",
 		OfficialStateName: "The Republic of Benin",
 		NumericCode:       "204",
@@ -207,6 +233,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "BM",
+		Alpha3Code:        "BMU",
 		CountryName:       "Bermuda",
 		OfficialStateName: "Bermuda",
 		NumericCode:       "060",
@@ -215,6 +242,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "BT",
+		Alpha3Code:        "BTN",
 		CountryName:       "Bhutan",
 		OfficialStateName: "The Kingdom of Bhutan",
 		NumericCode:       "064",
@@ -223,22 +251,25 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "BO",
+		Alpha3Code:        "BOL",
 		CountryName:       "Bolivia (Plurinational State of)",
 		OfficialStateName: "The Plurinational State of Bolivia",
 		NumericCode:       "068",
 		InternetccTLD:     ".bo",
-		Flag:              Flag_Bolivia,
+		Flag:              Flag_Bolivia_Plurinational_State_of,
 	},
 	{
 		Alpha2Code:        "BQ",
+		Alpha3Code:        "BES",
 		CountryName:       "Saba",
 		OfficialStateName: "Bonaire, Sint Eustatius and Saba",
 		NumericCode:       "535",
 		InternetccTLD:     ".bq",
-		Flag:              Flag_FIXME_TODO,
+		Flag:              Flag_Saba,
 	},
 	{
 		Alpha2Code:        "BA",
+		Alpha3Code:        "BIH",
 		CountryName:       "Bosnia and Herzegovina",
 		OfficialStateName: "Bosnia and Herzegovina",
 		NumericCode:       "070",
@@ -247,6 +278,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "BW",
+		Alpha3Code:        "BWA",
 		CountryName:       "Botswana",
 		OfficialStateName: "The Republic of Botswana",
 		NumericCode:       "072",
@@ -255,14 +287,16 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "BV",
+		Alpha3Code:        "BVT",
 		CountryName:       "Bouvet Island",
 		OfficialStateName: "Bouvet Island",
 		NumericCode:       "074",
-		InternetccTLD:     "[e]",
+		InternetccTLD:     "???",
 		Flag:              Flag_Bouvet_Island,
 	},
 	{
 		Alpha2Code:        "BR",
+		Alpha3Code:        "BRA",
 		CountryName:       "Brazil",
 		OfficialStateName: "The Federative Republic of Brazil",
 		NumericCode:       "076",
@@ -271,6 +305,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "IO",
+		Alpha3Code:        "IOT",
 		CountryName:       "British Indian Ocean Territory (the)",
 		OfficialStateName: "The British Indian Ocean Territory",
 		NumericCode:       "086",
@@ -279,14 +314,16 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "BN",
-		CountryName:       "Brunei",
+		Alpha3Code:        "BRN",
+		CountryName:       "Brunei Darussalam",
 		OfficialStateName: "The Nation of Brunei, the Abode of Peace",
 		NumericCode:       "096",
 		InternetccTLD:     ".bn",
-		Flag:              Flag_Brunei,
+		Flag:              Flag_Brunei_Darussalam,
 	},
 	{
 		Alpha2Code:        "BG",
+		Alpha3Code:        "BGR",
 		CountryName:       "Bulgaria",
 		OfficialStateName: "The Republic of Bulgaria",
 		NumericCode:       "100",
@@ -295,6 +332,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "BF",
+		Alpha3Code:        "BFA",
 		CountryName:       "Burkina Faso",
 		OfficialStateName: "Burkina Faso",
 		NumericCode:       "854",
@@ -303,6 +341,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "BI",
+		Alpha3Code:        "BDI",
 		CountryName:       "Burundi",
 		OfficialStateName: "The Republic of Burundi",
 		NumericCode:       "108",
@@ -311,14 +350,16 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "CV",
-		CountryName:       "[g]",
+		Alpha3Code:        "CPV",
+		CountryName:       "Cabo Verde",
 		OfficialStateName: "The Republic of Cabo Verde",
 		NumericCode:       "132",
 		InternetccTLD:     ".cv",
-		Flag:              Flag_FIXME_TODO,
+		Flag:              Flag_Cabo_Verde,
 	},
 	{
 		Alpha2Code:        "KH",
+		Alpha3Code:        "KHM",
 		CountryName:       "Cambodia",
 		OfficialStateName: "The Kingdom of Cambodia",
 		NumericCode:       "116",
@@ -327,6 +368,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "CM",
+		Alpha3Code:        "CMR",
 		CountryName:       "Cameroon",
 		OfficialStateName: "The Republic of Cameroon",
 		NumericCode:       "120",
@@ -335,6 +377,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "CA",
+		Alpha3Code:        "CAN",
 		CountryName:       "Canada",
 		OfficialStateName: "Canada",
 		NumericCode:       "124",
@@ -343,6 +386,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "KY",
+		Alpha3Code:        "CYM",
 		CountryName:       "Cayman Islands (the)",
 		OfficialStateName: "The Cayman Islands",
 		NumericCode:       "136",
@@ -351,6 +395,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "CF",
+		Alpha3Code:        "CAF",
 		CountryName:       "Central African Republic (the)",
 		OfficialStateName: "The Central African Republic",
 		NumericCode:       "140",
@@ -359,6 +404,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "TD",
+		Alpha3Code:        "TCD",
 		CountryName:       "Chad",
 		OfficialStateName: "The Republic of Chad",
 		NumericCode:       "148",
@@ -367,6 +413,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "CL",
+		Alpha3Code:        "CHL",
 		CountryName:       "Chile",
 		OfficialStateName: "The Republic of Chile",
 		NumericCode:       "152",
@@ -375,14 +422,16 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "CN",
+		Alpha3Code:        "CHN",
 		CountryName:       "China",
-		OfficialStateName: "The People&#39;s Republic of China",
+		OfficialStateName: "The People's Republic of China",
 		NumericCode:       "156",
 		InternetccTLD:     ".cn",
 		Flag:              Flag_China,
 	},
 	{
 		Alpha2Code:        "CX",
+		Alpha3Code:        "CXR",
 		CountryName:       "Christmas Island",
 		OfficialStateName: "The Territory of Christmas Island",
 		NumericCode:       "162",
@@ -391,6 +440,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "CC",
+		Alpha3Code:        "CCK",
 		CountryName:       "Cocos (Keeling) Islands (the)",
 		OfficialStateName: "The Territory of Cocos (Keeling) Islands",
 		NumericCode:       "166",
@@ -399,6 +449,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "CO",
+		Alpha3Code:        "COL",
 		CountryName:       "Colombia",
 		OfficialStateName: "The Republic of Colombia",
 		NumericCode:       "170",
@@ -407,30 +458,34 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "KM",
+		Alpha3Code:        "COM",
 		CountryName:       "Comoros (the)",
 		OfficialStateName: "The Union of the Comoros",
 		NumericCode:       "174",
 		InternetccTLD:     ".km",
-		Flag:              Flag_FIXME_TODO,
+		Flag:              Flag_Comoros,
 	},
 	{
 		Alpha2Code:        "CD",
+		Alpha3Code:        "COD",
 		CountryName:       "Congo (the Democratic Republic of the)",
 		OfficialStateName: "The Democratic Republic of the Congo",
 		NumericCode:       "180",
 		InternetccTLD:     ".cd",
-		Flag:              Flag_FIXME_TODO,
+		Flag:              Flag_Congo_Democratic,
 	},
 	{
 		Alpha2Code:        "CG",
-		CountryName:       "[h]",
+		Alpha3Code:        "COG",
+		CountryName:       "Congo (the)",
 		OfficialStateName: "The Republic of the Congo",
 		NumericCode:       "178",
 		InternetccTLD:     ".cg",
-		Flag:              Flag_FIXME_TODO,
+		Flag:              Flag_Congo,
 	},
 	{
 		Alpha2Code:        "CK",
+		Alpha3Code:        "COK",
 		CountryName:       "Cook Islands (the)",
 		OfficialStateName: "The Cook Islands",
 		NumericCode:       "184",
@@ -439,6 +494,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "CR",
+		Alpha3Code:        "CRI",
 		CountryName:       "Costa Rica",
 		OfficialStateName: "The Republic of Costa Rica",
 		NumericCode:       "188",
@@ -447,14 +503,16 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "CI",
-		CountryName:       "Cote d'Ivoire",
+		Alpha3Code:        "CIV",
+		CountryName:       "Côte d'Ivoire",
 		OfficialStateName: "The Republic of Côte d'Ivoire",
 		NumericCode:       "384",
 		InternetccTLD:     ".ci",
-		Flag:              Flag_Cote_DIvoire,
+		Flag:              Flag_Côte_dIvoire,
 	},
 	{
 		Alpha2Code:        "HR",
+		Alpha3Code:        "HRV",
 		CountryName:       "Croatia",
 		OfficialStateName: "The Republic of Croatia",
 		NumericCode:       "191",
@@ -463,6 +521,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "CU",
+		Alpha3Code:        "CUB",
 		CountryName:       "Cuba",
 		OfficialStateName: "The Republic of Cuba",
 		NumericCode:       "192",
@@ -471,6 +530,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "CW",
+		Alpha3Code:        "CUW",
 		CountryName:       "Curaçao",
 		OfficialStateName: "The Country of Curaçao",
 		NumericCode:       "531",
@@ -479,6 +539,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "CY",
+		Alpha3Code:        "CYP",
 		CountryName:       "Cyprus",
 		OfficialStateName: "The Republic of Cyprus",
 		NumericCode:       "196",
@@ -487,6 +548,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "CZ",
+		Alpha3Code:        "CZE",
 		CountryName:       "Czechia",
 		OfficialStateName: "The Czech Republic",
 		NumericCode:       "203",
@@ -495,6 +557,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "DK",
+		Alpha3Code:        "DNK",
 		CountryName:       "Denmark",
 		OfficialStateName: "The Kingdom of Denmark",
 		NumericCode:       "208",
@@ -503,6 +566,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "DJ",
+		Alpha3Code:        "DJI",
 		CountryName:       "Djibouti",
 		OfficialStateName: "The Republic of Djibouti",
 		NumericCode:       "262",
@@ -511,6 +575,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "DM",
+		Alpha3Code:        "DMA",
 		CountryName:       "Dominica",
 		OfficialStateName: "The Commonwealth of Dominica",
 		NumericCode:       "212",
@@ -519,6 +584,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "DO",
+		Alpha3Code:        "DOM",
 		CountryName:       "Dominican Republic (the)",
 		OfficialStateName: "The Dominican Republic",
 		NumericCode:       "214",
@@ -527,6 +593,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "EC",
+		Alpha3Code:        "ECU",
 		CountryName:       "Ecuador",
 		OfficialStateName: "The Republic of Ecuador",
 		NumericCode:       "218",
@@ -535,6 +602,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "EG",
+		Alpha3Code:        "EGY",
 		CountryName:       "Egypt",
 		OfficialStateName: "The Arab Republic of Egypt",
 		NumericCode:       "818",
@@ -543,6 +611,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "SV",
+		Alpha3Code:        "SLV",
 		CountryName:       "El Salvador",
 		OfficialStateName: "The Republic of El Salvador",
 		NumericCode:       "222",
@@ -551,6 +620,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "GQ",
+		Alpha3Code:        "GNQ",
 		CountryName:       "Equatorial Guinea",
 		OfficialStateName: "The Republic of Equatorial Guinea",
 		NumericCode:       "226",
@@ -559,6 +629,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "ER",
+		Alpha3Code:        "ERI",
 		CountryName:       "Eritrea",
 		OfficialStateName: "The State of Eritrea",
 		NumericCode:       "232",
@@ -567,6 +638,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "EE",
+		Alpha3Code:        "EST",
 		CountryName:       "Estonia",
 		OfficialStateName: "The Republic of Estonia",
 		NumericCode:       "233",
@@ -575,6 +647,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "SZ",
+		Alpha3Code:        "SWZ",
 		CountryName:       "Eswatini",
 		OfficialStateName: "The Kingdom of Eswatini",
 		NumericCode:       "748",
@@ -583,6 +656,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "ET",
+		Alpha3Code:        "ETH",
 		CountryName:       "Ethiopia",
 		OfficialStateName: "The Federal Democratic Republic of Ethiopia",
 		NumericCode:       "231",
@@ -591,7 +665,8 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "FK",
-		CountryName:       "Falkland Islands",
+		Alpha3Code:        "FLK",
+		CountryName:       "Falkland Islands (the) [Malvinas]",
 		OfficialStateName: "The Falkland Islands",
 		NumericCode:       "238",
 		InternetccTLD:     ".fk",
@@ -599,6 +674,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "FO",
+		Alpha3Code:        "FRO",
 		CountryName:       "Faroe Islands (the)",
 		OfficialStateName: "The Faroe Islands",
 		NumericCode:       "234",
@@ -607,6 +683,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "FJ",
+		Alpha3Code:        "FJI",
 		CountryName:       "Fiji",
 		OfficialStateName: "The Republic of Fiji",
 		NumericCode:       "242",
@@ -615,6 +692,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "FI",
+		Alpha3Code:        "FIN",
 		CountryName:       "Finland",
 		OfficialStateName: "The Republic of Finland",
 		NumericCode:       "246",
@@ -623,6 +701,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "FR",
+		Alpha3Code:        "FRA",
 		CountryName:       "France",
 		OfficialStateName: "The French Republic",
 		NumericCode:       "250",
@@ -631,6 +710,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "GF",
+		Alpha3Code:        "GUF",
 		CountryName:       "French Guiana",
 		OfficialStateName: "Guyane",
 		NumericCode:       "254",
@@ -639,6 +719,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "PF",
+		Alpha3Code:        "PYF",
 		CountryName:       "French Polynesia",
 		OfficialStateName: "French Polynesia",
 		NumericCode:       "258",
@@ -647,14 +728,16 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "TF",
-		CountryName:       "[n]",
+		Alpha3Code:        "ATF",
+		CountryName:       "French Southern Territories (the)",
 		OfficialStateName: "The French Southern and Antarctic Lands",
 		NumericCode:       "260",
 		InternetccTLD:     ".tf",
-		Flag:              Flag_French_Southern_Territories, // ?
+		Flag:              Flag_French_Southern_Territories,
 	},
 	{
 		Alpha2Code:        "GA",
+		Alpha3Code:        "GAB",
 		CountryName:       "Gabon",
 		OfficialStateName: "The Gabonese Republic",
 		NumericCode:       "266",
@@ -663,6 +746,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "GM",
+		Alpha3Code:        "GMB",
 		CountryName:       "Gambia (the)",
 		OfficialStateName: "The Republic of The Gambia",
 		NumericCode:       "270",
@@ -671,6 +755,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "GE",
+		Alpha3Code:        "GEO",
 		CountryName:       "Georgia",
 		OfficialStateName: "Georgia",
 		NumericCode:       "268",
@@ -679,6 +764,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "DE",
+		Alpha3Code:        "DEU",
 		CountryName:       "Germany",
 		OfficialStateName: "The Federal Republic of Germany",
 		NumericCode:       "276",
@@ -687,6 +773,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "GH",
+		Alpha3Code:        "GHA",
 		CountryName:       "Ghana",
 		OfficialStateName: "The Republic of Ghana",
 		NumericCode:       "288",
@@ -695,6 +782,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "GI",
+		Alpha3Code:        "GIB",
 		CountryName:       "Gibraltar",
 		OfficialStateName: "Gibraltar",
 		NumericCode:       "292",
@@ -703,6 +791,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "GR",
+		Alpha3Code:        "GRC",
 		CountryName:       "Greece",
 		OfficialStateName: "The Hellenic Republic",
 		NumericCode:       "300",
@@ -711,6 +800,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "GL",
+		Alpha3Code:        "GRL",
 		CountryName:       "Greenland",
 		OfficialStateName: "Kalaallit Nunaat",
 		NumericCode:       "304",
@@ -719,6 +809,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "GD",
+		Alpha3Code:        "GRD",
 		CountryName:       "Grenada",
 		OfficialStateName: "Grenada",
 		NumericCode:       "308",
@@ -727,6 +818,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "GP",
+		Alpha3Code:        "GLP",
 		CountryName:       "Guadeloupe",
 		OfficialStateName: "Guadeloupe",
 		NumericCode:       "312",
@@ -735,6 +827,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "GU",
+		Alpha3Code:        "GUM",
 		CountryName:       "Guam",
 		OfficialStateName: "The Territory of Guam",
 		NumericCode:       "316",
@@ -743,6 +836,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "GT",
+		Alpha3Code:        "GTM",
 		CountryName:       "Guatemala",
 		OfficialStateName: "The Republic of Guatemala",
 		NumericCode:       "320",
@@ -751,6 +845,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "GG",
+		Alpha3Code:        "GGY",
 		CountryName:       "Guernsey",
 		OfficialStateName: "The Bailiwick of Guernsey",
 		NumericCode:       "831",
@@ -759,6 +854,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "GN",
+		Alpha3Code:        "GIN",
 		CountryName:       "Guinea",
 		OfficialStateName: "The Republic of Guinea",
 		NumericCode:       "324",
@@ -767,6 +863,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "GW",
+		Alpha3Code:        "GNB",
 		CountryName:       "Guinea-Bissau",
 		OfficialStateName: "The Republic of Guinea-Bissau",
 		NumericCode:       "624",
@@ -775,6 +872,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "GY",
+		Alpha3Code:        "GUY",
 		CountryName:       "Guyana",
 		OfficialStateName: "The Co-operative Republic of Guyana",
 		NumericCode:       "328",
@@ -783,6 +881,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "HT",
+		Alpha3Code:        "HTI",
 		CountryName:       "Haiti",
 		OfficialStateName: "The Republic of Haiti",
 		NumericCode:       "332",
@@ -791,22 +890,25 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "HM",
+		Alpha3Code:        "HMD",
 		CountryName:       "Heard Island and McDonald Islands",
 		OfficialStateName: "The Territory of Heard Island and McDonald Islands",
 		NumericCode:       "334",
 		InternetccTLD:     ".hm",
-		Flag:              Flag_Heard_McDonald_Islands,
+		Flag:              Flag_Heard_Island_McDonald_Islands,
 	},
 	{
 		Alpha2Code:        "VA",
-		CountryName:       "Vatican",
+		Alpha3Code:        "VAT",
+		CountryName:       "Holy See (the)",
 		OfficialStateName: "The Holy See",
 		NumericCode:       "336",
 		InternetccTLD:     ".va",
-		Flag:              Flag_Vatican_City,
+		Flag:              Flag_Holy_See,
 	},
 	{
 		Alpha2Code:        "HN",
+		Alpha3Code:        "HND",
 		CountryName:       "Honduras",
 		OfficialStateName: "The Republic of Honduras",
 		NumericCode:       "340",
@@ -815,14 +917,16 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "HK",
+		Alpha3Code:        "HKG",
 		CountryName:       "Hong Kong",
 		OfficialStateName: "The Hong Kong Special Administrative Region of China",
 		NumericCode:       "344",
 		InternetccTLD:     ".hk",
-		Flag:              Flag_Hong_Kong_SAR_China,
+		Flag:              Flag_Hong_Kong,
 	},
 	{
 		Alpha2Code:        "HU",
+		Alpha3Code:        "HUN",
 		CountryName:       "Hungary",
 		OfficialStateName: "Hungary",
 		NumericCode:       "348",
@@ -831,6 +935,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "IS",
+		Alpha3Code:        "ISL",
 		CountryName:       "Iceland",
 		OfficialStateName: "Iceland",
 		NumericCode:       "352",
@@ -839,6 +944,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "IN",
+		Alpha3Code:        "IND",
 		CountryName:       "India",
 		OfficialStateName: "The Republic of India",
 		NumericCode:       "356",
@@ -847,6 +953,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "ID",
+		Alpha3Code:        "IDN",
 		CountryName:       "Indonesia",
 		OfficialStateName: "The Republic of Indonesia",
 		NumericCode:       "360",
@@ -855,14 +962,16 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "IR",
+		Alpha3Code:        "IRN",
 		CountryName:       "Iran (Islamic Republic of)",
 		OfficialStateName: "The Islamic Republic of Iran",
 		NumericCode:       "364",
 		InternetccTLD:     ".ir",
-		Flag:              Flag_Iran,
+		Flag:              Flag_Iran_Islamic,
 	},
 	{
 		Alpha2Code:        "IQ",
+		Alpha3Code:        "IRQ",
 		CountryName:       "Iraq",
 		OfficialStateName: "The Republic of Iraq",
 		NumericCode:       "368",
@@ -871,6 +980,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "IE",
+		Alpha3Code:        "IRL",
 		CountryName:       "Ireland",
 		OfficialStateName: "Ireland",
 		NumericCode:       "372",
@@ -879,6 +989,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "IM",
+		Alpha3Code:        "IMN",
 		CountryName:       "Isle of Man",
 		OfficialStateName: "The Isle of Man",
 		NumericCode:       "833",
@@ -887,6 +998,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "IL",
+		Alpha3Code:        "ISR",
 		CountryName:       "Israel",
 		OfficialStateName: "The State of Israel",
 		NumericCode:       "376",
@@ -895,6 +1007,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "IT",
+		Alpha3Code:        "ITA",
 		CountryName:       "Italy",
 		OfficialStateName: "The Italian Republic",
 		NumericCode:       "380",
@@ -903,6 +1016,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "JM",
+		Alpha3Code:        "JAM",
 		CountryName:       "Jamaica",
 		OfficialStateName: "Jamaica",
 		NumericCode:       "388",
@@ -911,6 +1025,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "JP",
+		Alpha3Code:        "JPN",
 		CountryName:       "Japan",
 		OfficialStateName: "Japan",
 		NumericCode:       "392",
@@ -919,6 +1034,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "JE",
+		Alpha3Code:        "JEY",
 		CountryName:       "Jersey",
 		OfficialStateName: "The Bailiwick of Jersey",
 		NumericCode:       "832",
@@ -927,6 +1043,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "JO",
+		Alpha3Code:        "JOR",
 		CountryName:       "Jordan",
 		OfficialStateName: "The Hashemite Kingdom of Jordan",
 		NumericCode:       "400",
@@ -935,6 +1052,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "KZ",
+		Alpha3Code:        "KAZ",
 		CountryName:       "Kazakhstan",
 		OfficialStateName: "The Republic of Kazakhstan",
 		NumericCode:       "398",
@@ -943,6 +1061,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "KE",
+		Alpha3Code:        "KEN",
 		CountryName:       "Kenya",
 		OfficialStateName: "The Republic of Kenya",
 		NumericCode:       "404",
@@ -951,6 +1070,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "KI",
+		Alpha3Code:        "KIR",
 		CountryName:       "Kiribati",
 		OfficialStateName: "The Republic of Kiribati",
 		NumericCode:       "296",
@@ -959,22 +1079,25 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "KP",
-		CountryName:       "North Korea",
+		Alpha3Code:        "PRK",
+		CountryName:       "Korea (the Democratic People's Republic of)",
 		OfficialStateName: "The Democratic People's Republic of Korea",
 		NumericCode:       "408",
 		InternetccTLD:     ".kp",
-		Flag:              Flag_North_Korea,
+		Flag:              Flag_Korea_Democratic_Peoples,
 	},
 	{
 		Alpha2Code:        "KR",
-		CountryName:       "South Korea",
+		Alpha3Code:        "KOR",
+		CountryName:       "Korea (the Republic of)",
 		OfficialStateName: "The Republic of Korea",
 		NumericCode:       "410",
 		InternetccTLD:     ".kr",
-		Flag:              Flag_South_Korea,
+		Flag:              Flag_Korea,
 	},
 	{
 		Alpha2Code:        "KW",
+		Alpha3Code:        "KWT",
 		CountryName:       "Kuwait",
 		OfficialStateName: "The State of Kuwait",
 		NumericCode:       "414",
@@ -983,6 +1106,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "KG",
+		Alpha3Code:        "KGZ",
 		CountryName:       "Kyrgyzstan",
 		OfficialStateName: "The Kyrgyz Republic",
 		NumericCode:       "417",
@@ -991,14 +1115,16 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "LA",
-		CountryName:       "Laos",
+		Alpha3Code:        "LAO",
+		CountryName:       "Lao People's Democratic Republic (the)",
 		OfficialStateName: "The Lao People's Democratic Republic",
 		NumericCode:       "418",
 		InternetccTLD:     ".la",
-		Flag:              Flag_Laos,
+		Flag:              Flag_Lao_Peoples_Democratic_Republic,
 	},
 	{
 		Alpha2Code:        "LV",
+		Alpha3Code:        "LVA",
 		CountryName:       "Latvia",
 		OfficialStateName: "The Republic of Latvia",
 		NumericCode:       "428",
@@ -1007,6 +1133,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "LB",
+		Alpha3Code:        "LBN",
 		CountryName:       "Lebanon",
 		OfficialStateName: "The Lebanese Republic",
 		NumericCode:       "422",
@@ -1015,6 +1142,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "LS",
+		Alpha3Code:        "LSO",
 		CountryName:       "Lesotho",
 		OfficialStateName: "The Kingdom of Lesotho",
 		NumericCode:       "426",
@@ -1023,6 +1151,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "LR",
+		Alpha3Code:        "LBR",
 		CountryName:       "Liberia",
 		OfficialStateName: "The Republic of Liberia",
 		NumericCode:       "430",
@@ -1031,6 +1160,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "LY",
+		Alpha3Code:        "LBY",
 		CountryName:       "Libya",
 		OfficialStateName: "The State of Libya",
 		NumericCode:       "434",
@@ -1039,6 +1169,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "LI",
+		Alpha3Code:        "LIE",
 		CountryName:       "Liechtenstein",
 		OfficialStateName: "The Principality of Liechtenstein",
 		NumericCode:       "438",
@@ -1047,6 +1178,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "LT",
+		Alpha3Code:        "LTU",
 		CountryName:       "Lithuania",
 		OfficialStateName: "The Republic of Lithuania",
 		NumericCode:       "440",
@@ -1055,6 +1187,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "LU",
+		Alpha3Code:        "LUX",
 		CountryName:       "Luxembourg",
 		OfficialStateName: "The Grand Duchy of Luxembourg",
 		NumericCode:       "442",
@@ -1063,14 +1196,16 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "MO",
+		Alpha3Code:        "MAC",
 		CountryName:       "Macao",
 		OfficialStateName: "The Macao Special Administrative Region of China",
 		NumericCode:       "446",
 		InternetccTLD:     ".mo",
-		Flag:              Flag_Macao_Sar_China,
+		Flag:              Flag_Macao,
 	},
 	{
 		Alpha2Code:        "MK",
+		Alpha3Code:        "MKD",
 		CountryName:       "North Macedonia",
 		OfficialStateName: "The Republic of North Macedonia",
 		NumericCode:       "807",
@@ -1079,6 +1214,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "MG",
+		Alpha3Code:        "MDG",
 		CountryName:       "Madagascar",
 		OfficialStateName: "The Republic of Madagascar",
 		NumericCode:       "450",
@@ -1087,6 +1223,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "MW",
+		Alpha3Code:        "MWI",
 		CountryName:       "Malawi",
 		OfficialStateName: "The Republic of Malawi",
 		NumericCode:       "454",
@@ -1095,6 +1232,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "MY",
+		Alpha3Code:        "MYS",
 		CountryName:       "Malaysia",
 		OfficialStateName: "Malaysia",
 		NumericCode:       "458",
@@ -1103,6 +1241,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "MV",
+		Alpha3Code:        "MDV",
 		CountryName:       "Maldives",
 		OfficialStateName: "The Republic of Maldives",
 		NumericCode:       "462",
@@ -1111,6 +1250,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "ML",
+		Alpha3Code:        "MLI",
 		CountryName:       "Mali",
 		OfficialStateName: "The Republic of Mali",
 		NumericCode:       "466",
@@ -1119,6 +1259,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "MT",
+		Alpha3Code:        "MLT",
 		CountryName:       "Malta",
 		OfficialStateName: "The Republic of Malta",
 		NumericCode:       "470",
@@ -1127,6 +1268,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "MH",
+		Alpha3Code:        "MHL",
 		CountryName:       "Marshall Islands (the)",
 		OfficialStateName: "The Republic of the Marshall Islands",
 		NumericCode:       "584",
@@ -1135,6 +1277,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "MQ",
+		Alpha3Code:        "MTQ",
 		CountryName:       "Martinique",
 		OfficialStateName: "Martinique",
 		NumericCode:       "474",
@@ -1143,6 +1286,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "MR",
+		Alpha3Code:        "MRT",
 		CountryName:       "Mauritania",
 		OfficialStateName: "The Islamic Republic of Mauritania",
 		NumericCode:       "478",
@@ -1151,6 +1295,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "MU",
+		Alpha3Code:        "MUS",
 		CountryName:       "Mauritius",
 		OfficialStateName: "The Republic of Mauritius",
 		NumericCode:       "480",
@@ -1159,6 +1304,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "YT",
+		Alpha3Code:        "MYT",
 		CountryName:       "Mayotte",
 		OfficialStateName: "The Department of Mayotte",
 		NumericCode:       "175",
@@ -1167,6 +1313,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "MX",
+		Alpha3Code:        "MEX",
 		CountryName:       "Mexico",
 		OfficialStateName: "The United Mexican States",
 		NumericCode:       "484",
@@ -1175,6 +1322,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "FM",
+		Alpha3Code:        "FSM",
 		CountryName:       "Micronesia (Federated States of)",
 		OfficialStateName: "The Federated States of Micronesia",
 		NumericCode:       "583",
@@ -1183,6 +1331,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "MD",
+		Alpha3Code:        "MDA",
 		CountryName:       "Moldova (the Republic of)",
 		OfficialStateName: "The Republic of Moldova",
 		NumericCode:       "498",
@@ -1191,6 +1340,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "MC",
+		Alpha3Code:        "MCO",
 		CountryName:       "Monaco",
 		OfficialStateName: "The Principality of Monaco",
 		NumericCode:       "492",
@@ -1199,6 +1349,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "MN",
+		Alpha3Code:        "MNG",
 		CountryName:       "Mongolia",
 		OfficialStateName: "Mongolia",
 		NumericCode:       "496",
@@ -1207,6 +1358,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "ME",
+		Alpha3Code:        "MNE",
 		CountryName:       "Montenegro",
 		OfficialStateName: "Montenegro",
 		NumericCode:       "499",
@@ -1215,6 +1367,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "MS",
+		Alpha3Code:        "MSR",
 		CountryName:       "Montserrat",
 		OfficialStateName: "Montserrat",
 		NumericCode:       "500",
@@ -1223,6 +1376,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "MA",
+		Alpha3Code:        "MAR",
 		CountryName:       "Morocco",
 		OfficialStateName: "The Kingdom of Morocco",
 		NumericCode:       "504",
@@ -1231,6 +1385,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "MZ",
+		Alpha3Code:        "MOZ",
 		CountryName:       "Mozambique",
 		OfficialStateName: "The Republic of Mozambique",
 		NumericCode:       "508",
@@ -1239,14 +1394,16 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "MM",
+		Alpha3Code:        "MMR",
 		CountryName:       "Myanmar",
 		OfficialStateName: "The Republic of the Union of Myanmar",
 		NumericCode:       "104",
 		InternetccTLD:     ".mm",
-		Flag:              Flag_Myanmar_Burma,
+		Flag:              Flag_Myanmar,
 	},
 	{
 		Alpha2Code:        "NA",
+		Alpha3Code:        "NAM",
 		CountryName:       "Namibia",
 		OfficialStateName: "The Republic of Namibia",
 		NumericCode:       "516",
@@ -1255,6 +1412,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "NR",
+		Alpha3Code:        "NRU",
 		CountryName:       "Nauru",
 		OfficialStateName: "The Republic of Nauru",
 		NumericCode:       "520",
@@ -1263,6 +1421,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "NP",
+		Alpha3Code:        "NPL",
 		CountryName:       "Nepal",
 		OfficialStateName: "The Federal Democratic Republic of Nepal",
 		NumericCode:       "524",
@@ -1271,6 +1430,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "NL",
+		Alpha3Code:        "NLD",
 		CountryName:       "Netherlands (the)",
 		OfficialStateName: "The Kingdom of the Netherlands",
 		NumericCode:       "528",
@@ -1279,6 +1439,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "NC",
+		Alpha3Code:        "NCL",
 		CountryName:       "New Caledonia",
 		OfficialStateName: "New Caledonia",
 		NumericCode:       "540",
@@ -1287,6 +1448,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "NZ",
+		Alpha3Code:        "NZL",
 		CountryName:       "New Zealand",
 		OfficialStateName: "New Zealand",
 		NumericCode:       "554",
@@ -1295,6 +1457,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "NI",
+		Alpha3Code:        "NIC",
 		CountryName:       "Nicaragua",
 		OfficialStateName: "The Republic of Nicaragua",
 		NumericCode:       "558",
@@ -1303,6 +1466,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "NE",
+		Alpha3Code:        "NER",
 		CountryName:       "Niger (the)",
 		OfficialStateName: "The Republic of the Niger",
 		NumericCode:       "562",
@@ -1311,6 +1475,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "NG",
+		Alpha3Code:        "NGA",
 		CountryName:       "Nigeria",
 		OfficialStateName: "The Federal Republic of Nigeria",
 		NumericCode:       "566",
@@ -1319,6 +1484,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "NU",
+		Alpha3Code:        "NIU",
 		CountryName:       "Niue",
 		OfficialStateName: "Niue",
 		NumericCode:       "570",
@@ -1327,6 +1493,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "NF",
+		Alpha3Code:        "NFK",
 		CountryName:       "Norfolk Island",
 		OfficialStateName: "The Territory of Norfolk Island",
 		NumericCode:       "574",
@@ -1335,6 +1502,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "MP",
+		Alpha3Code:        "MNP",
 		CountryName:       "Northern Mariana Islands (the)",
 		OfficialStateName: "The Commonwealth of the Northern Mariana Islands",
 		NumericCode:       "580",
@@ -1343,6 +1511,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "NO",
+		Alpha3Code:        "NOR",
 		CountryName:       "Norway",
 		OfficialStateName: "The Kingdom of Norway",
 		NumericCode:       "578",
@@ -1351,6 +1520,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "OM",
+		Alpha3Code:        "OMN",
 		CountryName:       "Oman",
 		OfficialStateName: "The Sultanate of Oman",
 		NumericCode:       "512",
@@ -1359,6 +1529,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "PK",
+		Alpha3Code:        "PAK",
 		CountryName:       "Pakistan",
 		OfficialStateName: "The Islamic Republic of Pakistan",
 		NumericCode:       "586",
@@ -1367,6 +1538,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "PW",
+		Alpha3Code:        "PLW",
 		CountryName:       "Palau",
 		OfficialStateName: "The Republic of Palau",
 		NumericCode:       "585",
@@ -1375,14 +1547,16 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "PS",
+		Alpha3Code:        "PSE",
 		CountryName:       "Palestine, State of",
 		OfficialStateName: "The State of Palestine",
 		NumericCode:       "275",
 		InternetccTLD:     ".ps",
-		Flag:              Flag_Palestinian_Territories,
+		Flag:              Flag_Palestine,
 	},
 	{
 		Alpha2Code:        "PA",
+		Alpha3Code:        "PAN",
 		CountryName:       "Panama",
 		OfficialStateName: "The Republic of Panamá",
 		NumericCode:       "591",
@@ -1391,6 +1565,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "PG",
+		Alpha3Code:        "PNG",
 		CountryName:       "Papua New Guinea",
 		OfficialStateName: "The Independent State of Papua New Guinea",
 		NumericCode:       "598",
@@ -1399,6 +1574,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "PY",
+		Alpha3Code:        "PRY",
 		CountryName:       "Paraguay",
 		OfficialStateName: "The Republic of Paraguay",
 		NumericCode:       "600",
@@ -1407,6 +1583,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "PE",
+		Alpha3Code:        "PER",
 		CountryName:       "Peru",
 		OfficialStateName: "The Republic of Perú",
 		NumericCode:       "604",
@@ -1415,6 +1592,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "PH",
+		Alpha3Code:        "PHL",
 		CountryName:       "Philippines (the)",
 		OfficialStateName: "The Republic of the Philippines",
 		NumericCode:       "608",
@@ -1423,14 +1601,16 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "PN",
-		CountryName:       "Pitcairn Islands",
+		Alpha3Code:        "PCN",
+		CountryName:       "Pitcairn",
 		OfficialStateName: "The Pitcairn, Henderson, Ducie and Oeno Islands",
 		NumericCode:       "612",
 		InternetccTLD:     ".pn",
-		Flag:              Flag_Pitcairn_Islands,
+		Flag:              Flag_Pitcairn,
 	},
 	{
 		Alpha2Code:        "PL",
+		Alpha3Code:        "POL",
 		CountryName:       "Poland",
 		OfficialStateName: "The Republic of Poland",
 		NumericCode:       "616",
@@ -1439,6 +1619,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "PT",
+		Alpha3Code:        "PRT",
 		CountryName:       "Portugal",
 		OfficialStateName: "The Portuguese Republic",
 		NumericCode:       "620",
@@ -1447,6 +1628,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "PR",
+		Alpha3Code:        "PRI",
 		CountryName:       "Puerto Rico",
 		OfficialStateName: "The Commonwealth of Puerto Rico",
 		NumericCode:       "630",
@@ -1455,6 +1637,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "QA",
+		Alpha3Code:        "QAT",
 		CountryName:       "Qatar",
 		OfficialStateName: "The State of Qatar",
 		NumericCode:       "634",
@@ -1463,6 +1646,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "RE",
+		Alpha3Code:        "REU",
 		CountryName:       "Réunion",
 		OfficialStateName: "Réunion",
 		NumericCode:       "638",
@@ -1471,6 +1655,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "RO",
+		Alpha3Code:        "ROU",
 		CountryName:       "Romania",
 		OfficialStateName: "Romania",
 		NumericCode:       "642",
@@ -1479,14 +1664,16 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "RU",
-		CountryName:       "[w]",
+		Alpha3Code:        "RUS",
+		CountryName:       "Russian Federation (the)",
 		OfficialStateName: "The Russian Federation",
 		NumericCode:       "643",
 		InternetccTLD:     ".ru",
-		Flag:              Flag_Russia,
+		Flag:              Flag_Russian_Federation,
 	},
 	{
 		Alpha2Code:        "RW",
+		Alpha3Code:        "RWA",
 		CountryName:       "Rwanda",
 		OfficialStateName: "The Republic of Rwanda",
 		NumericCode:       "646",
@@ -1495,6 +1682,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "BL",
+		Alpha3Code:        "BLM",
 		CountryName:       "Saint Barthélemy",
 		OfficialStateName: "The Collectivity of Saint-Barthélemy",
 		NumericCode:       "652",
@@ -1503,14 +1691,16 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "SH",
+		Alpha3Code:        "SHN",
 		CountryName:       "Tristan da Cunha",
 		OfficialStateName: "Saint Helena, Ascension and Tristan da Cunha",
 		NumericCode:       "654",
 		InternetccTLD:     ".sh",
-		Flag:              Flag_Tristan_Da_Cunha,
+		Flag:              Flag_Tristan_da_Cunha,
 	},
 	{
 		Alpha2Code:        "KN",
+		Alpha3Code:        "KNA",
 		CountryName:       "Saint Kitts and Nevis",
 		OfficialStateName: "Saint Kitts and Nevis",
 		NumericCode:       "659",
@@ -1519,6 +1709,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "LC",
+		Alpha3Code:        "LCA",
 		CountryName:       "Saint Lucia",
 		OfficialStateName: "Saint Lucia",
 		NumericCode:       "662",
@@ -1527,14 +1718,16 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "MF",
+		Alpha3Code:        "MAF",
 		CountryName:       "Saint Martin (French part)",
 		OfficialStateName: "The Collectivity of Saint-Martin",
 		NumericCode:       "663",
 		InternetccTLD:     ".mf",
-		Flag:              Flag_StMartin,
+		Flag:              Flag_StMartin_French_part,
 	},
 	{
 		Alpha2Code:        "PM",
+		Alpha3Code:        "SPM",
 		CountryName:       "Saint Pierre and Miquelon",
 		OfficialStateName: "The Overseas Collectivity of Saint-Pierre and Miquelon",
 		NumericCode:       "666",
@@ -1543,14 +1736,16 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "VC",
+		Alpha3Code:        "VCT",
 		CountryName:       "Saint Vincent and the Grenadines",
 		OfficialStateName: "Saint Vincent and the Grenadines",
 		NumericCode:       "670",
 		InternetccTLD:     ".vc",
-		Flag:              Flag_StVincent_Grenadines,
+		Flag:              Flag_StVincent_the_Grenadines,
 	},
 	{
 		Alpha2Code:        "WS",
+		Alpha3Code:        "WSM",
 		CountryName:       "Samoa",
 		OfficialStateName: "The Independent State of Samoa",
 		NumericCode:       "882",
@@ -1559,6 +1754,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "SM",
+		Alpha3Code:        "SMR",
 		CountryName:       "San Marino",
 		OfficialStateName: "The Republic of San Marino",
 		NumericCode:       "674",
@@ -1567,14 +1763,16 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "ST",
+		Alpha3Code:        "STP",
 		CountryName:       "Sao Tome and Principe",
 		OfficialStateName: "The Democratic Republic of São Tomé and Príncipe",
 		NumericCode:       "678",
 		InternetccTLD:     ".st",
-		Flag:              Flag_São_Tomé_Príncipe,
+		Flag:              Flag_Sao_Tome_Principe,
 	},
 	{
 		Alpha2Code:        "SA",
+		Alpha3Code:        "SAU",
 		CountryName:       "Saudi Arabia",
 		OfficialStateName: "The Kingdom of Saudi Arabia",
 		NumericCode:       "682",
@@ -1583,6 +1781,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "SN",
+		Alpha3Code:        "SEN",
 		CountryName:       "Senegal",
 		OfficialStateName: "The Republic of Senegal",
 		NumericCode:       "686",
@@ -1591,6 +1790,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "RS",
+		Alpha3Code:        "SRB",
 		CountryName:       "Serbia",
 		OfficialStateName: "The Republic of Serbia",
 		NumericCode:       "688",
@@ -1599,6 +1799,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "SC",
+		Alpha3Code:        "SYC",
 		CountryName:       "Seychelles",
 		OfficialStateName: "The Republic of Seychelles",
 		NumericCode:       "690",
@@ -1607,6 +1808,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "SL",
+		Alpha3Code:        "SLE",
 		CountryName:       "Sierra Leone",
 		OfficialStateName: "The Republic of Sierra Leone",
 		NumericCode:       "694",
@@ -1615,6 +1817,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "SG",
+		Alpha3Code:        "SGP",
 		CountryName:       "Singapore",
 		OfficialStateName: "The Republic of Singapore",
 		NumericCode:       "702",
@@ -1623,14 +1826,16 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "SX",
+		Alpha3Code:        "SXM",
 		CountryName:       "Sint Maarten (Dutch part)",
 		OfficialStateName: "Sint Maarten",
 		NumericCode:       "534",
 		InternetccTLD:     ".sx",
-		Flag:              Flag_Sint_Maarten,
+		Flag:              Flag_Sint_Maarten_Dutch_part,
 	},
 	{
 		Alpha2Code:        "SK",
+		Alpha3Code:        "SVK",
 		CountryName:       "Slovakia",
 		OfficialStateName: "The Slovak Republic",
 		NumericCode:       "703",
@@ -1639,6 +1844,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "SI",
+		Alpha3Code:        "SVN",
 		CountryName:       "Slovenia",
 		OfficialStateName: "The Republic of Slovenia",
 		NumericCode:       "705",
@@ -1647,6 +1853,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "SB",
+		Alpha3Code:        "SLB",
 		CountryName:       "Solomon Islands",
 		OfficialStateName: "The Solomon Islands",
 		NumericCode:       "090",
@@ -1655,6 +1862,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "SO",
+		Alpha3Code:        "SOM",
 		CountryName:       "Somalia",
 		OfficialStateName: "The Federal Republic of Somalia",
 		NumericCode:       "706",
@@ -1663,6 +1871,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "ZA",
+		Alpha3Code:        "ZAF",
 		CountryName:       "South Africa",
 		OfficialStateName: "The Republic of South Africa",
 		NumericCode:       "710",
@@ -1671,14 +1880,16 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "GS",
+		Alpha3Code:        "SGS",
 		CountryName:       "South Georgia and the South Sandwich Islands",
 		OfficialStateName: "South Georgia and the South Sandwich Islands",
 		NumericCode:       "239",
 		InternetccTLD:     ".gs",
-		Flag:              Flag_South_Georgia_South_Sandwich_Islands,
+		Flag:              Flag_South_Georgia_the_South_Sandwich_Islands,
 	},
 	{
 		Alpha2Code:        "SS",
+		Alpha3Code:        "SSD",
 		CountryName:       "South Sudan",
 		OfficialStateName: "The Republic of South Sudan",
 		NumericCode:       "728",
@@ -1687,6 +1898,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "ES",
+		Alpha3Code:        "ESP",
 		CountryName:       "Spain",
 		OfficialStateName: "The Kingdom of Spain",
 		NumericCode:       "724",
@@ -1695,6 +1907,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "LK",
+		Alpha3Code:        "LKA",
 		CountryName:       "Sri Lanka",
 		OfficialStateName: "The Democratic Socialist Republic of Sri Lanka",
 		NumericCode:       "144",
@@ -1703,6 +1916,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "SD",
+		Alpha3Code:        "SDN",
 		CountryName:       "Sudan (the)",
 		OfficialStateName: "The Republic of the Sudan",
 		NumericCode:       "729",
@@ -1711,6 +1925,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "SR",
+		Alpha3Code:        "SUR",
 		CountryName:       "Suriname",
 		OfficialStateName: "The Republic of Suriname",
 		NumericCode:       "740",
@@ -1719,14 +1934,16 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "SJ",
+		Alpha3Code:        "SJM",
 		CountryName:       "Jan Mayen",
 		OfficialStateName: "Svalbard and Jan Mayen",
 		NumericCode:       "744",
-		InternetccTLD:     "[x]",
-		Flag:              Flag_Svalbard_Jan_Mayen,
+		InternetccTLD:     "???",
+		Flag:              Flag_Jan_Mayen,
 	},
 	{
 		Alpha2Code:        "SE",
+		Alpha3Code:        "SWE",
 		CountryName:       "Sweden",
 		OfficialStateName: "The Kingdom of Sweden",
 		NumericCode:       "752",
@@ -1735,6 +1952,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "CH",
+		Alpha3Code:        "CHE",
 		CountryName:       "Switzerland",
 		OfficialStateName: "The Swiss Confederation",
 		NumericCode:       "756",
@@ -1743,22 +1961,25 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "SY",
-		CountryName:       "Syria",
+		Alpha3Code:        "SYR",
+		CountryName:       "Syrian Arab Republic (the)",
 		OfficialStateName: "The Syrian Arab Republic",
 		NumericCode:       "760",
 		InternetccTLD:     ".sy",
-		Flag:              Flag_Syria,
+		Flag:              Flag_Syrian_Arab_Republic,
 	},
 	{
 		Alpha2Code:        "TW",
-		CountryName:       "Taiwan",
+		Alpha3Code:        "TWN",
+		CountryName:       "Taiwan (Province of China)",
 		OfficialStateName: "The Republic of China",
 		NumericCode:       "158",
 		InternetccTLD:     ".tw",
-		Flag:              Flag_Taiwan,
+		Flag:              Flag_Taiwan_Province_of_China,
 	},
 	{
 		Alpha2Code:        "TJ",
+		Alpha3Code:        "TJK",
 		CountryName:       "Tajikistan",
 		OfficialStateName: "The Republic of Tajikistan",
 		NumericCode:       "762",
@@ -1767,6 +1988,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "TZ",
+		Alpha3Code:        "TZA",
 		CountryName:       "Tanzania, the United Republic of",
 		OfficialStateName: "The United Republic of Tanzania",
 		NumericCode:       "834",
@@ -1775,6 +1997,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "TH",
+		Alpha3Code:        "THA",
 		CountryName:       "Thailand",
 		OfficialStateName: "The Kingdom of Thailand",
 		NumericCode:       "764",
@@ -1783,7 +2006,8 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "TL",
-		CountryName:       "East Timor",
+		Alpha3Code:        "TLS",
+		CountryName:       "Timor-Leste",
 		OfficialStateName: "The Democratic Republic of Timor-Leste",
 		NumericCode:       "626",
 		InternetccTLD:     ".tl",
@@ -1791,6 +2015,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "TG",
+		Alpha3Code:        "TGO",
 		CountryName:       "Togo",
 		OfficialStateName: "The Togolese Republic",
 		NumericCode:       "768",
@@ -1799,6 +2024,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "TK",
+		Alpha3Code:        "TKL",
 		CountryName:       "Tokelau",
 		OfficialStateName: "Tokelau",
 		NumericCode:       "772",
@@ -1807,6 +2033,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "TO",
+		Alpha3Code:        "TON",
 		CountryName:       "Tonga",
 		OfficialStateName: "The Kingdom of Tonga",
 		NumericCode:       "776",
@@ -1815,6 +2042,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "TT",
+		Alpha3Code:        "TTO",
 		CountryName:       "Trinidad and Tobago",
 		OfficialStateName: "The Republic of Trinidad and Tobago",
 		NumericCode:       "780",
@@ -1823,6 +2051,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "TN",
+		Alpha3Code:        "TUN",
 		CountryName:       "Tunisia",
 		OfficialStateName: "The Republic of Tunisia",
 		NumericCode:       "788",
@@ -1831,14 +2060,16 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "TR",
-		CountryName:       "Turkey",
+		Alpha3Code:        "TUR",
+		CountryName:       "Türkiye",
 		OfficialStateName: "The Republic of Türkiye",
 		NumericCode:       "792",
 		InternetccTLD:     ".tr",
-		Flag:              Flag_Turkey,
+		Flag:              Flag_Türkiye,
 	},
 	{
 		Alpha2Code:        "TM",
+		Alpha3Code:        "TKM",
 		CountryName:       "Turkmenistan",
 		OfficialStateName: "Turkmenistan",
 		NumericCode:       "795",
@@ -1847,6 +2078,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "TC",
+		Alpha3Code:        "TCA",
 		CountryName:       "Turks and Caicos Islands (the)",
 		OfficialStateName: "The Turks and Caicos Islands",
 		NumericCode:       "796",
@@ -1855,6 +2087,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "TV",
+		Alpha3Code:        "TUV",
 		CountryName:       "Tuvalu",
 		OfficialStateName: "Tuvalu",
 		NumericCode:       "798",
@@ -1863,6 +2096,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "UG",
+		Alpha3Code:        "UGA",
 		CountryName:       "Uganda",
 		OfficialStateName: "The Republic of Uganda",
 		NumericCode:       "800",
@@ -1871,6 +2105,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "UA",
+		Alpha3Code:        "UKR",
 		CountryName:       "Ukraine",
 		OfficialStateName: "Ukraine",
 		NumericCode:       "804",
@@ -1879,6 +2114,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "AE",
+		Alpha3Code:        "ARE",
 		CountryName:       "United Arab Emirates (the)",
 		OfficialStateName: "The United Arab Emirates",
 		NumericCode:       "784",
@@ -1887,30 +2123,34 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "GB",
+		Alpha3Code:        "GBR",
 		CountryName:       "United Kingdom of Great Britain and Northern Ireland (the)",
 		OfficialStateName: "The United Kingdom of Great Britain and Northern Ireland",
 		NumericCode:       "826",
 		InternetccTLD:     ".gb",
-		Flag:              Flag_United_Kingdom,
+		Flag:              Flag_United_Kingdom_of_Great_Britain_Northern_Ireland,
 	},
 	{
-		Alpha2Code:        "UM",           // Baker Island, formerly known as New Nantucket,
-		CountryName:       "Baker Island", // is an uninhabited atoll just north of the Equator in the central Pacific Ocean
-		OfficialStateName: "Baker Island", // ownership?
+		Alpha2Code:        "UM",
+		Alpha3Code:        "UMI",
+		CountryName:       "United States Minor Outlying Islands (the)",
+		OfficialStateName: "Baker Island",
 		NumericCode:       "581",
-		InternetccTLD:     "[af]",
-		Flag:              Flag_FIXME_TODO,
+		InternetccTLD:     "???",
+		Flag:              Flag_United_States_Minor_Outlying_Islands,
 	},
 	{
 		Alpha2Code:        "US",
+		Alpha3Code:        "USA",
 		CountryName:       "United States of America (the)",
 		OfficialStateName: "The United States of America",
 		NumericCode:       "840",
 		InternetccTLD:     ".us",
-		Flag:              Flag_United_States,
+		Flag:              Flag_United_States_of_America,
 	},
 	{
 		Alpha2Code:        "UY",
+		Alpha3Code:        "URY",
 		CountryName:       "Uruguay",
 		OfficialStateName: "The Oriental Republic of Uruguay",
 		NumericCode:       "858",
@@ -1919,6 +2159,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "UZ",
+		Alpha3Code:        "UZB",
 		CountryName:       "Uzbekistan",
 		OfficialStateName: "The Republic of Uzbekistan",
 		NumericCode:       "860",
@@ -1927,6 +2168,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "VU",
+		Alpha3Code:        "VUT",
 		CountryName:       "Vanuatu",
 		OfficialStateName: "The Republic of Vanuatu",
 		NumericCode:       "548",
@@ -1935,38 +2177,43 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "VE",
+		Alpha3Code:        "VEN",
 		CountryName:       "Venezuela (Bolivarian Republic of)",
 		OfficialStateName: "The Bolivarian Republic of Venezuela",
 		NumericCode:       "862",
 		InternetccTLD:     ".ve",
-		Flag:              Flag_Venezuela,
+		Flag:              Flag_Venezuela_Bolivarian,
 	},
 	{
 		Alpha2Code:        "VN",
-		CountryName:       "Vietnam",
+		Alpha3Code:        "VNM",
+		CountryName:       "Viet Nam",
 		OfficialStateName: "The Socialist Republic of Viet Nam",
 		NumericCode:       "704",
 		InternetccTLD:     ".vn",
-		Flag:              Flag_Vietnam,
+		Flag:              Flag_Viet_Nam,
 	},
 	{
 		Alpha2Code:        "VG",
-		CountryName:       "British Virgin Islands",
+		Alpha3Code:        "VGB",
+		CountryName:       "Virgin Islands (British)",
 		OfficialStateName: "The Virgin Islands",
 		NumericCode:       "092",
 		InternetccTLD:     ".vg",
-		Flag:              Flag_British_Virgin_Islands,
+		Flag:              Flag_Virgin_Islands_British,
 	},
 	{
 		Alpha2Code:        "VI",
-		CountryName:       "US Virgin Islands",
+		Alpha3Code:        "VIR",
+		CountryName:       "Virgin Islands (U.S.)",
 		OfficialStateName: "The Virgin Islands of the United States",
 		NumericCode:       "850",
 		InternetccTLD:     ".vi",
-		Flag:              Flag_USVirgin_Islands,
+		Flag:              Flag_Virgin_Islands_US,
 	},
 	{
 		Alpha2Code:        "WF",
+		Alpha3Code:        "WLF",
 		CountryName:       "Wallis and Futuna",
 		OfficialStateName: "The Territory of the Wallis and Futuna Islands",
 		NumericCode:       "876",
@@ -1975,14 +2222,16 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "EH",
-		CountryName:       "Saharawi",
+		Alpha3Code:        "ESH",
+		CountryName:       "Western Sahara",
 		OfficialStateName: "The Sahrawi Arab Democratic Republic",
 		NumericCode:       "732",
-		InternetccTLD:     "[al]",
+		InternetccTLD:     "???",
 		Flag:              Flag_Western_Sahara,
 	},
 	{
 		Alpha2Code:        "YE",
+		Alpha3Code:        "YEM",
 		CountryName:       "Yemen",
 		OfficialStateName: "The Republic of Yemen",
 		NumericCode:       "887",
@@ -1991,6 +2240,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "ZM",
+		Alpha3Code:        "ZMB",
 		CountryName:       "Zambia",
 		OfficialStateName: "The Republic of Zambia",
 		NumericCode:       "894",
@@ -1999,6 +2249,7 @@ var Cultures = []CountryData{
 	},
 	{
 		Alpha2Code:        "ZW",
+		Alpha3Code:        "ZWE",
 		CountryName:       "Zimbabwe",
 		OfficialStateName: "The Republic of Zimbabwe",
 		NumericCode:       "716",

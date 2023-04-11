@@ -272,4 +272,44 @@ const (
 	Flag_Global_Rainbow_Flag                  = "🏳️‍🌈"
 	Flag_Global_Transgender_Flag              = "🏳️‍⚧️"
 	Flag_Global_Pirate_Flag                   = "🏴‍☠️"
+
+	// iso3166 import glue
+	Flag_Hong_Kong                       = Flag_Hong_Kong_SAR_China
+	Flag_Macao                           = Flag_Macao_Sar_China
+	Flag_Heard_Island_McDonald_Islands   = Flag_Heard_McDonald_Islands
+	Flag_Iran_Islamic                    = Flag_Iran
+	Flag_Korea_Democratic_Peoples        = Flag_North_Korea
+	Flag_Korea                           = Flag_South_Korea
+	Flag_Lao_Peoples_Democratic_Republic = Flag_Laos
+	Flag_Myanmar                         = Flag_Myanmar_Burma
+	Flag_Congo_Democratic                = Flag_Congo_Kinshasa
+	Flag_Congo                           = Flag_Congo_Brazzaville
+	Flag_Côte_dIvoire                    = Flag_Cote_DIvoire
+	Flag_Bolivia_Plurinational_State_of  = Flag_Bolivia
+	Flag_Pitcairn                        = Flag_Pitcairn_Islands
+	Flag_Russian_Federation              = Flag_Russia
+	Flag_Tristan_da_Cunha                = Flag_Tristan_Da_Cunha
+	Flag_StMartin_French_part            = Flag_StMartin
+	Flag_Sint_Maarten_Dutch_part         = Flag_Sint_Maarten
+	// Please don't shoot me for bugs. File issues instead. Thank you.
+	Flag_Cabo_Verde               = "X?"
+	Flag_Saba                     = "X?"
+	Flag_Sao_Tome_Principe        = "X?"
+	Flag_Virgin_Islands_US        = Flag_USVirgin_Islands
+	Flag_Virgin_Islands_British   = Flag_British_Virgin_Islands
+	Flag_Jan_Mayen                = Flag_Svalbard_Jan_Mayen
+	Flag_Viet_Nam                 = Flag_Vietnam
+	Flag_Brunei_Darussalam        = Flag_Brunei
+	Flag_Holy_See                 = Flag_Vatican_City
+	Flag_Palestine                = Flag_Palestinian_Territories
+	Flag_Syrian_Arab_Republic     = Flag_Syria
+	Flag_Taiwan_Province_of_China = Flag_Taiwan
+	Flag_Türkiye                  = Flag_Turkey
+	Flag_United_States_of_America = Flag_United_States
+	Flag_Venezuela_Bolivarian     = Flag_Venezuela
+	Flag_StVincent_the_Grenadines = Flag_StVincent_Grenadines
+	// English for brevity.
+	Flag_South_Georgia_the_South_Sandwich_Islands         = Flag_South_Georgia_South_Sandwich_Islands
+	Flag_United_Kingdom_of_Great_Britain_Northern_Ireland = Flag_United_Kingdom
+	Flag_United_States_Minor_Outlying_Islands             = Flag_USOutlying_Islands
 )
