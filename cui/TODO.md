@@ -50,3 +50,5 @@ this was the idea before thinking about HTML forms as input ...
 7. Settings report & system documentation
 8. Introduction and access to services
 ```
+
+advertise https://github.com/pb-/gotypist

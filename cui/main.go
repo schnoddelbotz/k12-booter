@@ -3,7 +3,6 @@ package cui
 import (
 	"fmt"
 	"log"
-	"schnoddelbotz/k12-booter/internationalization"
 	"time"
 
 	"github.com/jroimartin/gocui"
@@ -25,6 +24,7 @@ type App struct {
 	shortcutsView *gocui.View // Norton Commander / AS400-like bottom keymap
 	helpView      *gocui.View // sidebar; should toggle with F1
 	showHelp      bool
+	registry      *Registry
 }
 
 func Zain() {
@@ -32,6 +32,7 @@ func Zain() {
 		app App
 		err error
 	)
+	app.registry.Init()
 	app.gui, err = gocui.NewGui(gocui.OutputNormal)
 	if err != nil {
 		log.Fatalln(err)
@@ -69,14 +70,19 @@ func (app *App) bugger() {
 
 	time.Sleep(1 * time.Second)
 	e.Autoscroll = true
-	for country := range internationalization.CountryFlags {
-		app.gui.Update(func(g *gocui.Gui) error {
-			//e.Write([]byte(flag + " "))
-			fmt.Fprintf(e, "%s ", country)
-			return nil
-		})
-		time.Sleep(20 * time.Millisecond)
-	}
+	// WIP
+	// Provide C# Cultures interface here.
+	// Build POJOs, no structs holding data ... some typing work?
+	/*
+		for country := range internationalization.CountryFlags {
+			app.gui.Update(func(g *gocui.Gui) error {
+				//e.Write([]byte(flag + " "))
+				fmt.Fprintf(e, "%s ", country)
+				return nil
+			})
+			time.Sleep(20 * time.Millisecond)
+		}
+	*/
 	time.Sleep(1 * time.Second)
 
 	app.gui.Update(func(g *gocui.Gui) error {

@@ -1,273 +1,273 @@
 package internationalization
 
-// this list of flags has been imported using SublimeText from:
+// this_list_of_flags_has_been_imported_using_SublimeText_from:
 // https://emojipedia.org/flags/
-var CountryFlags = map[string]string{
-	"Ascension Island":                       "🇦🇨",
-	"Andorra":                                "🇦🇩",
-	"United Arab Emirates":                   "🇦🇪",
-	"Afghanistan":                            "🇦🇫",
-	"Antigua & Barbuda":                      "🇦🇬",
-	"Anguilla":                               "🇦🇮",
-	"Albania":                                "🇦🇱",
-	"Armenia":                                "🇦🇲",
-	"Angola":                                 "🇦🇴",
-	"Antarctica":                             "🇦🇶",
-	"Argentina":                              "🇦🇷",
-	"American Samoa":                         "🇦🇸",
-	"Austria":                                "🇦🇹",
-	"Australia":                              "🇦🇺",
-	"Aruba":                                  "🇦🇼",
-	"Åland Islands":                          "🇦🇽",
-	"Azerbaijan":                             "🇦🇿",
-	"Bosnia & Herzegovina":                   "🇧🇦",
-	"Barbados":                               "🇧🇧",
-	"Bangladesh":                             "🇧🇩",
-	"Belgium":                                "🇧🇪",
-	"Burkina Faso":                           "🇧🇫",
-	"Bulgaria":                               "🇧🇬",
-	"Bahrain":                                "🇧🇭",
-	"Burundi":                                "🇧🇮",
-	"Benin":                                  "🇧🇯",
-	"St. Barthélemy":                         "🇧🇱",
-	"Bermuda":                                "🇧🇲",
-	"Brunei":                                 "🇧🇳",
-	"Bolivia":                                "🇧🇴",
-	"Caribbean Netherlands":                  "🇧🇶",
-	"Brazil":                                 "🇧🇷",
-	"Bahamas":                                "🇧🇸",
-	"Bhutan":                                 "🇧🇹",
-	"Bouvet Island":                          "🇧🇻",
-	"Botswana":                               "🇧🇼",
-	"Belarus":                                "🇧🇾",
-	"Belize":                                 "🇧🇿",
-	"Canada":                                 "🇨🇦",
-	"Cocos (Keeling) Islands":                "🇨🇨",
-	"Congo - Kinshasa":                       "🇨🇩",
-	"Central African Republic":               "🇨🇫",
-	"Congo - Brazzaville":                    "🇨🇬",
-	"Switzerland":                            "🇨🇭",
-	"Côte d’Ivoire":                          "🇨🇮",
-	"Cook Islands":                           "🇨🇰",
-	"Chile":                                  "🇨🇱",
-	"Cameroon":                               "🇨🇲",
-	"China":                                  "🇨🇳",
-	"Colombia":                               "🇨🇴",
-	"Clipperton Island":                      "🇨🇵",
-	"Costa Rica":                             "🇨🇷",
-	"Cuba":                                   "🇨🇺",
-	"Cape Verde":                             "🇨🇻",
-	"Curaçao":                                "🇨🇼",
-	"Christmas Island":                       "🇨🇽",
-	"Cyprus":                                 "🇨🇾",
-	"Czechia":                                "🇨🇿",
-	"Germany":                                "🇩🇪",
-	"Diego Garcia":                           "🇩🇬",
-	"Djibouti":                               "🇩🇯",
-	"Denmark":                                "🇩🇰",
-	"Dominica":                               "🇩🇲",
-	"Dominican Republic":                     "🇩🇴",
-	"Algeria":                                "🇩🇿",
-	"Ceuta & Melilla":                        "🇪🇦",
-	"Ecuador":                                "🇪🇨",
-	"Estonia":                                "🇪🇪",
-	"Egypt":                                  "🇪🇬",
-	"Western Sahara":                         "🇪🇭",
-	"Eritrea":                                "🇪🇷",
-	"Spain":                                  "🇪🇸",
-	"Ethiopia":                               "🇪🇹",
-	"European Union":                         "🇪🇺",
-	"Finland":                                "🇫🇮",
-	"Fiji":                                   "🇫🇯",
-	"Falkland Islands":                       "🇫🇰",
-	"Micronesia":                             "🇫🇲",
-	"Faroe Islands":                          "🇫🇴",
-	"France":                                 "🇫🇷",
-	"Gabon":                                  "🇬🇦",
-	"United Kingdom":                         "🇬🇧",
-	"Grenada":                                "🇬🇩",
-	"Georgia":                                "🇬🇪",
-	"French Guiana":                          "🇬🇫",
-	"Guernsey":                               "🇬🇬",
-	"Ghana":                                  "🇬🇭",
-	"Gibraltar":                              "🇬🇮",
-	"Greenland":                              "🇬🇱",
-	"Gambia":                                 "🇬🇲",
-	"Guinea":                                 "🇬🇳",
-	"Guadeloupe":                             "🇬🇵",
-	"Equatorial Guinea":                      "🇬🇶",
-	"Greece":                                 "🇬🇷",
-	"South Georgia & South Sandwich Islands": "🇬🇸",
-	"Guatemala":                              "🇬🇹",
-	"Guam":                                   "🇬🇺",
-	"Guinea-Bissau":                          "🇬🇼",
-	"Guyana":                                 "🇬🇾",
-	"Hong Kong SAR China":                    "🇭🇰",
-	"Heard & McDonald Islands":               "🇭🇲",
-	"Honduras":                               "🇭🇳",
-	"Croatia":                                "🇭🇷",
-	"Haiti":                                  "🇭🇹",
-	"Hungary":                                "🇭🇺",
-	"Canary Islands":                         "🇮🇨",
-	"Indonesia":                              "🇮🇩",
-	"Ireland":                                "🇮🇪",
-	"Israel":                                 "🇮🇱",
-	"Isle of Man":                            "🇮🇲",
-	"India":                                  "🇮🇳",
-	"British Indian Ocean Territory":         "🇮🇴",
-	"Iraq":                                   "🇮🇶",
-	"Iran":                                   "🇮🇷",
-	"Iceland":                                "🇮🇸",
-	"Italy":                                  "🇮🇹",
-	"Jersey":                                 "🇯🇪",
-	"Jamaica":                                "🇯🇲",
-	"Jordan":                                 "🇯🇴",
-	"Japan":                                  "🇯🇵",
-	"Kenya":                                  "🇰🇪",
-	"Kyrgyzstan":                             "🇰🇬",
-	"Cambodia":                               "🇰🇭",
-	"Kiribati":                               "🇰🇮",
-	"Comoros":                                "🇰🇲",
-	"St. Kitts & Nevis":                      "🇰🇳",
-	"North Korea":                            "🇰🇵",
-	"South Korea":                            "🇰🇷",
-	"Kuwait":                                 "🇰🇼",
-	"Cayman Islands":                         "🇰🇾",
-	"Kazakhstan":                             "🇰🇿",
-	"Laos":                                   "🇱🇦",
-	"Lebanon":                                "🇱🇧",
-	"St. Lucia":                              "🇱🇨",
-	"Liechtenstein":                          "🇱🇮",
-	"Sri Lanka":                              "🇱🇰",
-	"Liberia":                                "🇱🇷",
-	"Lesotho":                                "🇱🇸",
-	"Lithuania":                              "🇱🇹",
-	"Luxembourg":                             "🇱🇺",
-	"Latvia":                                 "🇱🇻",
-	"Libya":                                  "🇱🇾",
-	"Morocco":                                "🇲🇦",
-	"Monaco":                                 "🇲🇨",
-	"Moldova":                                "🇲🇩",
-	"Montenegro":                             "🇲🇪",
-	"St. Martin":                             "🇲🇫",
-	"Madagascar":                             "🇲🇬",
-	"Marshall Islands":                       "🇲🇭",
-	"North Macedonia":                        "🇲🇰",
-	"Mali":                                   "🇲🇱",
-	"Myanmar (Burma)":                        "🇲🇲",
-	"Mongolia":                               "🇲🇳",
-	"Macao Sar China":                        "🇲🇴",
-	"Northern Mariana Islands":               "🇲🇵",
-	"Martinique":                             "🇲🇶",
-	"Mauritania":                             "🇲🇷",
-	"Montserrat":                             "🇲🇸",
-	"Malta":                                  "🇲🇹",
-	"Mauritius":                              "🇲🇺",
-	"Maldives":                               "🇲🇻",
-	"Malawi":                                 "🇲🇼",
-	"Mexico":                                 "🇲🇽",
-	"Malaysia":                               "🇲🇾",
-	"Mozambique":                             "🇲🇿",
-	"Namibia":                                "🇳🇦",
-	"New Caledonia":                          "🇳🇨",
-	"Niger":                                  "🇳🇪",
-	"Norfolk Island":                         "🇳🇫",
-	"Nigeria":                                "🇳🇬",
-	"Nicaragua":                              "🇳🇮",
-	"Netherlands":                            "🇳🇱",
-	"Norway":                                 "🇳🇴",
-	"Nepal":                                  "🇳🇵",
-	"Nauru":                                  "🇳🇷",
-	"Niue":                                   "🇳🇺",
-	"New Zealand":                            "🇳🇿",
-	"Oman":                                   "🇴🇲",
-	"Panama":                                 "🇵🇦",
-	"Peru":                                   "🇵🇪",
-	"French Polynesia":                       "🇵🇫",
-	"Papua New Guinea":                       "🇵🇬",
-	"Philippines":                            "🇵🇭",
-	"Pakistan":                               "🇵🇰",
-	"Poland":                                 "🇵🇱",
-	"St. Pierre & Miquelon":                  "🇵🇲",
-	"Pitcairn Islands":                       "🇵🇳",
-	"Puerto Rico":                            "🇵🇷",
-	"Palestinian Territories":                "🇵🇸",
-	"Portugal":                               "🇵🇹",
-	"Palau":                                  "🇵🇼",
-	"Paraguay":                               "🇵🇾",
-	"Qatar":                                  "🇶🇦",
-	"Réunion":                                "🇷🇪",
-	"Romania":                                "🇷🇴",
-	"Serbia":                                 "🇷🇸",
-	"Russia":                                 "🇷🇺",
-	"Rwanda":                                 "🇷🇼",
-	"Saudi Arabia":                           "🇸🇦",
-	"Solomon Islands":                        "🇸🇧",
-	"Seychelles":                             "🇸🇨",
-	"Sudan":                                  "🇸🇩",
-	"Sweden":                                 "🇸🇪",
-	"Singapore":                              "🇸🇬",
-	"St. Helena":                             "🇸🇭",
-	"Slovenia":                               "🇸🇮",
-	"Svalbard & Jan Mayen":                   "🇸🇯",
-	"Slovakia":                               "🇸🇰",
-	"Sierra Leone":                           "🇸🇱",
-	"San Marino":                             "🇸🇲",
-	"Senegal":                                "🇸🇳",
-	"Somalia":                                "🇸🇴",
-	"Suriname":                               "🇸🇷",
-	"South Sudan":                            "🇸🇸",
-	"São Tomé & Príncipe":                    "🇸🇹",
-	"El Salvador":                            "🇸🇻",
-	"Sint Maarten":                           "🇸🇽",
-	"Syria":                                  "🇸🇾",
-	"Eswatini":                               "🇸🇿",
-	"Tristan Da Cunha":                       "🇹🇦",
-	"Turks & Caicos Islands":                 "🇹🇨",
-	"Chad":                                   "🇹🇩",
-	"French Southern Territories":            "🇹🇫",
-	"Togo":                                   "🇹🇬",
-	"Thailand":                               "🇹🇭",
-	"Tajikistan":                             "🇹🇯",
-	"Tokelau":                                "🇹🇰",
-	"Timor-Leste":                            "🇹🇱",
-	"Turkmenistan":                           "🇹🇲",
-	"Tunisia":                                "🇹🇳",
-	"Tonga":                                  "🇹🇴",
-	"Turkey":                                 "🇹🇷",
-	"Trinidad & Tobago":                      "🇹🇹",
-	"Tuvalu":                                 "🇹🇻",
-	"Taiwan":                                 "🇹🇼",
-	"Tanzania":                               "🇹🇿",
-	"Ukraine":                                "🇺🇦",
-	"Uganda":                                 "🇺🇬",
-	"U.S. Outlying Islands":                  "🇺🇲",
-	"United Nations":                         "🇺🇳",
-	"United States":                          "🇺🇸",
-	"Uruguay":                                "🇺🇾",
-	"Uzbekistan":                             "🇺🇿",
-	"Vatican City":                           "🇻🇦",
-	"St. Vincent & Grenadines":               "🇻🇨",
-	"Venezuela":                              "🇻🇪",
-	"British Virgin Islands":                 "🇻🇬",
-	"U.S. Virgin Islands":                    "🇻🇮",
-	"Vietnam":                                "🇻🇳",
-	"Vanuatu":                                "🇻🇺",
-	"Wallis & Futuna":                        "🇼🇫",
-	"Samoa":                                  "🇼🇸",
-	"Kosovo":                                 "🇽🇰",
-	"Yemen":                                  "🇾🇪",
-	"Mayotte":                                "🇾🇹",
-	"South Africa":                           "🇿🇦",
-	"Zambia":                                 "🇿🇲",
-	"Zimbabwe":                               "🇿🇼",
-	"* Refugee Nation Flag":                  "🏳",
-	"* Chequered Flag":                       "🏁",
-	"* Triangular Flag":                      "🚩",
-	"* Crossed Flags":                        "🎌",
-	"* Black Flag":                           "🏴",
-	"* White Flag":                           "🏳️",
-	"* Rainbow Flag":                         "🏳️‍🌈",
-	"* Transgender Flag":                     "🏳️‍⚧️",
-	"* Pirate Flag":                          "🏴‍☠️",
-}
+const (
+	Flag_Ascension_Island                     = "🇦🇨"
+	Flag_Andorra                              = "🇦🇩"
+	Flag_United_Arab_Emirates                 = "🇦🇪"
+	Flag_Afghanistan                          = "🇦🇫"
+	Flag_Antigua_Barbuda                      = "🇦🇬"
+	Flag_Anguilla                             = "🇦🇮"
+	Flag_Albania                              = "🇦🇱"
+	Flag_Armenia                              = "🇦🇲"
+	Flag_Angola                               = "🇦🇴"
+	Flag_Antarctica                           = "🇦🇶"
+	Flag_Argentina                            = "🇦🇷"
+	Flag_American_Samoa                       = "🇦🇸"
+	Flag_Austria                              = "🇦🇹"
+	Flag_Australia                            = "🇦🇺"
+	Flag_Aruba                                = "🇦🇼"
+	Flag_Åland_Islands                        = "🇦🇽"
+	Flag_Azerbaijan                           = "🇦🇿"
+	Flag_Bosnia_Herzegovina                   = "🇧🇦"
+	Flag_Barbados                             = "🇧🇧"
+	Flag_Bangladesh                           = "🇧🇩"
+	Flag_Belgium                              = "🇧🇪"
+	Flag_Burkina_Faso                         = "🇧🇫"
+	Flag_Bulgaria                             = "🇧🇬"
+	Flag_Bahrain                              = "🇧🇭"
+	Flag_Burundi                              = "🇧🇮"
+	Flag_Benin                                = "🇧🇯"
+	Flag_StBarthélemy                         = "🇧🇱"
+	Flag_Bermuda                              = "🇧🇲"
+	Flag_Brunei                               = "🇧🇳"
+	Flag_Bolivia                              = "🇧🇴"
+	Flag_Caribbean_Netherlands                = "🇧🇶"
+	Flag_Brazil                               = "🇧🇷"
+	Flag_Bahamas                              = "🇧🇸"
+	Flag_Bhutan                               = "🇧🇹"
+	Flag_Bouvet_Island                        = "🇧🇻"
+	Flag_Botswana                             = "🇧🇼"
+	Flag_Belarus                              = "🇧🇾"
+	Flag_Belize                               = "🇧🇿"
+	Flag_Canada                               = "🇨🇦"
+	Flag_Cocos_Keeling_Islands                = "🇨🇨"
+	Flag_Congo_Kinshasa                       = "🇨🇩"
+	Flag_Central_African_Republic             = "🇨🇫"
+	Flag_Congo_Brazzaville                    = "🇨🇬"
+	Flag_Switzerland                          = "🇨🇭"
+	Flag_Cote_DIvoire                         = "🇨🇮"
+	Flag_Cook_Islands                         = "🇨🇰"
+	Flag_Chile                                = "🇨🇱"
+	Flag_Cameroon                             = "🇨🇲"
+	Flag_China                                = "🇨🇳"
+	Flag_Colombia                             = "🇨🇴"
+	Flag_Clipperton_Island                    = "🇨🇵"
+	Flag_Costa_Rica                           = "🇨🇷"
+	Flag_Cuba                                 = "🇨🇺"
+	Flag_Cape_Verde                           = "🇨🇻"
+	Flag_Curaçao                              = "🇨🇼"
+	Flag_Christmas_Island                     = "🇨🇽"
+	Flag_Cyprus                               = "🇨🇾"
+	Flag_Czechia                              = "🇨🇿"
+	Flag_Germany                              = "🇩🇪"
+	Flag_Diego_Garcia                         = "🇩🇬"
+	Flag_Djibouti                             = "🇩🇯"
+	Flag_Denmark                              = "🇩🇰"
+	Flag_Dominica                             = "🇩🇲"
+	Flag_Dominican_Republic                   = "🇩🇴"
+	Flag_Algeria                              = "🇩🇿"
+	Flag_Ceuta_Melilla                        = "🇪🇦"
+	Flag_Ecuador                              = "🇪🇨"
+	Flag_Estonia                              = "🇪🇪"
+	Flag_Egypt                                = "🇪🇬"
+	Flag_Western_Sahara                       = "🇪🇭"
+	Flag_Eritrea                              = "🇪🇷"
+	Flag_Spain                                = "🇪🇸"
+	Flag_Ethiopia                             = "🇪🇹"
+	Flag_European_Union                       = "🇪🇺"
+	Flag_Finland                              = "🇫🇮"
+	Flag_Fiji                                 = "🇫🇯"
+	Flag_Falkland_Islands                     = "🇫🇰"
+	Flag_Micronesia                           = "🇫🇲"
+	Flag_Faroe_Islands                        = "🇫🇴"
+	Flag_France                               = "🇫🇷"
+	Flag_Gabon                                = "🇬🇦"
+	Flag_United_Kingdom                       = "🇬🇧"
+	Flag_Grenada                              = "🇬🇩"
+	Flag_Georgia                              = "🇬🇪"
+	Flag_French_Guiana                        = "🇬🇫"
+	Flag_Guernsey                             = "🇬🇬"
+	Flag_Ghana                                = "🇬🇭"
+	Flag_Gibraltar                            = "🇬🇮"
+	Flag_Greenland                            = "🇬🇱"
+	Flag_Gambia                               = "🇬🇲"
+	Flag_Guinea                               = "🇬🇳"
+	Flag_Guadeloupe                           = "🇬🇵"
+	Flag_Equatorial_Guinea                    = "🇬🇶"
+	Flag_Greece                               = "🇬🇷"
+	Flag_South_Georgia_South_Sandwich_Islands = "🇬🇸"
+	Flag_Guatemala                            = "🇬🇹"
+	Flag_Guam                                 = "🇬🇺"
+	Flag_Guinea_Bissau                        = "🇬🇼"
+	Flag_Guyana                               = "🇬🇾"
+	Flag_Hong_Kong_SAR_China                  = "🇭🇰"
+	Flag_Heard_McDonald_Islands               = "🇭🇲"
+	Flag_Honduras                             = "🇭🇳"
+	Flag_Croatia                              = "🇭🇷"
+	Flag_Haiti                                = "🇭🇹"
+	Flag_Hungary                              = "🇭🇺"
+	Flag_Canary_Islands                       = "🇮🇨"
+	Flag_Indonesia                            = "🇮🇩"
+	Flag_Ireland                              = "🇮🇪"
+	Flag_Israel                               = "🇮🇱"
+	Flag_Isle_of_Man                          = "🇮🇲"
+	Flag_India                                = "🇮🇳"
+	Flag_British_Indian_Ocean_Territory       = "🇮🇴"
+	Flag_Iraq                                 = "🇮🇶"
+	Flag_Iran                                 = "🇮🇷"
+	Flag_Iceland                              = "🇮🇸"
+	Flag_Italy                                = "🇮🇹"
+	Flag_Jersey                               = "🇯🇪"
+	Flag_Jamaica                              = "🇯🇲"
+	Flag_Jordan                               = "🇯🇴"
+	Flag_Japan                                = "🇯🇵"
+	Flag_Kenya                                = "🇰🇪"
+	Flag_Kyrgyzstan                           = "🇰🇬"
+	Flag_Cambodia                             = "🇰🇭"
+	Flag_Kiribati                             = "🇰🇮"
+	Flag_Comoros                              = "🇰🇲"
+	Flag_StKitts_Nevis                        = "🇰🇳"
+	Flag_North_Korea                          = "🇰🇵"
+	Flag_South_Korea                          = "🇰🇷"
+	Flag_Kuwait                               = "🇰🇼"
+	Flag_Cayman_Islands                       = "🇰🇾"
+	Flag_Kazakhstan                           = "🇰🇿"
+	Flag_Laos                                 = "🇱🇦"
+	Flag_Lebanon                              = "🇱🇧"
+	Flag_StLucia                              = "🇱🇨"
+	Flag_Liechtenstein                        = "🇱🇮"
+	Flag_Sri_Lanka                            = "🇱🇰"
+	Flag_Liberia                              = "🇱🇷"
+	Flag_Lesotho                              = "🇱🇸"
+	Flag_Lithuania                            = "🇱🇹"
+	Flag_Luxembourg                           = "🇱🇺"
+	Flag_Latvia                               = "🇱🇻"
+	Flag_Libya                                = "🇱🇾"
+	Flag_Morocco                              = "🇲🇦"
+	Flag_Monaco                               = "🇲🇨"
+	Flag_Moldova                              = "🇲🇩"
+	Flag_Montenegro                           = "🇲🇪"
+	Flag_StMartin                             = "🇲🇫"
+	Flag_Madagascar                           = "🇲🇬"
+	Flag_Marshall_Islands                     = "🇲🇭"
+	Flag_North_Macedonia                      = "🇲🇰"
+	Flag_Mali                                 = "🇲🇱"
+	Flag_Myanmar_Burma                        = "🇲🇲"
+	Flag_Mongolia                             = "🇲🇳"
+	Flag_Macao_Sar_China                      = "🇲🇴"
+	Flag_Northern_Mariana_Islands             = "🇲🇵"
+	Flag_Martinique                           = "🇲🇶"
+	Flag_Mauritania                           = "🇲🇷"
+	Flag_Montserrat                           = "🇲🇸"
+	Flag_Malta                                = "🇲🇹"
+	Flag_Mauritius                            = "🇲🇺"
+	Flag_Maldives                             = "🇲🇻"
+	Flag_Malawi                               = "🇲🇼"
+	Flag_Mexico                               = "🇲🇽"
+	Flag_Malaysia                             = "🇲🇾"
+	Flag_Mozambique                           = "🇲🇿"
+	Flag_Namibia                              = "🇳🇦"
+	Flag_New_Caledonia                        = "🇳🇨"
+	Flag_Niger                                = "🇳🇪"
+	Flag_Norfolk_Island                       = "🇳🇫"
+	Flag_Nigeria                              = "🇳🇬"
+	Flag_Nicaragua                            = "🇳🇮"
+	Flag_Netherlands                          = "🇳🇱"
+	Flag_Norway                               = "🇳🇴"
+	Flag_Nepal                                = "🇳🇵"
+	Flag_Nauru                                = "🇳🇷"
+	Flag_Niue                                 = "🇳🇺"
+	Flag_New_Zealand                          = "🇳🇿"
+	Flag_Oman                                 = "🇴🇲"
+	Flag_Panama                               = "🇵🇦"
+	Flag_Peru                                 = "🇵🇪"
+	Flag_French_Polynesia                     = "🇵🇫"
+	Flag_Papua_New_Guinea                     = "🇵🇬"
+	Flag_Philippines                          = "🇵🇭"
+	Flag_Pakistan                             = "🇵🇰"
+	Flag_Poland                               = "🇵🇱"
+	Flag_StPierre_Miquelon                    = "🇵🇲"
+	Flag_Pitcairn_Islands                     = "🇵🇳"
+	Flag_Puerto_Rico                          = "🇵🇷"
+	Flag_Palestinian_Territories              = "🇵🇸"
+	Flag_Portugal                             = "🇵🇹"
+	Flag_Palau                                = "🇵🇼"
+	Flag_Paraguay                             = "🇵🇾"
+	Flag_Qatar                                = "🇶🇦"
+	Flag_Réunion                              = "🇷🇪"
+	Flag_Romania                              = "🇷🇴"
+	Flag_Serbia                               = "🇷🇸"
+	Flag_Russia                               = "🇷🇺"
+	Flag_Rwanda                               = "🇷🇼"
+	Flag_Saudi_Arabia                         = "🇸🇦"
+	Flag_Solomon_Islands                      = "🇸🇧"
+	Flag_Seychelles                           = "🇸🇨"
+	Flag_Sudan                                = "🇸🇩"
+	Flag_Sweden                               = "🇸🇪"
+	Flag_Singapore                            = "🇸🇬"
+	Flag_StHelena                             = "🇸🇭"
+	Flag_Slovenia                             = "🇸🇮"
+	Flag_Svalbard_Jan_Mayen                   = "🇸🇯"
+	Flag_Slovakia                             = "🇸🇰"
+	Flag_Sierra_Leone                         = "🇸🇱"
+	Flag_San_Marino                           = "🇸🇲"
+	Flag_Senegal                              = "🇸🇳"
+	Flag_Somalia                              = "🇸🇴"
+	Flag_Suriname                             = "🇸🇷"
+	Flag_South_Sudan                          = "🇸🇸"
+	Flag_São_Tomé_Príncipe                    = "🇸🇹"
+	Flag_El_Salvador                          = "🇸🇻"
+	Flag_Sint_Maarten                         = "🇸🇽"
+	Flag_Syria                                = "🇸🇾"
+	Flag_Eswatini                             = "🇸🇿"
+	Flag_Tristan_Da_Cunha                     = "🇹🇦"
+	Flag_Turks_Caicos_Islands                 = "🇹🇨"
+	Flag_Chad                                 = "🇹🇩"
+	Flag_French_Southern_Territories          = "🇹🇫"
+	Flag_Togo                                 = "🇹🇬"
+	Flag_Thailand                             = "🇹🇭"
+	Flag_Tajikistan                           = "🇹🇯"
+	Flag_Tokelau                              = "🇹🇰"
+	Flag_Timor_Leste                          = "🇹🇱"
+	Flag_Turkmenistan                         = "🇹🇲"
+	Flag_Tunisia                              = "🇹🇳"
+	Flag_Tonga                                = "🇹🇴"
+	Flag_Turkey                               = "🇹🇷"
+	Flag_Trinidad_Tobago                      = "🇹🇹"
+	Flag_Tuvalu                               = "🇹🇻"
+	Flag_Taiwan                               = "🇹🇼"
+	Flag_Tanzania                             = "🇹🇿"
+	Flag_Ukraine                              = "🇺🇦"
+	Flag_Uganda                               = "🇺🇬"
+	Flag_USOutlying_Islands                   = "🇺🇲"
+	Flag_United_Nations                       = "🇺🇳"
+	Flag_United_States                        = "🇺🇸"
+	Flag_Uruguay                              = "🇺🇾"
+	Flag_Uzbekistan                           = "🇺🇿"
+	Flag_Vatican_City                         = "🇻🇦"
+	Flag_StVincent_Grenadines                 = "🇻🇨"
+	Flag_Venezuela                            = "🇻🇪"
+	Flag_British_Virgin_Islands               = "🇻🇬"
+	Flag_USVirgin_Islands                     = "🇻🇮"
+	Flag_Vietnam                              = "🇻🇳"
+	Flag_Vanuatu                              = "🇻🇺"
+	Flag_Wallis_Futuna                        = "🇼🇫"
+	Flag_Samoa                                = "🇼🇸"
+	Flag_Kosovo                               = "🇽🇰"
+	Flag_Yemen                                = "🇾🇪"
+	Flag_Mayotte                              = "🇾🇹"
+	Flag_South_Africa                         = "🇿🇦"
+	Flag_Zambia                               = "🇿🇲"
+	Flag_Zimbabwe                             = "🇿🇼"
+	Flag_Global_Refugee_Nation_Flag           = "🏳"
+	Flag_Global_Chequered_Flag                = "🏁"
+	Flag_Global_Triangular_Flag               = "🚩"
+	Flag_Global_Crossed_Flags                 = "🎌"
+	Flag_Global_Black_Flag                    = "🏴"
+	Flag_Global_White_Flag                    = "🏳️"
+	Flag_Global_Rainbow_Flag                  = "🏳️‍🌈"
+	Flag_Global_Transgender_Flag              = "🏳️‍⚧️"
+	Flag_Global_Pirate_Flag                   = "🏴‍☠️"
+)
