@@ -2,6 +2,7 @@ package internationalization
 
 // this_list_of_flags_has_been_imported_using_SublimeText_from:
 // https://emojipedia.org/flags/
+// SEE: http://blog.unicode.org/2022/03/the-past-and-future-of-flag-emoji.html
 
 const (
 	Flag_FIXME_TODO                           = "x"
