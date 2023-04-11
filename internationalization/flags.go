@@ -2,7 +2,9 @@ package internationalization
 
 // this_list_of_flags_has_been_imported_using_SublimeText_from:
 // https://emojipedia.org/flags/
+
 const (
+	Flag_FIXME_TODO                           = "x"
 	Flag_Ascension_Island                     = "🇦🇨"
 	Flag_Andorra                              = "🇦🇩"
 	Flag_United_Arab_Emirates                 = "🇦🇪"

@@ -43,14 +43,56 @@ func main() {
 	isodata := readhtml(flags.in)
 	switch flags.to {
 	case outputFormatGO:
-		produceGo(isodata)
+		produceGo1(isodata)
 	default:
 		fmt.Println("Ja, well. Only go is supported as output format right now.")
 	}
 }
 
-func produceGo(data []iso3166) {
+func produceGo1(data []iso3166) {
+	// https://www.c-sharpcorner.com/UploadFile/0c1bb2/display-country-list-without-database-in-Asp-Net-C-Sharp/
 
+	fmt.Println(`
+package internationalization
+
+type CountryData struct {
+	CountryName       string
+	OfficialStateName string
+	Sovereignty       string
+	Alpha2Code        string
+	Alpha3Code        string
+	NumericCode       string
+	SubdivisionCode   string
+	InternetccTLD     string 
+	Flag string
+}`)
+	fmt.Printf("var ISO2CountryName = []CountryData{\n")
+	for _, country := range data {
+		fmt.Printf(`{  
+			Alpha2Code: "%s",
+			CountryName: "%s",
+			OfficialStateName: "%s",
+			NumericCode: "%s",
+			InternetccTLD: "%s",
+			Flag: Flag_%s,
+		},
+		`, country.Alpha2Code,
+			country.CountryName,
+			country.OfficialStateName,
+			country.NumericCode,
+			country.InternetccTLD,
+			CountryNameToFlagConstant(country.CountryName))
+	}
+	fmt.Printf("\n}\n")
+}
+
+func CountryNameToFlagConstant(cn string) string {
+	cn = strings.Replace(cn, "(", "", 1)
+	cn = strings.Replace(cn, ")", "", 1)
+	return strings.Replace(cn, " ", "", 9)
+}
+
+func produceGo0(data []iso3166) {
 	fmt.Printf("var ISO2CountryName = map[string]string{\n")
 	for _, country := range data {
 		fmt.Printf(`  "%s": "%s",`+"\n", country.Alpha2Code, country.CountryName)

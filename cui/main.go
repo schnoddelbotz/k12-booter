@@ -3,6 +3,7 @@ package cui
 import (
 	"fmt"
 	"log"
+	"schnoddelbotz/k12-booter/internationalization"
 	"time"
 
 	"github.com/jroimartin/gocui"
@@ -73,16 +74,16 @@ func (app *App) bugger() {
 	// WIP
 	// Provide C# Cultures interface here.
 	// Build POJOs, no structs holding data ... some typing work?
-	/*
-		for country := range internationalization.CountryFlags {
-			app.gui.Update(func(g *gocui.Gui) error {
-				//e.Write([]byte(flag + " "))
-				fmt.Fprintf(e, "%s ", country)
-				return nil
-			})
-			time.Sleep(20 * time.Millisecond)
-		}
-	*/
+
+	for _, country := range internationalization.Cultures {
+		app.gui.Update(func(g *gocui.Gui) error {
+			//e.Write([]byte(flag + " "))
+			fmt.Fprintf(e, "%4s %s %s %s\n", country.Flag, country.Alpha2Code, country.InternetccTLD, country.CountryName)
+			return nil
+		})
+		time.Sleep(20 * time.Millisecond)
+	}
+
 	time.Sleep(1 * time.Second)
 
 	app.gui.Update(func(g *gocui.Gui) error {
