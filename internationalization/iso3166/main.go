@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"os"
 	"regexp"
+	"strconv"
 	"strings"
 
 	"golang.org/x/net/html"
@@ -64,19 +65,21 @@ type CountryData struct {
 	Sovereignty       string
 	Alpha2Code        string
 	Alpha3Code        string
-	NumericCode       string
+	NumericCode       int
 	SubdivisionCode   string
 	InternetccTLD     string 
 	Flag string
 }`)
 	fmt.Printf("var Cultures = []CountryData{\n")
 	for _, country := range data {
+		numCode, err := strconv.ParseUint(country.NumericCode, 10, 16)
+		fatal(err)
 		fmt.Printf(`{  
 			Alpha2Code: "%s",
 			Alpha3Code: "%s",
 			CountryName: "%s",
 			OfficialStateName: "%s",
-			NumericCode: "%s",
+			NumericCode: %d,
 			InternetccTLD: "%s",
 			Flag: Flag_%s,
 		},
@@ -85,7 +88,7 @@ type CountryData struct {
 			country.CountryName,
 			//strings.Replace(country.OfficialStateName, "&#39;", "'", 1),
 			country.OfficialStateName,
-			country.NumericCode,
+			numCode, // country.NumericCode,
 			country.InternetccTLD,
 			CountryNameToFlagConstant(country.CountryName))
 	}

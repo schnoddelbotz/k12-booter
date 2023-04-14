@@ -30,6 +30,8 @@ func main() {
 		fmt.Printf("Region (~country): %s, confidence: %s\n", info.Region, info.RegionConfidence)
 		fmt.Printf("Detected base language: %s, confidence: %s\n", info.Base, info.BaseConfidence)
 		fmt.Printf("Detected script: %s, confidence: %s\n", info.Script, info.ScriptConfidence)
+		fmt.Printf("CultureInfo(756): %+v\n", internationalization.CultureInfo(756))
+		fmt.Printf(`CultureInfo("Australia"): %+v`+"\n", internationalization.CultureInfo("Australia"))
 		os.Exit(1)
 	}
 
