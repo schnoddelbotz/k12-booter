@@ -44,7 +44,6 @@ func Zain() {
 	app.gui.ASCII = true
 	// next two lines will enable color upon g.SetCurrentView(nextview)
 	app.gui.Highlight = true
-	app.gui.FgColor = gocui.ColorRed
 
 	app.gui.SetManagerFunc(app.layout)
 
@@ -95,14 +94,14 @@ func (app *App) bugger() {
 		e.Write([]byte("Should look for local config file now, ...\n"))
 		e.Write([]byte("Or start a wizard to collect basic data\n"))
 
-		fmt.Fprintf(e, "%s", ` ____________ 
-		< k12-booter >
-		 ------------ 
-				\   ^__^
-				 \  (oo)\_______
-					(__)\       )\/\
-						||----w |
-						||     ||`)
+		fmt.Fprintf(e, "\033[37;1m%s\033[0m", `        ____________ 
+        < k12-booter >
+         ------------ 
+                \   ^__^
+                 \  (oo)\_______
+                    (__)\       )\/\
+                        ||----w |
+                        ||     ||`)
 
 		return nil
 	})
@@ -111,16 +110,6 @@ func (app *App) bugger() {
 func (app *App) layout(g *gocui.Gui) error {
 	maxX, maxY := g.Size()
 	helpWidth := 0
-
-	if v, err := g.SetView(ViewTopMenu, 0, 0, maxX-1, 2); err != nil {
-		if err != gocui.ErrUnknownView {
-			return err
-		}
-		v.Title = "[ k12-booter ]"
-		fmt.Fprintln(v, " * FIRSTBOOT ")
-		v.FgColor = gocui.ColorGreen
-		app.topmenuView = v
-	}
 
 	// toggle
 	if app.showHelp {
@@ -137,11 +126,14 @@ func (app *App) layout(g *gocui.Gui) error {
 		g.DeleteView(ViewHelp)
 	}
 
-	if v, err := g.SetView(ViewMain, 0, 2, maxX-helpWidth-1, maxY-4); err != nil {
+	if v, err := g.SetView(ViewMain, 0, 0, maxX-helpWidth-1, maxY-3); err != nil {
 		if err != gocui.ErrUnknownView {
 			return err
 		}
 		v.Wrap = true
+		v.Title = " [ k12-booter - FirstBoot ] "
+		v.BgColor = gocui.ColorBlack
+		v.FgColor = gocui.ColorGreen
 		app.mainView = v
 	}
 
@@ -152,9 +144,10 @@ func (app *App) layout(g *gocui.Gui) error {
 		if _, err := g.SetCurrentView(ViewCommand); err != nil {
 			return err
 		}
-		v.Title = "[ Command ]"
 		v.Editable = true
-		v.Highlight = true
+		//v.Highlight = true
+
+		v.Frame = false
 		fmt.Fprintln(v, "")
 		app.commandView = v
 	}

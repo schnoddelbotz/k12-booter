@@ -93,18 +93,15 @@ func (app *App) SetHotkeyKeybindings() error {
 }
 
 func LayoutHotkeys(g *gocui.Gui) error {
-	_, maxY := g.Size()
+	maxX, maxY := g.Size()
+	width := maxX / 10
 	for i, key := range hotkeysWidget.HotKeys {
-		if v, err := g.SetView(key.ViewName, i*9, maxY-2, i*9+9, maxY); err != nil {
+		if v, err := g.SetView(key.ViewName, i*width-1, maxY-2, i*width+width-1, maxY); err != nil {
 			if err != gocui.ErrUnknownView {
 				return err
 			}
-			v.BgColor = gocui.ColorYellow
-			//v.FgColor = gocui.ColorWhite
 			v.Frame = false
-			// https://github.com/gczgcz2015/gocui/blob/master/_examples/colors256.go
-			// NC was: black empty bg instead of | char
-			fmt.Fprintf(v, "%s \033[30;1m%s\033[0m\n", key.ViewName, key.Label)
+			fmt.Fprintf(v, "\033[37;1m%d\033[0m\033[36;7m%-10s\033[0m\033[37;1m \033[0m", i+1, key.Label)
 		}
 	}
 	return nil
