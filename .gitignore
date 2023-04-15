@@ -90,5 +90,6 @@ fastlane/test_output
 iOSInjectionProject/
 /k12-booter
 /iso3166
+/flagit
 /List_of_ISO_3166_country_codes.html
 .DS_Store

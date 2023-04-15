@@ -99,12 +99,12 @@ func LayoutHotkeys(g *gocui.Gui) error {
 			if err != gocui.ErrUnknownView {
 				return err
 			}
-			v.BgColor = gocui.ColorBlue
-			v.FgColor = gocui.ColorWhite
+			v.BgColor = gocui.ColorYellow
+			//v.FgColor = gocui.ColorWhite
 			v.Frame = false
 			// https://github.com/gczgcz2015/gocui/blob/master/_examples/colors256.go
 			// NC was: black empty bg instead of | char
-			fmt.Fprintf(v, "%s %s", key.ViewName, key.Label)
+			fmt.Fprintf(v, "%s \033[30;1m%s\033[0m\n", key.ViewName, key.Label)
 		}
 	}
 	return nil
