@@ -1,6 +1,6 @@
 package cui
 
-var helpView = BooterView{
+var helpView = Widget{
 	Title: "Help",
 	Name:  "help",
 }

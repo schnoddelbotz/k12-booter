@@ -7,6 +7,14 @@ import (
 	"github.com/jroimartin/gocui"
 )
 
+type HotKey struct {
+	ViewName string // F1 .. F10
+	Label    string
+	Key      gocui.Key
+	Modifier gocui.Modifier
+	Handler  func(g *gocui.Gui, v *gocui.View) error
+}
+
 const (
 	HotKeyView_F1  = "F1"
 	HotKeyView_F2  = "F2"
@@ -23,23 +31,6 @@ const (
 	Label_Mask = "Mask"
 	Label_Quit = "Quit"
 )
-
-var hotkeysWidget = BooterView{
-	Title: "",
-	Name:  "",
-	HotKeys: []HotKey{
-		{ViewName: HotKeyView_F1, Key: gocui.KeyF1, Label: Label_Help},
-		{ViewName: HotKeyView_F2, Key: gocui.KeyF2},
-		{ViewName: HotKeyView_F3, Key: gocui.KeyF3},
-		{ViewName: HotKeyView_F4, Key: gocui.KeyF4},
-		{ViewName: HotKeyView_F5, Key: gocui.KeyF5},
-		{ViewName: HotKeyView_F6, Key: gocui.KeyF6},
-		{ViewName: HotKeyView_F7, Key: gocui.KeyF7},
-		{ViewName: HotKeyView_F8, Key: gocui.KeyF8},
-		{ViewName: HotKeyView_F9, Key: gocui.KeyF9, Label: Label_Mask},
-		{ViewName: HotKeyView_F10, Key: gocui.KeyF10, Label: Label_Quit},
-	},
-}
 
 func (app *App) voidKeyHandler(g *gocui.Gui, v *gocui.View) error {
 	log.Printf("VOID hotkeyhandler called [FIXME:hotkeys.go]")
@@ -71,31 +62,42 @@ func (app *App) keyHandlerMask(g *gocui.Gui, v *gocui.View) error {
 	return nil
 }
 
+func (app *App) InitHotkeysWidget() {
+	app.hotkeysWidget = &Widget{
+		Title: "",
+		Name:  "",
+		HotKeys: []HotKey{
+			{ViewName: HotKeyView_F1, Key: gocui.KeyF1, Label: Label_Help, Handler: app.keyHandlerHelp},
+			{ViewName: HotKeyView_F2, Key: gocui.KeyF2, Handler: app.voidKeyHandler},
+			{ViewName: HotKeyView_F3, Key: gocui.KeyF3, Handler: app.voidKeyHandler},
+			{ViewName: HotKeyView_F4, Key: gocui.KeyF4, Handler: app.voidKeyHandler},
+			{ViewName: HotKeyView_F5, Key: gocui.KeyF5, Handler: app.voidKeyHandler},
+			{ViewName: HotKeyView_F6, Key: gocui.KeyF6, Handler: app.voidKeyHandler},
+			{ViewName: HotKeyView_F7, Key: gocui.KeyF7, Handler: app.voidKeyHandler},
+			{ViewName: HotKeyView_F8, Key: gocui.KeyF8, Handler: app.voidKeyHandler},
+			{ViewName: HotKeyView_F9, Key: gocui.KeyF9, Label: Label_Mask, Handler: app.keyHandlerMask},
+			{ViewName: HotKeyView_F10, Key: gocui.KeyF10, Label: Label_Quit, Handler: app.keyHandlerQuit},
+		},
+	}
+}
+
 func (app *App) SetHotkeyKeybindings() error {
-	for _, key := range hotkeysWidget.HotKeys {
-		handler := app.voidKeyHandler
-		switch key.ViewName {
-		case HotKeyView_F1:
-			handler = app.keyHandlerHelp
-		case HotKeyView_F9:
-			handler = app.keyHandlerMask
-		case HotKeyView_F10:
-			handler = app.keyHandlerQuit
-		}
-		if err := app.gui.SetKeybinding("" /* global hotkey */, key.Key, gocui.ModNone, handler); err != nil {
+	// imaginable? if app.View == main, then:
+	for _, key := range app.hotkeysWidget.HotKeys {
+		if err := app.gui.SetKeybinding("" /* global hotkey */, key.Key, gocui.ModNone, key.Handler); err != nil {
 			return err
 		}
-		if err := app.gui.SetKeybinding(key.ViewName, gocui.MouseLeft, gocui.ModNone, handler); err != nil {
+		if err := app.gui.SetKeybinding(key.ViewName, gocui.MouseLeft, gocui.ModNone, key.Handler); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func LayoutHotkeys(g *gocui.Gui) error {
+func (app *App) LayoutHotkeys(g *gocui.Gui) error {
 	maxX, maxY := g.Size()
 	width := maxX / 10
-	for i, key := range hotkeysWidget.HotKeys {
+	for i, key := range app.hotkeysWidget.HotKeys {
 		if v, err := g.SetView(key.ViewName, i*width-1, maxY-2, i*width+width-1, maxY); err != nil {
 			if err != gocui.ErrUnknownView {
 				return err

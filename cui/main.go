@@ -19,13 +19,11 @@ const (
 
 type App struct {
 	gui           *gocui.Gui
-	topmenuView   *gocui.View // AS 400 like first row menu info
 	mainView      *gocui.View // the (?) main view
 	commandView   *gocui.View // interactive commands like: go infra ...
-	shortcutsView *gocui.View // Norton Commander / AS400-like bottom keymap
+	hotkeysWidget *Widget
 	helpView      *gocui.View // sidebar; should toggle with F1
 	showHelp      bool
-	registry      *Registry
 }
 
 func Zain() {
@@ -33,7 +31,6 @@ func Zain() {
 		app App
 		err error
 	)
-	app.registry.Init()
 	app.gui, err = gocui.NewGui(gocui.OutputNormal)
 	if err != nil {
 		log.Fatalln(err)
@@ -42,11 +39,12 @@ func Zain() {
 	app.gui.Cursor = true
 	app.gui.Mouse = true
 	app.gui.ASCII = true
-	// next two lines will enable color upon g.SetCurrentView(nextview)
+	// next two (?) lines will enable color upon g.SetCurrentView(nextview)
 	app.gui.Highlight = true
 
 	app.gui.SetManagerFunc(app.layout)
 
+	app.InitHotkeysWidget()
 	if err := app.SetHotkeyKeybindings(); err != nil {
 		log.Fatalln(err)
 	}
@@ -81,7 +79,7 @@ func (app *App) bugger() {
 				country.Flag, country.Alpha2Code, country.Alpha3Code, country.InternetccTLD, country.CountryName)
 			return nil
 		})
-		time.Sleep(20 * time.Millisecond)
+		time.Sleep(15 * time.Millisecond)
 	}
 
 	time.Sleep(1 * time.Second)
@@ -152,5 +150,8 @@ func (app *App) layout(g *gocui.Gui) error {
 		app.commandView = v
 	}
 
-	return LayoutHotkeys(g)
+	// add view "blinkenlights" = Status LEDs -> [Alt] pressed? [CAPS]? Download RX/TX?
+	// hovers border of main view (one-liner @ bottom, maybe one @top as well - clock? flag, kbd/locale->click?)
+
+	return app.LayoutHotkeys(g)
 }

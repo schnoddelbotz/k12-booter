@@ -3,6 +3,9 @@ package internationalization
 // this_list_of_flags_has_been_imported_using_SublimeText_from:
 // https://emojipedia.org/flags/
 // SEE: http://blog.unicode.org/2022/03/the-past-and-future-of-flag-emoji.html
+//
+// Correct solution would have been:
+// https://github.com/jayco/go-emoji-flag/blob/master/emoji_flag.go
 
 const (
 	Flag_FIXME_TODO                           = "x"
