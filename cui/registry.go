@@ -1,5 +1,9 @@
 package cui
 
+import (
+	"github.com/jroimartin/gocui"
+)
+
 // View registry.
 // Auto-generated form code must register here.
 // All the views. I hope this is a good idea.
@@ -15,11 +19,16 @@ type BooterView struct {
 }
 
 type HotKey struct {
-	// all needed to set up cui hotkey
+	ViewName string // F1 .. F10
+	Label    string
+	Key      gocui.Key
+	Modifier gocui.Modifier
+	Handler  func(g *gocui.Gui, v *gocui.View) error
 }
 
 func (r *Registry) Init() {
 	r.register(&helpView)
+	r.register(&hotkeysWidget)
 }
 
 func (r *Registry) register(bv *BooterView) error {

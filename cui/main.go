@@ -48,7 +48,7 @@ func Zain() {
 
 	app.gui.SetManagerFunc(app.layout)
 
-	if err := app.initKeybindings(app.gui); err != nil {
+	if err := app.SetHotkeyKeybindings(); err != nil {
 		log.Fatalln(err)
 	}
 
@@ -159,46 +159,5 @@ func (app *App) layout(g *gocui.Gui) error {
 		app.commandView = v
 	}
 
-	if v, err := g.SetView(ViewShortcuts, 0, maxY-2, maxX-1, maxY); err != nil {
-		if err != gocui.ErrUnknownView {
-			return err
-		}
-		//v.Title = "Shortcuts"
-		v.BgColor = gocui.ColorBlue
-		v.Frame = false
-		// https://github.com/gczgcz2015/gocui/blob/master/_examples/colors256.go
-		// NC was: black empty bg instead of | char
-		fmt.Fprintf(v, "F1 Help | F2 CMD | F3 View | F4 Edit | F5 Search | F9 Mask | F10 Exit")
-		app.shortcutsView = v
-	}
-
-	return nil
-}
-
-func (app *App) initKeybindings(g *gocui.Gui) error {
-	// they must depend on current view ...?
-	// ESC should ...? Get into main view and let it consume further ESCs.
-	// F2 in mainview should select CMD as active win
-
-	if err := g.SetKeybinding("", gocui.KeyF10, gocui.ModNone,
-		func(g *gocui.Gui, v *gocui.View) error {
-			return gocui.ErrQuit
-		}); err != nil {
-		return err
-	}
-	if err := g.SetKeybinding(ViewCommand, gocui.KeyF9, gocui.ModNone,
-		func(g *gocui.Gui, v *gocui.View) error {
-			v.Mask ^= '*'
-			return nil
-		}); err != nil {
-		return err
-	}
-	if err := g.SetKeybinding("", gocui.KeyF1, gocui.ModNone,
-		func(g *gocui.Gui, v *gocui.View) error {
-			app.showHelp = !app.showHelp // toggle
-			return nil
-		}); err != nil {
-		return err
-	}
-	return nil
+	return LayoutHotkeys(g)
 }
