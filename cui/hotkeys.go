@@ -38,17 +38,7 @@ func (app *App) voidKeyHandler(g *gocui.Gui, v *gocui.View) error {
 }
 
 func (app *App) keyHandlerHelp(g *gocui.Gui, v *gocui.View) error {
-	// they must depend on current view ...?
-	// ESC should ...? Get into main view and let it consume further ESCs.
-	// F2 in mainview should select CMD as active win
-
-	//if err := g.SetKeybinding("", gocui.KeyF1, gocui.ModNone,
-	//	func(g *gocui.Gui, v *gocui.View) error {
 	app.showHelp = !app.showHelp // toggle
-	//		return nil
-	//	}); err != nil {
-	//	return err
-	//}
 	return nil
 }
 

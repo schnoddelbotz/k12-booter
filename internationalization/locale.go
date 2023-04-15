@@ -18,10 +18,11 @@ type LocaleInfo struct {
 	Script           language.Script
 	ScriptConfidence language.Confidence
 	// TODO:
-	CountryTwoLetter string
-	CountryNameEN    string
-	CountryNameLocal string
-	LanguagesSpoken  []string
+	CountryTwoLetter  string
+	CountryNameEN     string
+	CountryNameLocal  string
+	LanguagesSpoken   []string
+	LanguageLocalName string
 }
 
 func GetLocaleInfo() LocaleInfo {
@@ -51,7 +52,7 @@ func GetLocaleInfo() LocaleInfo {
 		display.English.Tags().Name(info.LanguageTag),
 		display.Self.Name(info.LanguageTag),
 		index, confidence)
-
+	info.LanguageLocalName = display.Self.Name(info.LanguageTag)
 	//log.Printf("LLLL %+v", display.Languages())
 
 	return info

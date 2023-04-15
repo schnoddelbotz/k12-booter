@@ -24,6 +24,7 @@ type App struct {
 	hotkeysWidget *Widget
 	helpView      *gocui.View // sidebar; should toggle with F1
 	showHelp      bool
+	localeInfo    internationalization.LocaleInfo
 }
 
 func Zain() {
@@ -31,6 +32,7 @@ func Zain() {
 		app App
 		err error
 	)
+	app.localeInfo = internationalization.GetLocaleInfo()
 	app.gui, err = gocui.NewGui(gocui.OutputNormal)
 	if err != nil {
 		log.Fatalln(err)
@@ -75,8 +77,8 @@ func (app *App) bugger() {
 	for _, country := range internationalization.Cultures {
 		app.gui.Update(func(g *gocui.Gui) error {
 			//e.Write([]byte(flag + " "))
-			fmt.Fprintf(e, "%4s %s %s %s %s\n",
-				country.Flag, country.Alpha2Code, country.Alpha3Code, country.InternetccTLD, country.CountryName)
+			fmt.Fprintf(e, "%s %s %s %s\n",
+				country.Alpha2Code, country.Alpha3Code, country.InternetccTLD, country.CountryName)
 			return nil
 		})
 		time.Sleep(15 * time.Millisecond)
@@ -133,6 +135,18 @@ func (app *App) layout(g *gocui.Gui) error {
 		v.BgColor = gocui.ColorBlack
 		v.FgColor = gocui.ColorGreen
 		app.mainView = v
+	}
+
+	if v, err := g.SetView("locale", maxX-33, -1, maxX-2, 1); err != nil {
+		if err != gocui.ErrUnknownView {
+			return err
+		}
+		v.Wrap = false
+		v.Frame = false
+		msg := fmt.Sprintf("[ %5s %-20s ]", app.localeInfo.Locale, app.localeInfo.LanguageLocalName)
+		v.Write([]byte(msg))
+		v.BgColor = gocui.ColorBlue
+		v.FgColor = gocui.ColorYellow
 	}
 
 	if v, err := g.SetView(ViewCommand, 0, maxY-3, maxX-1, maxY-1); err != nil {
