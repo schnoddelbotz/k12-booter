@@ -1,7 +1,6 @@
 package cui
 
 import (
-	"fmt"
 	"log"
 	"schnoddelbotz/k12-booter/internationalization"
 
@@ -57,9 +56,11 @@ func Zain() {
 	app.views = map[string]*AppView{
 		// this should be built dynamically, based on forms etc?
 		// keep "paint order" in mind? m(
-		ViewCommand: {name: ViewCommand, layoutFunc: app.commandLayoutFunc},
-		ViewMain:    {name: ViewMain, layoutFunc: app.mainLayoutFunc},
-		ViewLocale:  {name: ViewLocale, layoutFunc: app.localeLayoutFunc},
+		ViewCommand:   {name: ViewCommand, layoutFunc: app.commandLayoutFunc},
+		ViewMain:      {name: ViewMain, layoutFunc: app.mainLayoutFunc},
+		ViewHelp:      {name: ViewHelp, layoutFunc: app.helpLayoutFunc},
+		ViewLocale:    {name: ViewLocale, layoutFunc: app.localeLayoutFunc},
+		ViewShortcuts: {name: ViewShortcuts, layoutFunc: app.hotkeysLayoutFunc},
 	}
 
 	app.gui.SetManagerFunc(app.layout)
@@ -77,24 +78,6 @@ func Zain() {
 }
 
 func (app *App) layout(g *gocui.Gui) error {
-	maxX, maxY := g.Size()
-	app.helpWidth = 0
-
-	// toggle
-	if app.showHelp {
-		app.helpWidth = 31
-		if v, err := g.SetView(ViewHelp, maxX-app.helpWidth-1, 1, maxX-1, maxY-3); err != nil {
-			if err != gocui.ErrUnknownView {
-				return err
-			}
-			v.Title = "[ Context help ]"
-			fmt.Fprintln(v, "This is k12-booter, yay!")
-			app.helpView = v
-		}
-	} else {
-		g.DeleteView(ViewHelp)
-	}
-
 	for _, av := range app.views {
 		v, err := av.layoutFunc()
 		if err != nil {
@@ -102,9 +85,8 @@ func (app *App) layout(g *gocui.Gui) error {
 		}
 		av.view = v
 	}
-
+	// TODO:
 	// add view "blinkenlights" = Status LEDs -> [Alt] pressed? [CAPS]? Download RX/TX?
 	// hovers border of main view (one-liner @ bottom, maybe one @top as well - clock? flag, kbd/locale->click?)
-
-	return app.LayoutHotkeys(g)
+	return nil
 }
