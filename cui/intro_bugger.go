@@ -31,7 +31,7 @@ func (app *App) bugger() {
 				country.Alpha2Code, country.Alpha3Code, country.InternetccTLD, country.CountryName)
 			return nil
 		})
-		time.Sleep(10 * time.Millisecond)
+		time.Sleep(7 * time.Millisecond)
 	}
 
 	time.Sleep(200 * time.Millisecond)
@@ -44,14 +44,14 @@ func (app *App) bugger() {
 		e.Write([]byte("Should look for local config file now, ...\n"))
 		e.Write([]byte("Or start a wizard to collect basic data\n"))
 
-		fmt.Fprintf(e, "\033[37;1m%s\033[0m", `        ____________ 
+		fmt.Fprintf(e, "\033[37;1m%s\033[0m", `         ____________ 
         < k12-booter >
          ------------ 
                 \   ^__^
                  \  (oo)\_______
                     (__)\       )\/\
                         ||----w |
-                        ||     ||`)
+                        ||     ||`+"\n\n")
 
 		return nil
 	})

@@ -64,6 +64,13 @@ func (app *App) keyHandlerMask(g *gocui.Gui, v *gocui.View) error {
 	return nil
 }
 
+func (app *App) handleUserCommand(g *gocui.Gui, v *gocui.View) error {
+	app.userCommands <- v.Buffer()
+	v.Clear()
+	v.SetCursor(0, 0)
+	return nil
+}
+
 func (app *App) InitHotkeysWidget() {
 	app.hotkeysWidget = &Widget{
 		Title: "",
@@ -92,6 +99,9 @@ func (app *App) SetHotkeyKeybindings() error {
 		if err := app.gui.SetKeybinding(key.ViewName, gocui.MouseLeft, gocui.ModNone, key.Handler); err != nil {
 			return err
 		}
+	}
+	if err := app.gui.SetKeybinding(ViewCommand, gocui.KeyEnter, gocui.ModNone, app.handleUserCommand); err != nil {
+		return err
 	}
 	return nil
 }

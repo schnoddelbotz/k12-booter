@@ -25,6 +25,7 @@ type App struct {
 	showHelp      bool
 	helpWidth     int
 	localeInfo    internationalization.LocaleInfo
+	userCommands  chan string
 }
 
 type ViewIdentifier string
@@ -53,6 +54,7 @@ func Zain() {
 	app.gui.ASCII = true
 	// next two (?) lines will enable color upon g.SetCurrentView(nextview)
 	app.gui.Highlight = true
+	app.userCommands = make(chan string)
 
 	app.views = map[string]*AppView{
 		// this should be built dynamically, based on forms etc?
@@ -72,6 +74,7 @@ func Zain() {
 	}
 
 	go app.bugger() // lorem ipsum intro flooding main view
+	go app.userCommandExecutor()
 
 	if err := app.gui.MainLoop(); err != nil && err != gocui.ErrQuit {
 		log.Fatalln(err)
