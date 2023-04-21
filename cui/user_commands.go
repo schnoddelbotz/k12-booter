@@ -10,22 +10,42 @@ import (
 func (app *App) userCommandExecutor() {
 	time.Sleep(250 * time.Millisecond)
 	e := app.views[ViewMain].view
-	for {
-		x := <-app.userCommands
-		// TODO handle commands ... map?
-		if x == "quit\n" {
+	actionMap := map[string]func(){
+		"cls": func() {
 			app.gui.Update(func(g *gocui.Gui) error {
-				fmt.Fprintf(e, "> \033[33;1mbye, peace!\033[0m")
+				e.Clear()
+				e.SetOrigin(0, 0)
+				return nil
+			})
+		},
+		"quit": func() {
+			app.gui.Update(func(g *gocui.Gui) error {
+				fmt.Fprintf(e, "\n> OK \033[33;1mbye, peace!\033[0m\n\n")
 				return nil
 			})
 			time.Sleep(1 * time.Second)
 			app.gui.Update(func(g *gocui.Gui) error {
 				return gocui.ErrQuit
 			})
+		},
+	}
+	for {
+		x := <-app.userCommands
+		// log received command to main view
+		fmt.Fprintf(e, "< \033[33;1m%s\033[0m\n", x)
+		if f, ok := actionMap[x]; ok {
+			f()
+		} else {
+			// next ... command with arguments m(
+
+			// for now ...
+			app.gui.Update(func(g *gocui.Gui) error {
+				cmds := "CLS, QUIT" // cough.
+				fmt.Fprintf(e, "> Unknown command: \033[31;1m%s\033[0m\n", x)
+				fmt.Fprintf(e, "> Known commands: \033[33;1m%s\033[0m\n", cmds)
+				fmt.Fprintln(e, "> AI tip of the day: \033[37;1mPress F1 for help\033[0m")
+				return nil
+			})
 		}
-		app.gui.Update(func(g *gocui.Gui) error {
-			fmt.Fprintf(e, "> \033[33;1mTODO\033[0m exec user command: \033[31;1m%s\033[0m", x)
-			return nil
-		})
 	}
 }

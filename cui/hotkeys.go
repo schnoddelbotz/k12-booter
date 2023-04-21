@@ -2,6 +2,7 @@ package cui
 
 import (
 	"log"
+	"strings"
 
 	"github.com/jroimartin/gocui"
 )
@@ -65,7 +66,7 @@ func (app *App) keyHandlerMask(g *gocui.Gui, v *gocui.View) error {
 }
 
 func (app *App) handleUserCommand(g *gocui.Gui, v *gocui.View) error {
-	app.userCommands <- v.Buffer()
+	app.userCommands <- strings.TrimSuffix(v.Buffer(), "\n")
 	v.Clear()
 	v.SetCursor(0, 0)
 	return nil
