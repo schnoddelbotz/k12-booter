@@ -14,6 +14,7 @@ const (
 	ViewCommand   = "command"
 	ViewLocale    = "locale"
 	ViewHelp      = "help"
+	ViewMenu      = "menu"
 )
 
 type App struct {

@@ -29,6 +29,7 @@ const (
 	Label_Help = "Help"
 	Label_Mask = "Mask"
 	Label_Quit = "Quit"
+	Label_Menu = "Menu"
 )
 
 func (app *App) voidKeyHandler(g *gocui.Gui, v *gocui.View) error {
@@ -38,6 +39,18 @@ func (app *App) voidKeyHandler(g *gocui.Gui, v *gocui.View) error {
 
 func (app *App) keyHandlerHelp(g *gocui.Gui, v *gocui.View) error {
 	app.showHelp = !app.showHelp // toggle
+	return nil
+}
+
+func (app *App) keyHandlerMainMenu(g *gocui.Gui, v *gocui.View) error {
+	// todo
+	//app.views[ViewMain].view.Clear() // why? don't?
+	if _, ok := app.views[ViewMenu]; ok {
+		app.gui.DeleteView(ViewMenu)
+		delete(app.views, ViewMenu)
+	} else {
+		app.views[ViewMenu] = &AppView{name: ViewMenu, layoutFunc: app.menuLayoutFunc}
+	}
 	return nil
 }
 
@@ -57,7 +70,7 @@ func (app *App) InitHotkeysWidget() {
 		Name:  "",
 		HotKeys: []HotKey{
 			{ViewName: HotKeyView_F1, Key: gocui.KeyF1, Label: Label_Help, Handler: app.keyHandlerHelp},
-			{ViewName: HotKeyView_F2, Key: gocui.KeyF2, Handler: app.voidKeyHandler},
+			{ViewName: HotKeyView_F2, Key: gocui.KeyF2, Label: Label_Menu, Handler: app.keyHandlerMainMenu},
 			{ViewName: HotKeyView_F3, Key: gocui.KeyF3, Handler: app.voidKeyHandler},
 			{ViewName: HotKeyView_F4, Key: gocui.KeyF4, Handler: app.voidKeyHandler},
 			{ViewName: HotKeyView_F5, Key: gocui.KeyF5, Handler: app.voidKeyHandler},
