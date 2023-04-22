@@ -33,11 +33,10 @@ type App struct {
 type ViewIdentifier string
 
 type AppView struct {
-	name          ViewIdentifier
-	view          *gocui.View
-	hotkeys       []HotKey
-	isCurrentView bool
-	layoutFunc    func() (*gocui.View, error)
+	name       ViewIdentifier
+	view       *gocui.View
+	hotkeys    []HotKey
+	layoutFunc func() (*gocui.View, error)
 }
 
 func Zain() {
@@ -61,7 +60,7 @@ func Zain() {
 	app.views = map[string]*AppView{
 		// this should be built dynamically, based on forms etc?
 		// keep "paint order" in mind? m(
-		ViewCommand:   {name: ViewCommand, layoutFunc: app.commandLayoutFunc, isCurrentView: true},
+		ViewCommand:   {name: ViewCommand, layoutFunc: app.commandLayoutFunc},
 		ViewMain:      {name: ViewMain, layoutFunc: app.mainLayoutFunc},
 		ViewHelp:      {name: ViewHelp, layoutFunc: app.helpLayoutFunc},
 		ViewLocale:    {name: ViewLocale, layoutFunc: app.localeLayoutFunc},
@@ -84,10 +83,7 @@ func Zain() {
 }
 
 func (app *App) layout(g *gocui.Gui) error {
-	for viewName, av := range app.views {
-		if av.isCurrentView {
-			app.gui.SetCurrentView(viewName)
-		}
+	for _, av := range app.views {
 		v, err := av.layoutFunc()
 		if err != nil {
 			return (err)

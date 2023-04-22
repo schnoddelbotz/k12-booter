@@ -44,28 +44,50 @@ func (app *App) keyHandlerHelp(g *gocui.Gui, v *gocui.View) error {
 	return nil
 }
 
-func (app *App) keyHandlerMainMenu(g *gocui.Gui, v *gocui.View) error {
+func (app *App) keyHandlerToggleMenu(g *gocui.Gui, v *gocui.View) error {
 	// todo
 	//app.views[ViewMain].view.Clear() // why? don't?
+	//e := app.views[ViewMain].view
 	if _, ok := app.views[ViewMenu]; ok {
-		app.gui.DeleteView(ViewMenu)
-		delete(app.views, ViewMenu)
-		app.views[ViewCommand].isCurrentView = true
 		app.gui.DeleteKeybindings(ViewMenu)
-	} else {
-		app.views[ViewCommand].isCurrentView = false
-		app.views[ViewMenu] = &AppView{
-			name:          ViewMenu,
-			layoutFunc:    app.menuLayoutFunc,
-			isCurrentView: true,
-		}
-		app.setupMenuKeybindings()
 		app.gui.Update(func(g *gocui.Gui) error {
-			app.gui.SetCurrentView(ViewMenu)
+			app.gui.DeleteView(ViewMenu)
 			return nil
 		})
+		delete(app.views, ViewMenu)
+		app.gui.Update(func(g *gocui.Gui) error {
+			app.gui.SetCurrentView(ViewCommand)
+			return nil
+		})
+	} else {
+		app.showMenu(app.currentMenu)
 	}
 	return nil
+}
+
+func (app *App) showMenu(menuName string) {
+	app.views[ViewMenu] = &AppView{
+		name:       ViewMenu,
+		layoutFunc: app.menuLayoutFunc,
+	}
+	/// FIXME ^^^
+	/// take it into intial list and then delete it on startup again?
+	/// or create .view prior to layout()
+
+	app.currentMenu = menuName
+	app.currentMenuItem = 0
+	app.setupMenuKeybindings()
+	app.gui.Update(func(g *gocui.Gui) error {
+		app.gui.SetCurrentView(ViewMenu)
+		//if app.views[ViewMenu].view != nil && app.currentMenuItem < len(app.menuItems(app.currentMenu)) {
+		// hairy? FIXME
+		if v, err := app.gui.View(ViewMenu); err == nil {
+			v.SetCursor(0, app.currentMenuItem)
+		}
+		//	app.views[ViewMenu].view.SetCursor(0, app.currentMenuItem)
+		//}
+		return nil
+	})
 }
 
 func (app *App) keyHandlerQuit(g *gocui.Gui, v *gocui.View) error {
@@ -86,19 +108,11 @@ func (app *App) sendUserCommandCLS(g *gocui.Gui, v *gocui.View) error {
 func (app *App) handleTab(g *gocui.Gui, v *gocui.View) error {
 	// unsure if good idea. tab.
 	// tabindex, forms ... ESC ? vi?
-	if app.gui.CurrentView().Name() == ViewMain {
-		app.setActiveView(ViewCommand)
-	} else {
-		app.setActiveView(ViewMain)
-	}
+	app.setActiveView(ViewCommand)
 	return nil
 }
 
 func (app *App) setActiveView(id string) error {
-	for _, v := range app.views {
-		v.isCurrentView = false
-	}
-	app.views[id].isCurrentView = true
 	app.gui.Update(func(g *gocui.Gui) error {
 		app.gui.SetCurrentView(id)
 		return nil
@@ -127,7 +141,7 @@ func (app *App) InitHotkeysWidget() {
 		Name:  "",
 		HotKeys: []HotKey{
 			{ViewName: HotKeyView_F1, Key: gocui.KeyF1, Label: Label_Help, Handler: app.keyHandlerHelp},
-			{ViewName: HotKeyView_F2, Key: gocui.KeyF2, Label: Label_Menu, Handler: app.keyHandlerMainMenu},
+			{ViewName: HotKeyView_F2, Key: gocui.KeyF2, Label: Label_Menu, Handler: app.keyHandlerToggleMenu},
 			{ViewName: HotKeyView_F3, Key: gocui.KeyF3, Handler: app.voidKeyHandler},
 			{ViewName: HotKeyView_F4, Key: gocui.KeyF4, Handler: app.voidKeyHandler},
 			{ViewName: HotKeyView_F5, Key: gocui.KeyF5, Handler: app.voidKeyHandler},

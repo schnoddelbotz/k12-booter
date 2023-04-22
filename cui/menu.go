@@ -77,6 +77,25 @@ var AppMenu = []MenuItem{
 		itemType: LinkUserCommand,
 		target:   "quit", //
 	},
+	// hmm.
+	{
+		Label:    "Return to main menu",
+		Parent:   Menu_Applications,
+		itemType: LinkMenu,
+		target:   Menu_Main,
+	},
+	{
+		Label:    "Return to main menu",
+		Parent:   Menu_Admin,
+		itemType: LinkMenu,
+		target:   Menu_Main,
+	},
+	{
+		Label:    "Return to main menu",
+		Parent:   Menu_Deployment,
+		itemType: LinkMenu,
+		target:   Menu_Main,
+	},
 	{
 		Label:    "Return to main menu",
 		Parent:   Menu_Preferences,
@@ -90,8 +109,8 @@ func (app *App) menuLayoutFunc() (*gocui.View, error) {
 	if app.currentMenu == "" {
 		app.currentMenu = Menu_Main
 	}
-	maxX, maxY := g.Size()
-	if v, err := g.SetView(ViewMenu, 20, 4, maxX-20, maxY-6); err != nil {
+	_, maxY := g.Size()
+	if v, err := g.SetView(ViewMenu, 20, 4, 55, maxY-6); err != nil {
 		if err != gocui.ErrUnknownView {
 			return nil, err
 		}
@@ -102,38 +121,54 @@ func (app *App) menuLayoutFunc() (*gocui.View, error) {
 		v.SelFgColor = gocui.ColorBlack
 		items := app.menuItems(app.currentMenu)
 		for i, mi := range items {
-			fmt.Fprintf(v, "%d > %s\n", i, mi.Label)
+			fmt.Fprintf(v, "%3d > %-32s\n", i, mi.Label)
 		}
 	}
 	return app.views[ViewMenu].view, nil
 }
 
 func (app *App) handleMenuKeyUp(g *gocui.Gui, v *gocui.View) error {
-	// e := app.views[ViewMain].view
+	//e := app.views[ViewMain].view
 	if app.currentMenuItem > 0 {
 		app.currentMenuItem--
 		// fmt.Fprintf(e, "# menu debug: UP ↑ -> %d\n", app.currentMenuItem)
 	}
-	app.views[ViewMenu].view.SetCursor(0, app.currentMenuItem)
+	if app.currentMenuItem < len(app.menuItems(app.currentMenu)) {
+		// fmt.Fprintf(e, "cur %d len %d\n", app.currentMenuItem, len(app.menuItems(app.currentMenu)))
+		if v, err := app.gui.View(ViewMenu); err == nil {
+			v.SetCursor(0, app.currentMenuItem)
+		}
+	}
+
 	return nil
 }
 
 func (app *App) handleMenuKeyDown(g *gocui.Gui, v *gocui.View) error {
-	// e := app.views[ViewMain].view
+	//e := app.views[ViewMain].view
 	if app.currentMenuItem+1 < len(app.menuItems(app.currentMenu)) {
 		app.currentMenuItem++
 		// fmt.Fprintf(e, "# menu debug: DN ↓-> %d\n", app.currentMenuItem)
 	}
-	app.views[ViewMenu].view.SetCursor(0, app.currentMenuItem)
+	if app.currentMenuItem < len(app.menuItems(app.currentMenu)) {
+		if v, err := app.gui.View(ViewMenu); err == nil {
+			v.SetCursor(0, app.currentMenuItem)
+		}
+	}
+
 	return nil
 }
 
 func (app *App) menuEnterKeyHandler(g *gocui.Gui, v *gocui.View) error {
 	e := app.views[ViewMain].view
 	items := app.menuItems(app.currentMenu)
-	clickedItem := items[app.currentMenuItem]
-	fmt.Fprintf(e, "# menu debug: ENTER -> %d = %v\n", app.currentMenuItem, clickedItem)
-	return app.execMenuItemAction(clickedItem)
+	if app.currentMenuItem <= len(items) {
+		clickedItem := items[app.currentMenuItem]
+		fmt.Fprintf(e, "# menu debug: ENTER -> %d = %v\n", app.currentMenuItem, clickedItem)
+		app.gui.Update(func(*gocui.Gui) error { return nil })
+		return app.execMenuItemAction(clickedItem)
+	}
+	fmt.Fprintf(e, "# menu debug: IGNORE ENTER -> %d\n", app.currentMenuItem)
+	return nil
 }
 
 func (app *App) menuMouseClickHandler(g *gocui.Gui, v *gocui.View) error {
@@ -156,8 +191,11 @@ func (app *App) execMenuItemAction(mi MenuItem) error {
 	switch mi.itemType {
 	case LinkUserCommand:
 		app.userCommands <- mi.target
+		// todo: close menu now?
 	case LinkMenu:
 		fmt.Fprintf(e, "# TODO Scotty, beam me into sub-menu %s\n", mi.Label)
+		//app.showMenu(mi.target)
+		app.gui.Update(func(*gocui.Gui) error { app.currentMenu = mi.target; app.currentMenuItem = 0; return nil })
 	default:
 		fmt.Fprintf(e, "# MI_EXEC TODO impl %+v\n", mi)
 	}
