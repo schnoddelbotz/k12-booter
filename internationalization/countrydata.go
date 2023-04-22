@@ -1431,7 +1431,7 @@ var Cultures = []CountryData{
 	{
 		Alpha2Code:        "NL",
 		Alpha3Code:        "NLD",
-		CountryName:       "Netherlands (the)",
+		CountryName:       "Netherlands, Kingdom of the",
 		OfficialStateName: "The Kingdom of the Netherlands",
 		NumericCode:       528,
 		InternetccTLD:     ".nl",

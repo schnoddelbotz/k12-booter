@@ -98,6 +98,7 @@ type CountryData struct {
 func CountryNameToFlagConstant(cn string) string {
 	// no politics intended here - just to match our Go constant names for FLAGS #PEACE.
 	cn = strings.Replace(cn, ", the United Republic of", "", 1)
+	cn = strings.Replace(cn, ", Kingdom of", "", 1)
 	cn = strings.Replace(cn, "(", "", 2)
 	cn = strings.Replace(cn, ")", "", 2)
 	cn = strings.Replace(cn, " and ", "_", 1)
