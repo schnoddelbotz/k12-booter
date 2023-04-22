@@ -31,6 +31,7 @@ const (
 	Label_Mask = "Mask"
 	Label_Quit = "Quit"
 	Label_Menu = "Menu"
+	Label_CLS  = "CLS"
 )
 
 func (app *App) voidKeyHandler(g *gocui.Gui, v *gocui.View) error {
@@ -49,8 +50,16 @@ func (app *App) keyHandlerMainMenu(g *gocui.Gui, v *gocui.View) error {
 	if _, ok := app.views[ViewMenu]; ok {
 		app.gui.DeleteView(ViewMenu)
 		delete(app.views, ViewMenu)
+		app.views[ViewCommand].isCurrentView = true
+		app.gui.DeleteKeybindings(ViewMenu)
 	} else {
-		app.views[ViewMenu] = &AppView{name: ViewMenu, layoutFunc: app.menuLayoutFunc}
+		app.views[ViewCommand].isCurrentView = false
+		app.views[ViewMenu] = &AppView{name: ViewMenu, layoutFunc: app.menuLayoutFunc, isCurrentView: true}
+		app.setupMenuKeybindings()
+		app.gui.Update(func(g *gocui.Gui) error {
+			app.gui.SetCurrentView(ViewMenu)
+			return nil
+		})
 	}
 	return nil
 }
@@ -62,6 +71,42 @@ func (app *App) keyHandlerQuit(g *gocui.Gui, v *gocui.View) error {
 func (app *App) keyHandlerMask(g *gocui.Gui, v *gocui.View) error {
 	// try on view "" using F9 ;) ... Fine via mouse. Demo relict.
 	v.Mask ^= '*'
+	return nil
+}
+
+func (app *App) sendUserCommandCLS(g *gocui.Gui, v *gocui.View) error {
+	app.userCommands <- "cls"
+	return nil
+}
+
+func (app *App) handleTab(g *gocui.Gui, v *gocui.View) error {
+	// unsure if good idea. tab.
+	// tabindex, forms ... ESC ? vi?
+	if app.gui.CurrentView().Name() == ViewMain {
+		app.setActiveView(ViewCommand)
+	} else {
+		app.setActiveView(ViewMain)
+	}
+	return nil
+}
+
+func (app *App) setActiveView(id string) error {
+	for _, v := range app.views {
+		v.isCurrentView = false
+	}
+	app.views[id].isCurrentView = true
+	app.gui.Update(func(g *gocui.Gui) error {
+		app.gui.SetCurrentView(id)
+		return nil
+	})
+	return nil
+}
+
+func (app *App) mainScrollUp(g *gocui.Gui, v *gocui.View) error {
+	app.gui.Update(func(g *gocui.Gui) error {
+		v.MoveCursor(0, 0, false)
+		return nil
+	})
 	return nil
 }
 
@@ -84,7 +129,7 @@ func (app *App) InitHotkeysWidget() {
 			{ViewName: HotKeyView_F5, Key: gocui.KeyF5, Handler: app.voidKeyHandler},
 			{ViewName: HotKeyView_F6, Key: gocui.KeyF6, Handler: app.voidKeyHandler},
 			{ViewName: HotKeyView_F7, Key: gocui.KeyF7, Handler: app.voidKeyHandler},
-			{ViewName: HotKeyView_F8, Key: gocui.KeyF8, Handler: app.voidKeyHandler},
+			{ViewName: HotKeyView_F8, Key: gocui.KeyF8, Label: Label_CLS, Handler: app.sendUserCommandCLS},
 			{ViewName: HotKeyView_F9, Key: gocui.KeyF9, Label: Label_Mask, Handler: app.keyHandlerMask},
 			{ViewName: HotKeyView_F10, Key: gocui.KeyF10, Label: Label_Quit, Handler: app.keyHandlerQuit},
 		},
@@ -102,6 +147,12 @@ func (app *App) SetHotkeyKeybindings() error {
 		}
 	}
 	if err := app.gui.SetKeybinding(ViewCommand, gocui.KeyEnter, gocui.ModNone, app.handleUserCommand); err != nil {
+		return err
+	}
+	if err := app.gui.SetKeybinding(ViewMain, gocui.KeyArrowUp, gocui.ModNone, app.mainScrollUp); err != nil {
+		return err
+	}
+	if err := app.gui.SetKeybinding("", gocui.KeyTab, gocui.ModNone, app.handleTab); err != nil {
 		return err
 	}
 	return nil

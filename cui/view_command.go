@@ -13,12 +13,8 @@ func (app *App) commandLayoutFunc() (*gocui.View, error) {
 		if err != gocui.ErrUnknownView {
 			return nil, err
 		}
-		if _, err := g.SetCurrentView(ViewCommand); err != nil {
-			return nil, err
-		}
 		v.Editable = true
 		//v.Highlight = true
-
 		v.Frame = false
 		fmt.Fprintln(v, "")
 		return v, nil

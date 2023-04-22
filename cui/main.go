@@ -59,7 +59,7 @@ func Zain() {
 	app.views = map[string]*AppView{
 		// this should be built dynamically, based on forms etc?
 		// keep "paint order" in mind? m(
-		ViewCommand:   {name: ViewCommand, layoutFunc: app.commandLayoutFunc},
+		ViewCommand:   {name: ViewCommand, layoutFunc: app.commandLayoutFunc, isCurrentView: true},
 		ViewMain:      {name: ViewMain, layoutFunc: app.mainLayoutFunc},
 		ViewHelp:      {name: ViewHelp, layoutFunc: app.helpLayoutFunc},
 		ViewLocale:    {name: ViewLocale, layoutFunc: app.localeLayoutFunc},
@@ -82,7 +82,10 @@ func Zain() {
 }
 
 func (app *App) layout(g *gocui.Gui) error {
-	for _, av := range app.views {
+	for viewName, av := range app.views {
+		if av.isCurrentView {
+			app.gui.SetCurrentView(viewName)
+		}
 		v, err := av.layoutFunc()
 		if err != nil {
 			return (err)
