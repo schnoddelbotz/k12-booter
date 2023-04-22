@@ -54,7 +54,11 @@ func (app *App) keyHandlerMainMenu(g *gocui.Gui, v *gocui.View) error {
 		app.gui.DeleteKeybindings(ViewMenu)
 	} else {
 		app.views[ViewCommand].isCurrentView = false
-		app.views[ViewMenu] = &AppView{name: ViewMenu, layoutFunc: app.menuLayoutFunc, isCurrentView: true}
+		app.views[ViewMenu] = &AppView{
+			name:          ViewMenu,
+			layoutFunc:    app.menuLayoutFunc,
+			isCurrentView: true,
+		}
 		app.setupMenuKeybindings()
 		app.gui.Update(func(g *gocui.Gui) error {
 			app.gui.SetCurrentView(ViewMenu)

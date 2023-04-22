@@ -18,14 +18,16 @@ const (
 )
 
 type App struct {
-	gui           *gocui.Gui
-	views         map[string]*AppView
-	hotkeysWidget *Widget
-	helpView      *gocui.View // sidebar; should toggle with F1
-	showHelp      bool
-	helpWidth     int
-	localeInfo    internationalization.LocaleInfo
-	userCommands  chan string
+	gui             *gocui.Gui
+	views           map[string]*AppView
+	hotkeysWidget   *Widget
+	helpView        *gocui.View // sidebar; should toggle with F1
+	showHelp        bool
+	helpWidth       int
+	localeInfo      internationalization.LocaleInfo
+	currentMenu     string
+	currentMenuItem int
+	userCommands    chan string
 }
 
 type ViewIdentifier string
