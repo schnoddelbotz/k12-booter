@@ -47,7 +47,7 @@ for x in range(0, inputRows):
 	for y in range(0, maxLineLength):
 		output[y][x] = data[x][y]
 
-for l in reversed(output):
-	for c in l:
-		print(c, end='')
-	print()
+for l in reversed(range(0, maxLineLength)):
+	o = "".join(output[l]).rstrip()
+	if o != "":
+		print(o)
