@@ -17,5 +17,5 @@ func (app *App) mainLayoutFunc() (*gocui.View, error) {
 		v.FgColor = gocui.ColorGreen
 		return v, nil
 	}
-	return app.views[ViewMain].view, nil
+	return nil, nil
 }

@@ -34,7 +34,6 @@ type ViewIdentifier string
 
 type AppView struct {
 	name       ViewIdentifier
-	view       *gocui.View
 	hotkeys    []HotKey
 	layoutFunc func() (*gocui.View, error)
 }
@@ -84,11 +83,10 @@ func Zain() {
 
 func (app *App) layout(g *gocui.Gui) error {
 	for _, av := range app.views {
-		v, err := av.layoutFunc()
+		_, err := av.layoutFunc()
 		if err != nil {
 			return (err)
 		}
-		av.view = v
 	}
 	// TODO:
 	// add view "blinkenlights" = Status LEDs -> [Alt] pressed? [CAPS]? Download RX/TX?

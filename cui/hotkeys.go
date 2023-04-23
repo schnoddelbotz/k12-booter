@@ -49,16 +49,7 @@ func (app *App) keyHandlerToggleMenu(g *gocui.Gui, v *gocui.View) error {
 	//app.views[ViewMain].view.Clear() // why? don't?
 	//e := app.views[ViewMain].view
 	if _, ok := app.views[ViewMenu]; ok {
-		app.gui.DeleteKeybindings(ViewMenu)
-		app.gui.Update(func(g *gocui.Gui) error {
-			app.gui.DeleteView(ViewMenu)
-			return nil
-		})
-		delete(app.views, ViewMenu)
-		app.gui.Update(func(g *gocui.Gui) error {
-			app.gui.SetCurrentView(ViewCommand)
-			return nil
-		})
+		app.hideMenu()
 	} else {
 		app.showMenu(app.currentMenu)
 	}
@@ -75,17 +66,41 @@ func (app *App) showMenu(menuName string) {
 	/// or create .view prior to layout()
 
 	app.currentMenu = menuName
-	app.currentMenuItem = 0
 	app.setupMenuKeybindings()
 	app.gui.Update(func(g *gocui.Gui) error {
-		app.gui.SetCurrentView(ViewMenu)
-		//if app.views[ViewMenu].view != nil && app.currentMenuItem < len(app.menuItems(app.currentMenu)) {
-		// hairy? FIXME
-		if v, err := app.gui.View(ViewMenu); err == nil {
+		g.SetCurrentView(ViewMenu)
+		if v, err := g.View(ViewMenu); err == nil {
 			v.SetCursor(0, app.currentMenuItem)
 		}
-		//	app.views[ViewMenu].view.SetCursor(0, app.currentMenuItem)
-		//}
+		return nil
+	})
+}
+
+func (app *App) hideMenu() {
+	app.gui.DeleteKeybindings(ViewMenu)
+	app.gui.Update(func(g *gocui.Gui) error {
+		app.gui.DeleteView(ViewMenu)
+		return nil
+	})
+	delete(app.views, ViewMenu)
+	app.gui.Update(func(g *gocui.Gui) error {
+		app.gui.SetCurrentView(ViewCommand)
+		return nil
+	})
+}
+
+func (app *App) switchMenu(menuName string) {
+	app.currentMenu = menuName
+	app.currentMenuItem = 0
+	app.gui.Update(func(g *gocui.Gui) error {
+		g.SetCurrentView(ViewMenu)
+		if v, err := g.View(ViewMenu); err == nil {
+			v.SetCursor(0, 0)
+			// HACK
+			g.DeleteView(ViewMenu)
+			g.DeleteKeybindings(ViewMenu)
+			app.showMenu(app.currentMenu)
+		}
 		return nil
 	})
 }

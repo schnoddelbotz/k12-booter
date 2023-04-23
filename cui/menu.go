@@ -114,7 +114,6 @@ func (app *App) menuLayoutFunc() (*gocui.View, error) {
 		if err != gocui.ErrUnknownView {
 			return nil, err
 		}
-		app.views[ViewMenu].view = v
 		v.Title = fmt.Sprintf("[ %s ]", app.currentMenu)
 		v.Highlight = true
 		v.SelBgColor = gocui.ColorGreen
@@ -123,8 +122,9 @@ func (app *App) menuLayoutFunc() (*gocui.View, error) {
 		for i, mi := range items {
 			fmt.Fprintf(v, "%3d > %-32s\n", i, mi.Label)
 		}
+		return v, nil
 	}
-	return app.views[ViewMenu].view, nil
+	return nil, nil
 }
 
 func (app *App) handleMenuKeyUp(g *gocui.Gui, v *gocui.View) error {
@@ -159,7 +159,7 @@ func (app *App) handleMenuKeyDown(g *gocui.Gui, v *gocui.View) error {
 }
 
 func (app *App) menuEnterKeyHandler(g *gocui.Gui, v *gocui.View) error {
-	e := app.views[ViewMain].view
+	e, _ := app.gui.View(ViewMain)
 	items := app.menuItems(app.currentMenu)
 	if app.currentMenuItem <= len(items) {
 		clickedItem := items[app.currentMenuItem]
@@ -187,7 +187,7 @@ func (app *App) menuMouseClickHandler(g *gocui.Gui, v *gocui.View) error {
 }
 
 func (app *App) execMenuItemAction(mi MenuItem) error {
-	e := app.views[ViewMain].view
+	e, _ := app.gui.View(ViewMain)
 	switch mi.itemType {
 	case LinkUserCommand:
 		app.userCommands <- mi.target
@@ -195,7 +195,10 @@ func (app *App) execMenuItemAction(mi MenuItem) error {
 	case LinkMenu:
 		fmt.Fprintf(e, "# TODO Scotty, beam me into sub-menu %s\n", mi.Label)
 		//app.showMenu(mi.target)
-		app.gui.Update(func(*gocui.Gui) error { app.currentMenu = mi.target; app.currentMenuItem = 0; return nil })
+		app.switchMenu(mi.target)
+		//app.currentMenu = mi.target
+		//app.currentMenuItem = 0
+		//app.gui.SetCurrentView(ViewMenu)
 	default:
 		fmt.Fprintf(e, "# MI_EXEC TODO impl %+v\n", mi)
 	}
@@ -225,5 +228,6 @@ func (app *App) setupMenuKeybindings() error {
 	if err := app.gui.SetKeybinding(ViewMenu, gocui.MouseLeft, gocui.ModNone, app.menuMouseClickHandler); err != nil {
 		return err
 	}
+	// 0..9 ?
 	return nil
 }

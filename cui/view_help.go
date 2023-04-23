@@ -20,9 +20,11 @@ func (app *App) helpLayoutFunc() (*gocui.View, error) {
 			v.Title = "[ Context help ]"
 			fmt.Fprintln(v, "This is k12-booter, yay!")
 			app.helpView = v
+			return v, nil
 		}
 	} else {
 		g.DeleteView(ViewHelp)
+		return nil, nil
 	}
-	return app.views[ViewHelp].view, nil
+	return nil, nil
 }

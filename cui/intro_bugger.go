@@ -2,6 +2,7 @@ package cui
 
 import (
 	"fmt"
+	"log"
 	"schnoddelbotz/k12-booter/internationalization"
 	"time"
 
@@ -11,7 +12,10 @@ import (
 func (app *App) bugger() {
 	time.Sleep(250 * time.Millisecond) // "wait" for main loop to be run once m(
 
-	e := app.views[ViewMain].view
+	e, err := app.gui.View(ViewMain)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	app.gui.Update(func(g *gocui.Gui) error {
 		fmt.Fprintln(e, " * Loading I18N data (fake) ...")
@@ -31,10 +35,10 @@ func (app *App) bugger() {
 				country.Alpha2Code, country.Alpha3Code, country.InternetccTLD, country.CountryName)
 			return nil
 		})
-		time.Sleep(7 * time.Millisecond)
+		time.Sleep(5 * time.Millisecond)
 	}
 
-	time.Sleep(200 * time.Millisecond)
+	time.Sleep(100 * time.Millisecond)
 
 	app.gui.Update(func(g *gocui.Gui) error {
 		e.Write([]byte("\n\n * NOTA BENE\n"))

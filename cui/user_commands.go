@@ -9,7 +9,7 @@ import (
 
 func (app *App) userCommandExecutor() {
 	time.Sleep(250 * time.Millisecond)
-	e := app.views[ViewMain].view
+	e, _ := app.gui.View(ViewMain)
 	actionMap := map[string]func(){
 		"cls": func() {
 			app.gui.Update(func(g *gocui.Gui) error {

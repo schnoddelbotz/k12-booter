@@ -19,5 +19,5 @@ func (app *App) commandLayoutFunc() (*gocui.View, error) {
 		fmt.Fprintln(v, "")
 		return v, nil
 	}
-	return app.views[ViewCommand].view, nil
+	return nil, nil
 }

@@ -21,5 +21,5 @@ func (app *App) localeLayoutFunc() (*gocui.View, error) {
 		v.FgColor = gocui.ColorYellow
 		return v, nil
 	}
-	return app.views[ViewLocale].view, nil
+	return nil, nil
 }
