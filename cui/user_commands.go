@@ -31,6 +31,9 @@ func (app *App) userCommandExecutor() {
 	}
 	for {
 		x := <-app.userCommands
+		if x == "" {
+			continue
+		}
 		// log received command to main view
 		fmt.Fprintf(e, "< \033[33;1m%s\033[0m\n", x)
 		if f, ok := actionMap[x]; ok {

@@ -19,6 +19,7 @@ func (app *App) bugger() {
 
 	app.gui.Update(func(g *gocui.Gui) error {
 		fmt.Fprintln(e, " * Loading I18N data (fake) ...")
+		g.SetCurrentView(ViewCommand)
 		return nil
 	})
 
