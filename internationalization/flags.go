@@ -295,10 +295,11 @@ const (
 	Flag_Tristan_da_Cunha                = Flag_Tristan_Da_Cunha
 	Flag_StMartin_French_part            = Flag_StMartin
 	Flag_Sint_Maarten_Dutch_part         = Flag_Sint_Maarten
+	Flag_FIXME                           = Flag_Global_White_Flag
 	// Please don't shoot me for bugs. File issues instead. Thank you.
-	Flag_Cabo_Verde               = "X?"
-	Flag_Saba                     = "X?"
-	Flag_Sao_Tome_Principe        = "X?"
+	Flag_Cabo_Verde               = Flag_FIXME
+	Flag_Saba                     = Flag_FIXME
+	Flag_Sao_Tome_Principe        = Flag_FIXME
 	Flag_Virgin_Islands_US        = Flag_USVirgin_Islands
 	Flag_Virgin_Islands_British   = Flag_British_Virgin_Islands
 	Flag_Jan_Mayen                = Flag_Svalbard_Jan_Mayen
