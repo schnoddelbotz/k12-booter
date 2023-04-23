@@ -3,7 +3,6 @@ package cui
 import (
 	"fmt"
 	"log"
-	"schnoddelbotz/k12-booter/internationalization"
 	"time"
 
 	"github.com/jroimartin/gocui"
@@ -11,44 +10,22 @@ import (
 
 func (app *App) bugger() {
 	time.Sleep(250 * time.Millisecond) // "wait" for main loop to be run once m(
-
 	e, err := app.gui.View(ViewMain)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	app.gui.Update(func(g *gocui.Gui) error {
-		fmt.Fprintln(e, " * Loading I18N data (fake) ...")
 		g.SetCurrentView(ViewCommand)
 		return nil
 	})
 
-	time.Sleep(1 * time.Second)
 	e.Autoscroll = true
-	// WIP
-	// Provide C# Cultures interface here.
-	// Build POJOs, no structs holding data ... some typing work?
-
-	for _, country := range internationalization.Cultures {
-		app.gui.Update(func(g *gocui.Gui) error {
-			//e.Write([]byte(flag + " "))
-			fmt.Fprintf(e, "%s %s %s %s\n",
-				country.Alpha2Code, country.Alpha3Code, country.InternetccTLD, country.CountryName)
-			return nil
-		})
-		time.Sleep(5 * time.Millisecond)
-	}
-
-	time.Sleep(100 * time.Millisecond)
 
 	app.gui.Update(func(g *gocui.Gui) error {
-		e.Write([]byte("\n\n * NOTA BENE\n"))
-		e.Write([]byte("Enterprise version does this twice as fast\n"))
-		e.Write([]byte("Press F10 now to quit, then Ctrl-C\n\n"))
-
-		e.Write([]byte("Should look for local config file now, ...\n"))
-		e.Write([]byte("Or start a wizard to collect basic data\n"))
-
+		e.Write([]byte("\n *** NOTA BENE ***\n"))
+		e.Write([]byte(" Enterprise version does this twice as fast\n"))
+		e.Write([]byte(" Press F2 for menu, F10 to quit\n\n"))
 		fmt.Fprintf(e, "\033[37;1m%s\033[0m", `         ____________ 
         < k12-booter >
          ------------ 
@@ -57,7 +34,7 @@ func (app *App) bugger() {
                     (__)\       )\/\
                         ||----w |
                         ||     ||`+"\n\n")
-
+		e.Write([]byte("\n> k12-booter is ready\n"))
 		return nil
 	})
 }

@@ -16,8 +16,6 @@ type flags struct {
 }
 
 func main() {
-	fmt.Println("Welcome to nc-booter K12 EDU OSS IT Wizard. Please wait ... :)")
-
 	options := &flags{}
 	flag.BoolVar(&options.formByQuery, "formByQuery", false, "generate form code interactively")
 	flag.StringVar(&options.formFromFile, "formFromFile", "", "generate form code from input file")

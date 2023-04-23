@@ -1,8 +1,11 @@
 package cui
 
 import (
+	"fmt"
 	"log"
 	"schnoddelbotz/k12-booter/internationalization"
+	"strings"
+	"time"
 
 	"github.com/jroimartin/gocui"
 )
@@ -43,6 +46,7 @@ func Zain() {
 		app App
 		err error
 	)
+	printBanner()
 	app.localeInfo = internationalization.GetLocaleInfo()
 	app.gui, err = gocui.NewGui(gocui.OutputNormal)
 	if err != nil {
@@ -92,4 +96,29 @@ func (app *App) layout(g *gocui.Gui) error {
 	// add view "blinkenlights" = Status LEDs -> [Alt] pressed? [CAPS]? Download RX/TX?
 	// hovers border of main view (one-liner @ bottom, maybe one @top as well - clock? flag, kbd/locale->click?)
 	return nil
+}
+
+func printBanner() {
+	const k12booterBanner = `🇦🇫🇦🇽           🇦🇱🇩🇿       🇦🇸🇦🇩
+🇦🇴      🇦🇮  🇦🇶  🇦🇬🇦🇷       🇦🇲
+🇦🇼      🇦🇺      🇦🇹       🇦🇿
+🇧🇸     🇧🇭🇧🇩      🇧🇧🇧🇾      🇧🇪
+🇧🇿     🇧🇯🇧🇲      🇧🇹🇧🇴      🏳️
+🇧🇦     🇧🇼🇧🇻      🇧🇷🇮🇴      🇧🇳                 🇧🇬
+🇧🇫     🇧🇮🏳️      🇰🇭🇨🇲      🇨🇦                 🇰🇾
+🇨🇫 🇹🇩🇨🇱  🇨🇳🇨🇽      🇨🇨       🇨🇴 🇰🇲🇨🇩   🇨🇬🇨🇰🇨🇷   🇨🇮🇭🇷🇨🇺 🇨🇼🇨🇾🇨🇿   🇩🇰🇩🇯🇩🇲 🇩🇴🇪🇨 🇪🇬🇸🇻
+🇬🇶 🇪🇷   🇪🇪🇸🇿     🇪🇹🇫🇰       🇫🇴🇫🇯 🇫🇮🇫🇷 🇬🇫  🇵🇫  🇹🇫  🇬🇦  🇬🇲   🇬🇪  🇩🇪  🇬🇭🇬🇮 🇬🇷🇬🇱
+🇬🇩     🇬🇵🇬🇺    🇬🇹🇬🇬        🇬🇳   🇬🇼 🇬🇾   🇭🇹 🇭🇲   🇻🇦 🇭🇳   🇭🇰  🇭🇺🇮🇸 🇮🇳  🇮🇩
+🇮🇷🇮🇶    🇮🇪🇮🇲    🇮🇱   🇮🇹🇯🇲🇯🇵🇯🇪🇯🇴 🇰🇿   🇰🇪🇰🇮🇰🇵   🇰🇷🇰🇼🇰🇬   🇱🇦 🇱🇻  🇱🇧🇱🇸   🇱🇷 🇱🇾
+🇱🇮🇱🇹🇱🇺   🇲🇴🇲🇰   🇲🇬          🇲🇼   🇲🇾🇲🇻🇲🇱   🇲🇹🇲🇭🇲🇶   🇲🇷 🇲🇺  🇾🇹🇲🇽🇫🇲🇲🇩🇲🇨🇲🇳 🇲🇪
+🇲🇸 🇲🇦   🇲🇿🇲🇲              🇳🇦   🇳🇷🇳🇵🇳🇱   🇳🇨🇳🇿🇳🇮   🇳🇪 🇳🇬  🇳🇺🇳🇫     🇲🇵
+🇳🇴 🇴🇲🇵🇰  🇵🇼🇵🇸  🇵🇦    🇵🇬      🇵🇾   🇵🇪 🇵🇭   🇵🇳 🇵🇱   🇵🇹 🇵🇷   🇶🇦     🇷🇪
+🇷🇴  🇷🇺  🇷🇼🇧🇱  🇹🇦🇰🇳🇱🇨🇲🇫🇵🇲🇻🇨      🇼🇸  🇸🇲🏳️ 🇸🇦  🇸🇳  🇷🇸  🇸🇨  🇸🇱🇸🇬  🇸🇽     🇸🇰
+🇸🇮  🇸🇧🇸🇴 🇿🇦🇬🇸  🇸🇸🇪🇸🇱🇰🇸🇩🇸🇷       🇸🇯 🇸🇪🇨🇭   🇸🇾🇹🇼🇹🇯   🇹🇿🇹🇭🇹🇱   🇹🇬🇹🇰  🇹🇴 🇹🇹  🇹🇳`
+	lines := strings.Split(k12booterBanner, "\n")
+	for i, l := range lines {
+		fmt.Println(l)
+		time.Sleep(time.Duration(i*5) * time.Millisecond)
+	}
+	time.Sleep(250 * time.Millisecond)
 }

@@ -35,23 +35,23 @@ func GetLocaleInfo() LocaleInfo {
 	info.Base, info.BaseConfidence = lang.Base()
 	info.Script, info.ScriptConfidence = lang.Script()
 
-	log.Printf("%+v", info.LanguageTag)
-	log.Printf("Parent of %s: %s", lang, lang.Parent().String())
-	log.Printf("Parent of %s extensions: %s", lang, lang.Parent().Extensions())
-	log.Printf("Extensions of %s: %+v", lang, lang.Extensions())
+	// log.Printf("%+v", info.LanguageTag)
+	// log.Printf("Parent of %s: %s", lang, lang.Parent().String())
+	// log.Printf("Parent of %s extensions: %s", lang, lang.Parent().Extensions())
+	// log.Printf("Extensions of %s: %+v", lang, lang.Extensions())
 
 	//x := display.Scripts(lang)
-	log.Printf("XXX %+v", display.Scripts(lang)) // LATIN
-	log.Printf("XXX %+v", display.German.Languages().Name(lang))
+	// log.Printf("XXX %+v", display.Scripts(lang)) // LATIN
+	// log.Printf("XXX %+v", display.German.Languages().Name(lang))
 	// HOW TO GET ALL languages SPOKEN / available in e.g. Switzerland?
 
-	var matcher = language.NewMatcher([]language.Tag{})
-	tag, index, confidence := matcher.Match(info.LanguageTag)
-	log.Printf("TAG from matcher %+v", tag)
-	log.Printf("best match: %s (%s) index=%d confidence=%v\n",
-		display.English.Tags().Name(info.LanguageTag),
-		display.Self.Name(info.LanguageTag),
-		index, confidence)
+	//var matcher = language.NewMatcher([]language.Tag{})
+	//tag, index, confidence := matcher.Match(info.LanguageTag)
+	// log.Printf("TAG from matcher %+v", tag)
+	// log.Printf("best match: %s (%s) index=%d confidence=%v\n",
+	// 	display.English.Tags().Name(info.LanguageTag),
+	// 	display.Self.Name(info.LanguageTag),
+	// 	index, confidence)
 	info.LanguageLocalName = display.Self.Name(info.LanguageTag)
 	//log.Printf("LLLL %+v", display.Languages())
 

@@ -12,7 +12,7 @@ func (app *App) mainLayoutFunc() (*gocui.View, error) {
 			return nil, err
 		}
 		v.Wrap = true
-		v.Title = " [ k12-booter - FirstBoot ] "
+		v.Title = " {[ k12-booter ]} "
 		v.BgColor = gocui.ColorBlack
 		v.FgColor = gocui.ColorGreen
 		return v, nil
