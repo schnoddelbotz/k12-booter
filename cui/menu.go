@@ -25,11 +25,12 @@ type MenuItem struct {
 }
 
 const (
-	Menu_Main         = "k12-booter Main Menu"
+	Menu_Main         = "Main Menu"
 	Menu_Preferences  = "Preferences"
 	Menu_Admin        = "Administration"
 	Menu_Applications = "Applications"
 	Menu_Deployment   = "Lab management & deployment"
+	Menu_TODO         = "TODO_WIP_XXX"
 )
 
 // AppMenu wants to be outsourced and auto-generated.
@@ -72,18 +73,54 @@ var AppMenu = []MenuItem{
 		target:   "quit",
 	},
 	{
-		Label:    "Set display language... tbd",
-		Parent:   Menu_Preferences,
-		itemType: LinkUserCommand,
-		target:   "quit", //
-	},
-	// hmm.
-	{
 		Label:    "Return to main menu",
 		Parent:   Menu_Applications,
 		itemType: LinkMenu,
 		target:   Menu_Main,
 	},
+	{
+		Label:    "Citing and Referncing tools",
+		Parent:   Menu_Applications,
+		itemType: LinkMenu,
+		target:   Menu_TODO,
+	},
+	{
+		Label:    "Text processing and layout",
+		Parent:   Menu_Applications,
+		itemType: LinkMenu,
+		target:   Menu_TODO,
+	},
+	{
+		Label:    "Maths and Physics",
+		Parent:   Menu_Applications,
+		itemType: LinkMenu,
+		target:   Menu_TODO,
+	},
+	{
+		Label:    "Biology and Chemistry",
+		Parent:   Menu_Applications,
+		itemType: LinkMenu,
+		target:   Menu_TODO,
+	},
+	{
+		Label:    "History, Dictionaries, ...",
+		Parent:   Menu_Applications,
+		itemType: LinkMenu,
+		target:   Menu_TODO,
+	},
+	{
+		Label:    "Trainers: Vocabulary, typing",
+		Parent:   Menu_Applications,
+		itemType: LinkMenu,
+		target:   Menu_TODO,
+	},
+	{
+		Label:    "Software development",
+		Parent:   Menu_Applications,
+		itemType: LinkMenu,
+		target:   Menu_TODO,
+	},
+	// hmm because repetitive.
 	{
 		Label:    "Return to main menu",
 		Parent:   Menu_Admin,
@@ -102,6 +139,12 @@ var AppMenu = []MenuItem{
 		itemType: LinkMenu,
 		target:   Menu_Main,
 	},
+	{
+		Label:    "Set display language... tbd",
+		Parent:   Menu_Preferences,
+		itemType: LinkUserCommand,
+		target:   "quit", //
+	},
 }
 
 func (app *App) menuLayoutFunc() (*gocui.View, error) {
@@ -110,7 +153,7 @@ func (app *App) menuLayoutFunc() (*gocui.View, error) {
 		app.currentMenu = Menu_Main
 	}
 	_, maxY := g.Size()
-	if v, err := g.SetView(ViewMenu, 20, 4, 55, maxY-6); err != nil {
+	if v, err := g.SetView(ViewMenu, 22, 4, 60, maxY-6); err != nil {
 		if err != gocui.ErrUnknownView {
 			return nil, err
 		}
@@ -159,15 +202,12 @@ func (app *App) handleMenuKeyDown(g *gocui.Gui, v *gocui.View) error {
 }
 
 func (app *App) menuEnterKeyHandler(g *gocui.Gui, v *gocui.View) error {
-	e, _ := app.gui.View(ViewMain)
 	items := app.menuItems(app.currentMenu)
 	if app.currentMenuItem <= len(items) {
 		clickedItem := items[app.currentMenuItem]
-		fmt.Fprintf(e, "# menu debug: ENTER -> %d = %v\n", app.currentMenuItem, clickedItem)
 		app.gui.Update(func(*gocui.Gui) error { return nil })
 		return app.execMenuItemAction(clickedItem)
 	}
-	fmt.Fprintf(e, "# menu debug: IGNORE ENTER -> %d\n", app.currentMenuItem)
 	return nil
 }
 
@@ -191,14 +231,10 @@ func (app *App) execMenuItemAction(mi MenuItem) error {
 	switch mi.itemType {
 	case LinkUserCommand:
 		app.userCommands <- mi.target
+		app.hideMenu()
 		// todo: close menu now?
 	case LinkMenu:
-		fmt.Fprintf(e, "# TODO Scotty, beam me into sub-menu %s\n", mi.Label)
-		//app.showMenu(mi.target)
 		app.switchMenu(mi.target)
-		//app.currentMenu = mi.target
-		//app.currentMenuItem = 0
-		//app.gui.SetCurrentView(ViewMenu)
 	default:
 		fmt.Fprintf(e, "# MI_EXEC TODO impl %+v\n", mi)
 	}

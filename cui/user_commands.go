@@ -40,7 +40,7 @@ func (app *App) userCommandExecutor() {
 
 			// for now ...
 			app.gui.Update(func(g *gocui.Gui) error {
-				cmds := "CLS, QUIT" // cough.
+				cmds := "cls, quit" // cough.
 				fmt.Fprintf(e, "> Unknown command: \033[31;1m%s\033[0m\n", x)
 				fmt.Fprintf(e, "> Known commands: \033[33;1m%s\033[0m\n", cmds)
 				fmt.Fprintln(e, "> AI tip of the day: \033[37;1mPress F1 for help\033[0m")
