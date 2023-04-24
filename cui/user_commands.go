@@ -2,6 +2,7 @@ package cui
 
 import (
 	"fmt"
+	"schnoddelbotz/k12-booter/diagnostics"
 	"time"
 
 	"github.com/jroimartin/gocui"
@@ -28,6 +29,12 @@ func (app *App) userCommandExecutor() {
 				return gocui.ErrQuit
 			})
 		},
+		"sysinfo": func() {
+			app.gui.Update(func(g *gocui.Gui) error {
+				fmt.Fprintln(e, diagnostics.SysInfo())
+				return nil
+			})
+		},
 	}
 	for {
 		x := <-app.userCommands
@@ -43,7 +50,7 @@ func (app *App) userCommandExecutor() {
 
 			// for now ...
 			app.gui.Update(func(g *gocui.Gui) error {
-				cmds := "cls, quit" // cough.
+				cmds := "cls, sysinfo, quit" // cough.
 				fmt.Fprintf(e, "> Unknown command: \033[31;1m%s\033[0m\n", x)
 				fmt.Fprintf(e, "> Known commands: \033[33;1m%s\033[0m\n", cmds)
 				fmt.Fprintln(e, "> AI tip of the day: \033[37;1mPress F1 for help\033[0m")

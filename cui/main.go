@@ -31,6 +31,7 @@ type App struct {
 	currentMenu     string
 	currentMenuItem int
 	userCommands    chan string
+	version         string
 }
 
 type ViewIdentifier string
@@ -41,12 +42,13 @@ type AppView struct {
 	layoutFunc func() (*gocui.View, error)
 }
 
-func Zain() {
+func Zain(version string) {
 	var (
 		app App
 		err error
 	)
-	printBanner()
+	app.version = version
+	app.printBanner()
 	app.localeInfo = internationalization.GetLocaleInfo()
 	app.gui, err = gocui.NewGui(gocui.OutputNormal)
 	if err != nil {
@@ -99,7 +101,7 @@ func (app *App) layout(g *gocui.Gui) error {
 	return nil
 }
 
-func printBanner() {
+func (app *App) printBanner() {
 	const k12booterBanner = `🇦🇫🇦🇽           🇦🇱🇩🇿       🇦🇸🇦🇩
 🇦🇴      🇦🇮  🇦🇶  🇦🇬🇦🇷       🇦🇲
 🇦🇼      🇦🇺      🇦🇹       🇦🇿
@@ -116,6 +118,7 @@ func printBanner() {
 🇳🇴 🇴🇲🇵🇰  🇵🇼🇵🇸  🇵🇦    🇵🇬      🇵🇾   🇵🇪 🇵🇭   🇵🇳 🇵🇱   🇵🇹 🇵🇷   🇶🇦     🇷🇪
 🇷🇴  🇷🇺  🇷🇼🇧🇱  🇹🇦🇰🇳🇱🇨🇲🇫🇵🇲🇻🇨      🇼🇸  🇸🇲🏳️ 🇸🇦  🇸🇳  🇷🇸  🇸🇨  🇸🇱🇸🇬  🇸🇽     🇸🇰
 🇸🇮  🇸🇧🇸🇴 🇿🇦🇬🇸  🇸🇸🇪🇸🇱🇰🇸🇩🇸🇷       🇸🇯 🇸🇪🇨🇭   🇸🇾🇹🇼🇹🇯   🇹🇿🇹🇭🇹🇱   🇹🇬🇹🇰  🇹🇴 🇹🇹  🇹🇳`
+	fmt.Printf("Welcome to k-12 booter version %s\n", app.version)
 	lines := strings.Split(k12booterBanner, "\n")
 	for i, l := range lines {
 		fmt.Println(l)

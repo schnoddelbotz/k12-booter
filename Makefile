@@ -1,8 +1,11 @@
 
+K12_VERSION := $(shell git describe --tags | cut -dv -f2)
+LDFLAGS := -X main.AppVersion=$(K12_VERSION)
+
 all: k12-booter
 
-k12-booter: *.go */*.go
-	go build
+k12-booter: *.go
+	go build -ldflags='$(LDFLAGS)'
 
 internationalization/countrydata.go: iso3166
 	./iso3166 > internationalization/countrydata.go 

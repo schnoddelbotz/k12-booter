@@ -15,6 +15,8 @@ type flags struct {
 	formFromFile string
 }
 
+var AppVersion = "git-0.0.0"
+
 func main() {
 	options := &flags{}
 	flag.BoolVar(&options.formByQuery, "formByQuery", false, "generate form code interactively")
@@ -38,5 +40,5 @@ func main() {
 	}
 
 	// Launch the UI
-	cui.Zain()
+	cui.Zain(AppVersion)
 }

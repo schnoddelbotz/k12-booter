@@ -3,6 +3,7 @@ package cui
 import (
 	"fmt"
 	"log"
+	"schnoddelbotz/k12-booter/diagnostics"
 	"time"
 
 	"github.com/jroimartin/gocui"
@@ -34,7 +35,9 @@ func (app *App) bugger() {
                     (__)\       )\/\
                         ||----w |
                         ||     ||`+"\n\n")
-		e.Write([]byte("\n> k12-booter is ready\n"))
+
+		si := diagnostics.GetSysInfoData()
+		fmt.Fprintf(e, "\n> k12-booter v%s (%s/%s) is ready\n", app.version, si.OS, si.Architecture)
 		return nil
 	})
 }
