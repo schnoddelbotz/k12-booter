@@ -56,6 +56,7 @@ func Zain() {
 	app.gui.Cursor = true
 	app.gui.Mouse = true
 	app.gui.ASCII = true
+	app.gui.InputEsc = true
 	// next two (?) lines will enable color upon g.SetCurrentView(nextview)
 	app.gui.Highlight = true
 	app.userCommands = make(chan string)

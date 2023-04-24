@@ -299,7 +299,7 @@ func (app *App) setupMenuKeybindings() error {
 	if err := app.gui.SetKeybinding(ViewMenu, gocui.MouseLeft, gocui.ModNone, app.menuMouseClickHandler); err != nil {
 		return err
 	}
-	// this does not seem to work (using ESC. Any other does.)
+	// gocui.KeyEsc requires Gui.InputESC=true to work.
 	if err := app.gui.SetKeybinding(ViewMenu, gocui.KeyEsc, gocui.ModNone, app.hideMenuHandler); err != nil {
 		return err
 	}
