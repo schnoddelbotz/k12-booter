@@ -120,10 +120,13 @@ func (app *App) sendUserCommandCLS(g *gocui.Gui, v *gocui.View) error {
 	return nil
 }
 
-func (app *App) handleTab(g *gocui.Gui, v *gocui.View) error {
-	// unsure if good idea. tab.
-	// tabindex, forms ... ESC ? vi?
+func (app *App) setActiveViewCommand(g *gocui.Gui, v *gocui.View) error {
 	app.setActiveView(ViewCommand)
+	return nil
+}
+
+func (app *App) setActiveViewMain(g *gocui.Gui, v *gocui.View) error {
+	app.setActiveView(ViewMain)
 	return nil
 }
 
@@ -185,7 +188,10 @@ func (app *App) SetHotkeyKeybindings() error {
 	if err := app.gui.SetKeybinding(ViewMain, gocui.KeyArrowUp, gocui.ModNone, app.mainScrollUp); err != nil {
 		return err
 	}
-	if err := app.gui.SetKeybinding("", gocui.KeyTab, gocui.ModNone, app.handleTab); err != nil {
+	if err := app.gui.SetKeybinding(ViewMain, gocui.KeyTab, gocui.ModNone, app.setActiveViewCommand); err != nil {
+		return err
+	}
+	if err := app.gui.SetKeybinding(ViewCommand, gocui.KeyTab, gocui.ModNone, app.setActiveViewMain); err != nil {
 		return err
 	}
 	return nil

@@ -2,8 +2,10 @@ package cui
 
 import (
 	"fmt"
+	"log"
 
 	"github.com/jroimartin/gocui"
+	"github.com/pkg/browser"
 )
 
 type MenuItemType int
@@ -13,6 +15,7 @@ const (
 	LinkUserCommand
 	LinkFunc
 	LinkShellCommand
+	LinkBrowser
 )
 
 type MenuItem struct {
@@ -36,19 +39,31 @@ const (
 // AppMenu wants to be outsourced and auto-generated.
 var AppMenu = []MenuItem{
 	{
-		Label:    "Discover applications", // launch or install
+		Label:    "Discover Applications", // launch or install
 		Parent:   Menu_Main,
 		itemType: LinkMenu,
 		target:   Menu_Applications,
 	},
 	{
-		Label:    "School administration", // API ? Buckets ? /country/canton|bundesland|state.../city/zip/schoolname
+		Label:    "School Administration", // API ? Buckets ? /country/canton|bundesland|state.../city/zip/schoolname
 		Parent:   Menu_Main,
 		itemType: LinkMenu,
 		target:   Menu_Admin,
 	},
 	{
-		Label:    "Manage & Deploy labs",
+		Label:    "Manage & Deploy Labs",
+		Parent:   Menu_Main,
+		itemType: LinkMenu,
+		target:   Menu_Deployment,
+	},
+	{
+		Label:    "Reporting & Statistics",
+		Parent:   Menu_Main,
+		itemType: LinkMenu,
+		target:   Menu_Deployment,
+	},
+	{
+		Label:    "Assistants and Guides", // config .ssh pubkeys, set up gcloud account + sdk, ...? WWW.
 		Parent:   Menu_Main,
 		itemType: LinkMenu,
 		target:   Menu_Deployment,
@@ -65,6 +80,12 @@ var AppMenu = []MenuItem{
 		Parent:   Menu_Main,
 		itemType: LinkUserCommand,
 		target:   "cls",
+	},
+	{
+		Label:    "WWW: k12-booter Homepage",
+		Parent:   Menu_Main,
+		itemType: LinkBrowser,
+		target:   "https://schnoddelbotz.github.io/k12-booter/",
 	},
 	{
 		Label:    "Quit",
@@ -136,6 +157,12 @@ var AppMenu = []MenuItem{
 	{
 		Label:    "Return to main menu",
 		Parent:   Menu_Preferences,
+		itemType: LinkMenu,
+		target:   Menu_Main,
+	},
+	{
+		Label:    "Return to main menu",
+		Parent:   Menu_TODO,
 		itemType: LinkMenu,
 		target:   Menu_Main,
 	},
@@ -226,9 +253,17 @@ func (app *App) menuMouseClickHandler(g *gocui.Gui, v *gocui.View) error {
 	return app.execMenuItemAction(clickedItem)
 }
 
+func (app *App) hideMenuHandler(g *gocui.Gui, v *gocui.View) error {
+	app.hideMenu()
+	log.Printf("Should hide menu")
+	return nil
+}
+
 func (app *App) execMenuItemAction(mi MenuItem) error {
 	e, _ := app.gui.View(ViewMain)
 	switch mi.itemType {
+	case LinkBrowser:
+		browser.OpenURL(mi.target)
 	case LinkUserCommand:
 		app.userCommands <- mi.target
 		app.hideMenu()
@@ -262,6 +297,10 @@ func (app *App) setupMenuKeybindings() error {
 		return err
 	}
 	if err := app.gui.SetKeybinding(ViewMenu, gocui.MouseLeft, gocui.ModNone, app.menuMouseClickHandler); err != nil {
+		return err
+	}
+	// this does not seem to work (using ESC. Any other does.)
+	if err := app.gui.SetKeybinding(ViewMenu, gocui.KeyEsc, gocui.ModNone, app.hideMenuHandler); err != nil {
 		return err
 	}
 	// 0..9 ?
