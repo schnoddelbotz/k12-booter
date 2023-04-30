@@ -2,12 +2,15 @@ package main
 
 import (
 	"bufio"
+	"flag"
 	"fmt"
 	"os"
 	"schnoddelbotz/k12-booter/internationalization"
 )
 
 func main() {
+	userFlag := flag.String("flag", "", "Use given emoji/flag instead of all")
+	flag.Parse()
 	scanner := bufio.NewScanner(os.Stdin)
 	flags := flagsAsArray()
 	numFlags := len(flags)
@@ -18,12 +21,16 @@ func main() {
 			if c == ' ' {
 				fmt.Printf(" ")
 			} else {
-				flag := flags[flagKey]
-				flagKey++
-				if flagKey == numFlags {
-					flagKey = 0
+				if *userFlag == "" {
+					flag := flags[flagKey]
+					flagKey++
+					if flagKey == numFlags {
+						flagKey = 0
+					}
+					fmt.Printf("%s", flag)
+				} else {
+					fmt.Printf("%s", *userFlag)
 				}
-				fmt.Printf("%s", flag)
 			}
 		}
 		fmt.Println()
