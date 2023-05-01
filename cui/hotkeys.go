@@ -121,11 +121,21 @@ func (app *App) sendUserCommandCLS(g *gocui.Gui, v *gocui.View) error {
 }
 
 func (app *App) setActiveViewCommand(g *gocui.Gui, v *gocui.View) error {
+	e, err := app.gui.View(ViewMain)
+	if err != nil {
+		log.Fatal(err)
+	}
+	e.Autoscroll = true
 	app.setActiveView(ViewCommand)
 	return nil
 }
 
 func (app *App) setActiveViewMain(g *gocui.Gui, v *gocui.View) error {
+	e, err := app.gui.View(ViewMain)
+	if err != nil {
+		log.Fatal(err)
+	}
+	e.Autoscroll = false
 	app.setActiveView(ViewMain)
 	return nil
 }
@@ -138,9 +148,19 @@ func (app *App) setActiveView(id string) error {
 	return nil
 }
 
+func (app *App) mainScrollDown(g *gocui.Gui, v *gocui.View) error {
+	app.gui.Update(func(g *gocui.Gui) error {
+		_, nowY := v.Origin()
+		v.SetOrigin(0, nowY+1)
+		return nil
+	})
+	return nil
+}
+
 func (app *App) mainScrollUp(g *gocui.Gui, v *gocui.View) error {
 	app.gui.Update(func(g *gocui.Gui) error {
-		v.MoveCursor(0, 0, false)
+		_, nowY := v.Origin()
+		v.SetOrigin(0, nowY-1)
 		return nil
 	})
 	return nil
@@ -186,6 +206,9 @@ func (app *App) SetHotkeyKeybindings() error {
 		return err
 	}
 	if err := app.gui.SetKeybinding(ViewMain, gocui.KeyArrowUp, gocui.ModNone, app.mainScrollUp); err != nil {
+		return err
+	}
+	if err := app.gui.SetKeybinding(ViewMain, gocui.KeyArrowDown, gocui.ModNone, app.mainScrollDown); err != nil {
 		return err
 	}
 	if err := app.gui.SetKeybinding(ViewMain, gocui.KeyTab, gocui.ModNone, app.setActiveViewCommand); err != nil {

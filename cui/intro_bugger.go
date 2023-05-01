@@ -17,11 +17,10 @@ func (app *App) bugger() {
 	}
 
 	app.gui.Update(func(g *gocui.Gui) error {
+		e.Autoscroll = true
 		g.SetCurrentView(ViewCommand)
 		return nil
 	})
-
-	e.Autoscroll = true
 
 	app.gui.Update(func(g *gocui.Gui) error {
 		e.Write([]byte("\n *** NOTA BENE ***\n"))
