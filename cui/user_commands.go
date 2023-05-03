@@ -3,6 +3,7 @@ package cui
 import (
 	"fmt"
 	"schnoddelbotz/k12-booter/diagnostics"
+	"schnoddelbotz/k12-booter/sounds"
 	"time"
 
 	"github.com/jroimartin/gocui"
@@ -13,6 +14,7 @@ func (app *App) userCommandExecutor() {
 	e, _ := app.gui.View(ViewMain)
 	actionMap := map[string]func(){
 		"cls": func() {
+			go sounds.PlayIt(sounds.Maelstrom_AlertSound, app.otoCtx)
 			app.gui.Update(func(g *gocui.Gui) error {
 				e.Clear()
 				e.SetOrigin(0, 0)
@@ -20,16 +22,19 @@ func (app *App) userCommandExecutor() {
 			})
 		},
 		"quit": func() {
+			go sounds.PlayIt(sounds.Maelstrom_Yahoo, app.otoCtx)
 			app.gui.Update(func(g *gocui.Gui) error {
 				fmt.Fprintf(e, "\n> OK \033[33;1mbye, peace!\033[0m\n\n")
 				return nil
 			})
+			sounds.PlayIt(sounds.Maelstrom_Laughing, app.otoCtx)
 			time.Sleep(1 * time.Second)
 			app.gui.Update(func(g *gocui.Gui) error {
 				return gocui.ErrQuit
 			})
 		},
 		"sysinfo": func() {
+			go sounds.PlayIt(sounds.Maelstrom_Yo, app.otoCtx)
 			app.gui.Update(func(g *gocui.Gui) error {
 				fmt.Fprintln(e, diagnostics.SysInfo())
 				return nil
@@ -49,6 +54,7 @@ func (app *App) userCommandExecutor() {
 			// next ... command with arguments m(
 
 			// for now ...
+			sounds.PlayIt(sounds.Maelstrom_MaleOop, app.otoCtx)
 			app.gui.Update(func(g *gocui.Gui) error {
 				cmds := "cls, sysinfo, quit" // cough.
 				fmt.Fprintf(e, "> Unknown command: \033[31;1m%s\033[0m\n", x)

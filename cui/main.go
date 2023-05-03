@@ -4,20 +4,23 @@ import (
 	"fmt"
 	"log"
 	"schnoddelbotz/k12-booter/internationalization"
+	"schnoddelbotz/k12-booter/sounds"
 	"strings"
 	"time"
 
+	"github.com/hajimehoshi/oto/v2"
 	"github.com/jroimartin/gocui"
 )
 
 const (
-	ViewTopMenu   = "topmenu"
-	ViewMain      = "main"
-	ViewShortcuts = "shortcuts"
-	ViewCommand   = "command"
-	ViewLocale    = "locale"
-	ViewHelp      = "help"
-	ViewMenu      = "menu"
+	ViewTopMenu       = "topmenu"
+	ViewMain          = "main"
+	ViewShortcuts     = "shortcuts"
+	ViewCommand       = "command"
+	ViewLocale        = "locale"
+	ViewHelp          = "help"
+	ViewMenu          = "menu"
+	ConfigDisablePOST = "disable_post"
 )
 
 type App struct {
@@ -32,6 +35,7 @@ type App struct {
 	currentMenuItem int
 	userCommands    chan string
 	version         string
+	otoCtx          *oto.Context
 }
 
 type ViewIdentifier string
@@ -48,7 +52,10 @@ func Zain(version string) {
 		err error
 	)
 	app.version = version
+	app.otoCtx = sounds.InitAudio()
+	sounds.PlayIt(sounds.Maelstrom_Ping, app.otoCtx)
 	app.printBanner()
+	sounds.PlayIt(sounds.Maelstrom_Pong, app.otoCtx)
 	app.localeInfo = internationalization.GetLocaleInfo()
 	app.gui, err = gocui.NewGui(gocui.OutputNormal)
 	if err != nil {

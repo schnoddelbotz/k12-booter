@@ -2,6 +2,7 @@ package cui
 
 import (
 	"log"
+	"schnoddelbotz/k12-booter/sounds"
 	"strings"
 
 	"github.com/jroimartin/gocui"
@@ -41,6 +42,7 @@ func (app *App) voidKeyHandler(g *gocui.Gui, v *gocui.View) error {
 
 func (app *App) keyHandlerHelp(g *gocui.Gui, v *gocui.View) error {
 	app.showHelp = !app.showHelp // toggle
+	go sounds.PlayIt(sounds.Maelstrom_YouIdiot, app.otoCtx)
 	return nil
 }
 

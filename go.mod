@@ -4,7 +4,10 @@ go 1.20
 
 require (
 	github.com/Xuanwo/go-locale v1.1.0 // indirect
+	github.com/ebitengine/purego v0.3.0 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
+	github.com/hajimehoshi/go-mp3 v0.3.4 // indirect
+	github.com/hajimehoshi/oto/v2 v2.4.0 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/jroimartin/gocui v0.5.0 // indirect
 	github.com/magiconair/properties v1.8.7 // indirect
