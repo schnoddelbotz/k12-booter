@@ -3,6 +3,7 @@ package cui
 import (
 	"fmt"
 	"log"
+	"schnoddelbotz/k12-booter/sounds"
 
 	"github.com/jroimartin/gocui"
 	"github.com/pkg/browser"
@@ -82,10 +83,10 @@ var AppMenu = []MenuItem{
 		target:   "cls",
 	},
 	{
-		Label:    "WWW: k12-booter Homepage",
+		Label:    "↗ WWW FSF Homepage",
 		Parent:   Menu_Main,
 		itemType: LinkBrowser,
-		target:   "https://schnoddelbotz.github.io/k12-booter/",
+		target:   "https://www.fsf.org/",
 	},
 	{
 		Label:    "Quit",
@@ -263,12 +264,14 @@ func (app *App) execMenuItemAction(mi MenuItem) error {
 	e, _ := app.gui.View(ViewMain)
 	switch mi.itemType {
 	case LinkBrowser:
+		go sounds.PlayIt(sounds.Maelstrom_Beamer, app.otoCtx)
 		browser.OpenURL(mi.target)
 	case LinkUserCommand:
 		app.userCommands <- mi.target
 		app.hideMenu()
 		// todo: close menu now?
 	case LinkMenu:
+		go sounds.PlayIt(sounds.Maelstrom_Sweet, app.otoCtx)
 		app.switchMenu(mi.target)
 	default:
 		fmt.Fprintf(e, "# MI_EXEC TODO impl %+v\n", mi)
