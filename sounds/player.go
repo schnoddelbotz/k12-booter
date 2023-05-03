@@ -54,7 +54,10 @@ const (
 // https://github.com/hajimehoshi/oto/blob/main/example/main.go
 // Thank you!
 
-func InitAudio() *oto.Context {
+func InitAudio(disableAudio bool) *oto.Context {
+	if disableAudio {
+		return nil
+	}
 	samplingRate := 44100
 	numOfChannels := 2
 	audioBitDepth := 2
@@ -68,6 +71,9 @@ func InitAudio() *oto.Context {
 }
 
 func PlayIt(mp3Name string, otoCtx *oto.Context) {
+	if otoCtx == nil {
+		return
+	}
 	fileBytes, err := content.ReadFile(mp3Name)
 	if err != nil {
 		panic("reading my-file.mp3 failed: " + err.Error())

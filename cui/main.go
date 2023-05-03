@@ -10,6 +10,7 @@ import (
 
 	"github.com/hajimehoshi/oto/v2"
 	"github.com/jroimartin/gocui"
+	"github.com/spf13/viper"
 )
 
 const (
@@ -21,6 +22,7 @@ const (
 	ViewHelp          = "help"
 	ViewMenu          = "menu"
 	ConfigDisablePOST = "disable_post"
+	ConfigDisableSFX  = "disable_sfx"
 )
 
 type App struct {
@@ -52,7 +54,7 @@ func Zain(version string) {
 		err error
 	)
 	app.version = version
-	app.otoCtx = sounds.InitAudio()
+	app.otoCtx = sounds.InitAudio(viper.GetBool(ConfigDisableSFX))
 	sounds.PlayIt(sounds.Maelstrom_Ping, app.otoCtx)
 	app.printBanner()
 	sounds.PlayIt(sounds.Maelstrom_Pong, app.otoCtx)

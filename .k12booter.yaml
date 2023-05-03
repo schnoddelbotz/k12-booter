@@ -1,0 +1,4 @@
+# Set disable_sfx to true to disable any sound effects in k12-booter
+# Environment variables win over config; override using:
+# env K12B_DISABLE_SFX=true k12-booter
+disable_sfx: false

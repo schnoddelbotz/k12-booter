@@ -12,6 +12,7 @@ require (
 	github.com/jroimartin/gocui v0.5.0 // indirect
 	github.com/magiconair/properties v1.8.7 // indirect
 	github.com/mattn/go-runewidth v0.0.9 // indirect
+	github.com/mitchellh/go-homedir v1.1.0
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/nicksnyder/go-i18n/v2 v2.2.1 // indirect
 	github.com/nsf/termbox-go v1.1.1 // indirect

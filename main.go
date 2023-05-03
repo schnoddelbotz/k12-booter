@@ -7,6 +7,9 @@ import (
 	"schnoddelbotz/k12-booter/cui"
 	"schnoddelbotz/k12-booter/formgenerator"
 	"schnoddelbotz/k12-booter/internationalization"
+
+	"github.com/mitchellh/go-homedir"
+	"github.com/spf13/viper"
 )
 
 type flags struct {
@@ -18,6 +21,18 @@ type flags struct {
 var AppVersion = "git-0.0.0"
 
 func main() {
+	viper.SetEnvPrefix("K12B")
+	viper.AutomaticEnv()
+	viper.AddConfigPath(".")
+	home, err := homedir.Dir()
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+	viper.AddConfigPath(home)
+	viper.SetConfigName(".k12booter")
+	viper.ReadInConfig()
+
 	options := &flags{}
 	flag.BoolVar(&options.formByQuery, "formByQuery", false, "generate form code interactively")
 	flag.StringVar(&options.formFromFile, "formFromFile", "", "generate form code from input file")
