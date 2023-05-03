@@ -19,6 +19,7 @@ const (
 	ViewShortcuts     = "shortcuts"
 	ViewCommand       = "command"
 	ViewLocale        = "locale"
+	ViewPrompt        = "prompt"
 	ViewHelp          = "help"
 	ViewMenu          = "menu"
 	ConfigDisablePOST = "disable_post"
@@ -79,6 +80,7 @@ func Zain(version string) {
 		ViewMain:      {name: ViewMain, layoutFunc: app.mainLayoutFunc},
 		ViewHelp:      {name: ViewHelp, layoutFunc: app.helpLayoutFunc},
 		ViewLocale:    {name: ViewLocale, layoutFunc: app.localeLayoutFunc},
+		ViewPrompt:    {name: ViewPrompt, layoutFunc: app.promptLayoutFunc},
 		ViewShortcuts: {name: ViewShortcuts, layoutFunc: app.hotkeysLayoutFunc},
 	}
 
