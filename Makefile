@@ -19,5 +19,8 @@ flagit: internationalization/flagit/*.go
 	banner -w 40 k12 | ./flagit 
 	cowsay k12-booter | lolcat
 
+sinebeep: sounds/sinebeep/*.go 
+	cd sounds/sinebeep && go build -o ../../sinebeep
+
 clean:
-	rm -f k12-booter iso3166 flagit
+	rm -f k12-booter iso3166 flagit sinebeep
