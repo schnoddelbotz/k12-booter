@@ -22,6 +22,7 @@ const (
 	ViewPrompt        = "prompt"
 	ViewHelp          = "help"
 	ViewMenu          = "menu"
+	ViewDialog        = "dialog"
 	ConfigDisablePOST = "disable_post"
 	ConfigDisableSFX  = "disable_sfx"
 )
@@ -44,9 +45,12 @@ type App struct {
 type ViewIdentifier string
 
 type AppView struct {
-	name       ViewIdentifier
-	hotkeys    []HotKey
-	layoutFunc func() (*gocui.View, error)
+	name         ViewIdentifier
+	text         string
+	currentBool  bool
+	hotskeys     []HotKey
+	layoutFunc   func() (*gocui.View, error)
+	onSubmitBool func(bool) error
 }
 
 func Zain(version string) {

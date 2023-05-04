@@ -30,13 +30,12 @@ type MenuItem struct {
 }
 
 const (
-	Menu_Main              = "Main Menu"
-	Menu_Preferences       = "Preferences"
-	Menu_Admin             = "Administration"
-	Menu_Applications      = "Applications"
-	Menu_Deployment        = "Lab management & deployment"
-	Menu_Preferences_Sound = "Sound preferences"
-	Menu_TODO              = "TODO_WIP_XXX"
+	Menu_Main         = "Main Menu"
+	Menu_Preferences  = "Preferences"
+	Menu_Admin        = "Administration"
+	Menu_Applications = "Applications"
+	Menu_Deployment   = "Lab management & deployment"
+	Menu_TODO         = "TODO_WIP_XXX"
 )
 
 // AppMenu wants to be outsourced and auto-generated.
@@ -169,47 +168,37 @@ var AppMenu = []MenuItem{
 		itemType: LinkMenu,
 		target:   Menu_Main,
 	},
-	/*{
-		Label:    "Set display language... tbd",
+	{
+		Label:    "Toggle POST",
 		Parent:   Menu_Preferences,
-		itemType: LinkUserCommand,
-		target:   "quit", //
-	},*/
-	{
-		Label:    "Toggle sound / SFX",
-		Parent:   Menu_Preferences,
-		itemType: LinkMenu,
-		target:   Menu_Preferences_Sound,
-	},
-	{
-		Label:    "Return to Preferences",
-		Parent:   Menu_Preferences_Sound,
-		itemType: LinkMenu,
-		target:   Menu_Preferences,
-	},
-	{
-		Label:    "Enable SFX",
-		Parent:   Menu_Preferences_Sound,
 		itemType: LinkFunc,
 		linkFunc: func(a *App) error {
-			viper.Set(ConfigDisableSFX, false)
-			viper.WriteConfig()
-			// re-init of otoCtx lead to crash :/ ... for now:
 			a.destroyMenu()
-			a.printlnMain("> SFX enabled. Restart k12-booter to enjoy sounds.")
+			handler := func(b bool) error {
+				a.printlnMain(fmt.Sprintf("> preference disable_post set to: %v", b))
+				viper.Set(ConfigDisablePOST, b)
+				viper.WriteConfig()
+				a.DestroyDialogBool(a.gui, nil)
+				return nil
+			}
+			a.DisplayDialogBool("Disable Power-On Self-Test", viper.GetBool(ConfigDisablePOST), handler)
 			return nil
 		},
 	},
 	{
-		Label:    "Disable SFX",
-		Parent:   Menu_Preferences_Sound,
+		Label:    "Toggle SFX",
+		Parent:   Menu_Preferences,
 		itemType: LinkFunc,
 		linkFunc: func(a *App) error {
-			a.otoCtx = nil
-			viper.Set(ConfigDisableSFX, true)
-			viper.WriteConfig() // mhh. Collateral damage. bind vars...?!
 			a.destroyMenu()
-			a.printlnMain("> SFX disabled")
+			handler := func(b bool) error {
+				a.printlnMain(fmt.Sprintf("> preference disable_sfx set to: %v", b))
+				viper.Set(ConfigDisableSFX, b)
+				viper.WriteConfig()
+				a.DestroyDialogBool(a.gui, nil)
+				return nil
+			}
+			a.DisplayDialogBool("Disable Sound effects", viper.GetBool(ConfigDisableSFX), handler)
 			return nil
 		},
 	},
