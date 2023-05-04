@@ -78,6 +78,11 @@ func (app *App) showMenu(menuName string) {
 	})
 }
 
+func (app *App) destroyMenu() {
+	app.currentMenu = Menu_Main
+	app.hideMenu()
+}
+
 func (app *App) hideMenu() {
 	app.gui.DeleteKeybindings(ViewMenu)
 	app.gui.Update(func(g *gocui.Gui) error {

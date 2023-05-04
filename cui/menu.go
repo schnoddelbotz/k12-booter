@@ -7,6 +7,7 @@ import (
 
 	"github.com/jroimartin/gocui"
 	"github.com/pkg/browser"
+	"github.com/spf13/viper"
 )
 
 type MenuItemType int
@@ -24,17 +25,18 @@ type MenuItem struct {
 	Parent   string
 	itemType MenuItemType
 	target   string
-	linkFunc *func() error
+	linkFunc func(a *App) error
 	// attributes ...
 }
 
 const (
-	Menu_Main         = "Main Menu"
-	Menu_Preferences  = "Preferences"
-	Menu_Admin        = "Administration"
-	Menu_Applications = "Applications"
-	Menu_Deployment   = "Lab management & deployment"
-	Menu_TODO         = "TODO_WIP_XXX"
+	Menu_Main              = "Main Menu"
+	Menu_Preferences       = "Preferences"
+	Menu_Admin             = "Administration"
+	Menu_Applications      = "Applications"
+	Menu_Deployment        = "Lab management & deployment"
+	Menu_Preferences_Sound = "Sound preferences"
+	Menu_TODO              = "TODO_WIP_XXX"
 )
 
 // AppMenu wants to be outsourced and auto-generated.
@@ -167,11 +169,49 @@ var AppMenu = []MenuItem{
 		itemType: LinkMenu,
 		target:   Menu_Main,
 	},
-	{
+	/*{
 		Label:    "Set display language... tbd",
 		Parent:   Menu_Preferences,
 		itemType: LinkUserCommand,
 		target:   "quit", //
+	},*/
+	{
+		Label:    "Toggle sound / SFX",
+		Parent:   Menu_Preferences,
+		itemType: LinkMenu,
+		target:   Menu_Preferences_Sound,
+	},
+	{
+		Label:    "Return to Preferences",
+		Parent:   Menu_Preferences_Sound,
+		itemType: LinkMenu,
+		target:   Menu_Preferences,
+	},
+	{
+		Label:    "Enable SFX",
+		Parent:   Menu_Preferences_Sound,
+		itemType: LinkFunc,
+		linkFunc: func(a *App) error {
+			viper.Set(ConfigDisableSFX, false)
+			viper.WriteConfig()
+			// re-init of otoCtx lead to crash :/ ... for now:
+			a.destroyMenu()
+			a.printlnMain("> SFX enabled. Restart k12-booter to enjoy sounds.")
+			return nil
+		},
+	},
+	{
+		Label:    "Disable SFX",
+		Parent:   Menu_Preferences_Sound,
+		itemType: LinkFunc,
+		linkFunc: func(a *App) error {
+			a.otoCtx = nil
+			viper.Set(ConfigDisableSFX, true)
+			viper.WriteConfig() // mhh. Collateral damage. bind vars...?!
+			a.destroyMenu()
+			a.printlnMain("> SFX disabled")
+			return nil
+		},
 	},
 }
 
@@ -273,6 +313,8 @@ func (app *App) execMenuItemAction(mi MenuItem) error {
 	case LinkMenu:
 		go sounds.PlayIt(sounds.Maelstrom_Sweet, app.otoCtx)
 		app.switchMenu(mi.target)
+	case LinkFunc:
+		mi.linkFunc(app)
 	default:
 		fmt.Fprintf(e, "# MI_EXEC TODO impl %+v\n", mi)
 	}
