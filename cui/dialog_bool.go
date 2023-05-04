@@ -18,6 +18,9 @@ func (app *App) DisplayDialogBool(description string, current bool, onSubmit fun
 	if err := app.gui.SetKeybinding(ViewDialog, gocui.KeyEnter, gocui.ModNone, app.SaveDialogBool); err != nil {
 		panic(err)
 	}
+	if err := app.gui.SetKeybinding(ViewDialog, gocui.MouseLeft, gocui.ModNone, app.SaveDialogBool); err != nil {
+		panic(err)
+	}
 	if err := app.gui.SetKeybinding(ViewDialog, gocui.KeyEsc, gocui.ModNone, app.DestroyDialogBool); err != nil {
 		panic(err)
 	}

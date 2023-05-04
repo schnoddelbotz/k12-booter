@@ -2,3 +2,4 @@
 # Environment variables win over config; override using:
 # env K12B_DISABLE_SFX=true k12-booter
 disable_sfx: false
+disable_post: false
