@@ -22,5 +22,13 @@ flagit: internationalization/flagit/*.go
 sinebeep: sounds/sinebeep/*.go 
 	cd sounds/sinebeep && go build -o ../../sinebeep
 
+playsine: sinebeep
+	./sinebeep -duration 150 cCdDefFgGaAb^:cCdDefFgGaAb^:cCdDefFgGaAbbAaGgFfeDdCcVbAaGgFfeDdCcVXbAaGgFfeDdCc
+	./sinebeep -duration 200 cdefgg,aaaag,::aaaag,ffffee,ggggc
+	./sinebeep -duration 200 ^cdefgg:,aaaag,aaaag,ffffee,ggggc
+	./sinebeep -duration 200 ^^cdefgg:,aaaag,aaaag,ffffee,XXXXggggc,::::c
+	# Now looking for DAISY notes ...?
+	# https://tedgioia.substack.com/p/how-an-ibm-computer-learned-to-sing
+
 clean:
 	rm -f k12-booter iso3166 flagit sinebeep
