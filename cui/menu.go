@@ -3,6 +3,7 @@ package cui
 import (
 	"fmt"
 	"log"
+	"schnoddelbotz/k12-booter/eui"
 	"schnoddelbotz/k12-booter/sounds"
 
 	"github.com/jroimartin/gocui"
@@ -43,8 +44,16 @@ var AppMenu = []MenuItem{
 	{
 		Label:    "Discover Applications", // launch or install
 		Parent:   Menu_Main,
-		itemType: LinkMenu,
-		target:   Menu_Applications,
+		itemType: LinkFunc,
+		linkFunc: func(a *App) error {
+			eui.Main()
+			// panic: ebiten: NewImage cannot be called after RunGame finishes
+			// i.e. feels we must quit here?
+			a.gui.Update(func(g *gocui.Gui) error {
+				return gocui.ErrQuit
+			})
+			return nil
+		},
 	},
 	{
 		Label:    "School Administration", // API ? Buckets ? /country/canton|bundesland|state.../city/zip/schoolname
