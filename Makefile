@@ -25,10 +25,20 @@ sinebeep: sounds/sinebeep/*.go
 playsine: sinebeep
 	./sinebeep -duration 150 cCdDefFgGaAb^:cCdDefFgGaAb^:cCdDefFgGaAbbAaGgFfeDdCcVbAaGgFfeDdCcVXbAaGgFfeDdCc
 	./sinebeep -duration 200 cdefgg,aaaag,::aaaag,ffffee,ggggc
-	./sinebeep -duration 200 ^cdefgg:,aaaag,aaaag,ffffee,ggggc
 	./sinebeep -duration 200 ^^cdefgg:,aaaag,aaaag,ffffee,XXXXggggc,::::c
+	./sinebeep -duration 200 ^^^^cVcVcVcVcVcVcVcVc
 	# Now looking for DAISY notes ...?
 	# https://tedgioia.substack.com/p/how-an-ibm-computer-learned-to-sing
+	# Trying here: Love story - sorry for the buggy implementation!
+	# https://en.wikipedia.org/wiki/Francis_Lai
+	./sinebeep -duration 200 ^^cVee^cc,Vee^ccVefedddbb,ddbbdedcccaa,ccaacdcVbbb^aVb^aa
+	# polyphony via shell jobs - 2 voices
+	./sinebeep -duration 200 ^cVee^cc,Vee^ccVefedddbb & \
+	./sinebeep -duration 200 ^^cVee^cc,Vee^ccVefedddbb
+	# 3 voices
+	./sinebeep -duration 200 ^cVee^cc,Vee^ccVefedddbb,ddbbdedcccaa,ccaacdcVbbb^aVb^aa & \
+	./sinebeep -duration 200 ^^cVee^cc,Vee^ccVefedddbb,ddbbdedcccaa,ccaacdcVbbb^aVb^aa & \
+	./sinebeep -duration 200 ^^^cVee^cc,Vee^ccVefedddbb,ddbbdedcccaa,ccaacdcVbbb^aVb^aa
 
 clean:
 	rm -f k12-booter iso3166 flagit sinebeep
