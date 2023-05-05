@@ -29,8 +29,8 @@ type pageContainer struct {
 
 func Main() {
 	ebiten.SetWindowSize(900, 800)
-	ebiten.SetFullscreen(true)
-	ebiten.SetWindowTitle("Ebiten UI Demo")
+	// ebiten.SetFullscreen(true)
+	ebiten.SetWindowTitle("Ebiten UI Demo #FSD")
 	ebiten.SetWindowResizingMode(ebiten.WindowResizingModeEnabled)
 	ebiten.SetScreenClearedEveryFrame(false)
 

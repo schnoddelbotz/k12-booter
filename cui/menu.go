@@ -46,12 +46,13 @@ var AppMenu = []MenuItem{
 		Parent:   Menu_Main,
 		itemType: LinkFunc,
 		linkFunc: func(a *App) error {
-			eui.Main()
 			// panic: ebiten: NewImage cannot be called after RunGame finishes
 			// i.e. feels we must quit here?
 			a.gui.Update(func(g *gocui.Gui) error {
 				return gocui.ErrQuit
 			})
+			a.gui.Close()
+			eui.Main()
 			return nil
 		},
 	},
