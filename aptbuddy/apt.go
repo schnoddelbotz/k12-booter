@@ -1,5 +1,163 @@
 package aptbuddy
 
+import (
+	"bufio"
+	"compress/gzip"
+	"fmt"
+	"os"
+	"regexp"
+	"schnoddelbotz/k12-booter/utility"
+
+	"github.com/blevesearch/bleve/v2"
+)
+
+/*
+
+Assumptions made here:
+1. The debian repositories are public.
+2. k12-booter's intension is to increase OSS adoption, be it on debian or not.
+3. k12-booter states package descriptions origin and does not try to monetarise.
+
+If you see any issue here, please ping me. Thank you. Peace.
+
+https://www.debian.org/mirror/list -> CDN, https -> https://deb.debian.org/debian/
+
+*/
+
+type APTPackage struct {
+	Package         string
+	Description     string
+	Homepage        string
+	Tags            []string
+	Section         string
+	LongDescription string // depends on I18N ...
+}
+
+const (
+	PackagesGZ = "Packages.gz"
+)
+
+func FetchFiles(translation string) error {
+	packagesURL := fmt.Sprintf("https://deb.debian.org/debian/dists/stable/main/binary-amd64/%s", PackagesGZ)
+	utility.Fetch(packagesURL, PackagesGZ)
+	i18nURL := fmt.Sprintf("https://deb.debian.org/debian/dists/stable/main/i18n/%s", translationFilename(translation))
+	utility.Fetch(i18nURL, translationFilename(translation))
+	return nil
+}
+
+func (b *Buddy) Debian2Bleve(translation string) error {
+	// UGLY + BUGGY( check eg. `gzcat Packages.gz | grep '^Section: math$' | wc -l` vs 345 here).
+	// And todo:
+	// add LongDescriptions
+	// add https://popcon.debian.org/source/by_inst for scoring? how to use in query?
+	packGZ, err := os.Open(PackagesGZ)
+	utility.Fatal(err)
+	zr, err := gzip.NewReader(packGZ)
+	utility.Fatal(err)
+	fileScanner := bufio.NewScanner(zr)
+	fileScanner.Split(bufio.ScanLines)
+
+	var packagesRegEx = regexp.MustCompile(`^(\S+): (.*)`)
+
+	var p APTPackage
+	var pn string
+	var cs string
+
+	batchSize := 10000
+	packagesCount := 0
+	batch := b.index.NewBatch()
+	for fileScanner.Scan() {
+		line := fileScanner.Text()
+		if line == "" {
+			//fmt.Printf("flush current package - batch index %s\n", pn)
+			packagesCount++
+			batch.Index(pn, p)
+			p = APTPackage{}
+			pn = ""
+			if packagesCount%batchSize == 0 {
+				fmt.Printf("Indexing batch (%d docs)...\n", packagesCount)
+				err := b.index.Batch(batch)
+				if err != nil {
+					return err
+				}
+				batch = b.index.NewBatch()
+			}
+			continue
+		}
+
+		pMatch := packagesRegEx.FindStringSubmatch(line)
+		if len(pMatch) == 3 {
+			//fmt.Printf("'%s' = '%s'\n", pMatch[1], pMatch[2])
+			cs = pMatch[1]
+		}
+		switch cs {
+		case "Package":
+			p.Package = pMatch[2]
+			pn = pMatch[2]
+		case "Description":
+			p.Description = pMatch[2]
+		case "Section":
+			p.Section = pMatch[2]
+		case "Homepage":
+			p.Homepage = pMatch[2]
+		case "Tag":
+			p.Tags = append(p.Tags, line) // BS FIXME; explode ,
+		}
+	}
+
+	fmt.Printf("Indexing batch (%d docs)...\n", packagesCount)
+	err = b.index.Batch(batch)
+	if err != nil {
+		return err
+	}
+
+	zr.Close()
+	packGZ.Close()
+	return nil
+}
+
+func (b *Buddy) Experiments() {
+	r := b.Search("0ad")
+	fmt.Printf("\n%+v\n", r)
+	fmt.Printf("%+v\n", r.MaxScore)
+
+	b.FieldDict("Description", 1000)
+	b.FieldDict("Section", 1)
+
+	r = b.Search("Section:math")
+	fmt.Printf("\n%+v\n", r)
+
+	b.FieldDict("Tags", 1)
+	r = b.Search(`Tags:"lang:ada"`)
+	fmt.Printf("\n%+v\n", r)
+
+	b.FacetQueryExperiment()
+}
+
+func (b *Buddy) FacetQueryExperiment() {
+	i := b.index
+	facet := bleve.NewFacetRequest("Section", 10)
+	query := bleve.NewMatchAllQuery()
+	searchRequest := bleve.NewSearchRequest(query)
+	searchRequest.AddFacet("facet name", facet)
+	searchResults, err := i.Search(searchRequest)
+	if err != nil {
+		panic(err)
+	}
+
+	// total number of terms
+	fmt.Println(searchResults.Facets["facet name"].Total)
+	// numer of docs with no value for this field
+	fmt.Println(searchResults.Facets["facet name"].Missing)
+	// term with highest occurrences in field name
+	fmt.Println(searchResults.Facets["facet name"].Terms.Terms()[0].Term)
+	fmt.Printf("%+v", searchResults.Facets["facet name"].Terms)
+}
+
+func translationFilename(translation string) string {
+	return fmt.Sprintf("Translation-%s.bz2", translation)
+}
+
 // http://ftp.debian.org/debian/dists/stable/main/binary-amd64/Packages.gz
 /*
 Package: 0ad

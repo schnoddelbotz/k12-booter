@@ -40,5 +40,12 @@ playsine: sinebeep
 	./sinebeep -duration 200 ^^cVee^cc,Vee^ccVefedddbb,ddbbdedcccaa,ccaacdcVbbb^aVb^aa & \
 	./sinebeep -duration 200 ^^^cVee^cc,Vee^ccVefedddbb,ddbbdedcccaa,ccaacdcVbbb^aVb^aa
 
+apt-bleve-experiment: k12-booter
+	./k12-booter -apt
+
+install-bleve-cli:
+	go install github.com/blevesearch/bleve/v2/cmd/bleve@latest
+
 clean:
 	rm -f k12-booter iso3166 flagit sinebeep
+	# rm -rf aptbuddy_en.bleve/

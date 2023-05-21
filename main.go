@@ -4,18 +4,21 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"schnoddelbotz/k12-booter/aptbuddy"
 	"schnoddelbotz/k12-booter/cui"
 	"schnoddelbotz/k12-booter/formgenerator"
 	"schnoddelbotz/k12-booter/internationalization"
+	"schnoddelbotz/k12-booter/utility"
 
 	"github.com/mitchellh/go-homedir"
 	"github.com/spf13/viper"
 )
 
 type flags struct {
-	formByQuery  bool
-	localeInfo   bool
-	formFromFile string
+	formByQuery           bool
+	localeInfo            bool
+	runAptBleveExperiment bool
+	formFromFile          string
 }
 
 var AppVersion = "git-0.0.0"
@@ -37,6 +40,7 @@ func main() {
 	flag.BoolVar(&options.formByQuery, "formByQuery", false, "generate form code interactively")
 	flag.StringVar(&options.formFromFile, "formFromFile", "", "generate form code from input file")
 	flag.BoolVar(&options.localeInfo, "localeInfo", false, "dump detected locale info an quit job")
+	flag.BoolVar(&options.runAptBleveExperiment, "apt", false, "run apt bleve indexing experiment")
 	flag.Parse()
 
 	if options.localeInfo {
@@ -48,6 +52,13 @@ func main() {
 		fmt.Printf("CultureInfo(756): %+v\n", internationalization.CultureInfo(756))
 		fmt.Printf(`CultureInfo("Australia"): %+v`+"\n", internationalization.CultureInfo("Australia"))
 		os.Exit(1)
+	}
+
+	if options.runAptBleveExperiment {
+		b, err := aptbuddy.New("en")
+		utility.Fatal(err)
+		b.Experiments()
+		os.Exit(0)
 	}
 
 	if formgenerator.CreateFormAsNeeded(options.formByQuery, options.formFromFile) {

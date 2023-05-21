@@ -6,9 +6,9 @@ import (
 	"flag"
 	"fmt"
 	"io"
-	"net/http"
 	"os"
 	"regexp"
+	"schnoddelbotz/k12-booter/utility"
 	"strconv"
 	"strings"
 
@@ -41,7 +41,7 @@ func main() {
 	flag.StringVar(&flags.via, "via", "https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes", "source url")
 
 	flag.Parse()
-	fetch(flags.via, flags.in)
+	utility.Fetch(flags.via, flags.in)
 	isodata := readhtml(flags.in)
 	switch flags.to {
 	case outputFormatGO:
@@ -73,7 +73,7 @@ type CountryData struct {
 	fmt.Printf("var Cultures = []CountryData{\n")
 	for _, country := range data {
 		numCode, err := strconv.ParseUint(country.NumericCode, 10, 16)
-		fatal(err)
+		utility.Fatal(err)
 		fmt.Printf(`{  
 			Alpha2Code: "%s",
 			Alpha3Code: "%s",
@@ -119,11 +119,11 @@ func CountryNameToFlagConstant(cn string) string {
 
 func readhtml(file string) []iso3166 {
 	htmlFile, err := os.Open(file)
-	fatal(err)
+	utility.Fatal(err)
 	defer htmlFile.Close()
 
 	htmldoc, err := html.Parse(htmlFile)
-	fatal(err)
+	utility.Fatal(err)
 	var tableNode *html.Node
 	var fn func(*html.Node)
 	fn = func(n *html.Node) {
@@ -137,7 +137,7 @@ func readhtml(file string) []iso3166 {
 	}
 	fn(htmldoc)
 	if tableNode == nil {
-		fatal(errors.New("no table of CSS class wikitable found in HTML; tried hard, very"))
+		utility.Fatal(errors.New("no table of CSS class wikitable found in HTML; tried hard, very"))
 	}
 	return readtable(tableNode)
 }
@@ -153,7 +153,7 @@ func readtable(table *html.Node) []iso3166 {
 		}
 	}
 	if tbody == nil || tbody.FirstChild == nil {
-		fatal(errors.New("tbody not found"))
+		utility.Fatal(errors.New("tbody not found"))
 	}
 
 	for d := tbody.FirstChild; d != nil; d = d.NextSibling {
@@ -216,32 +216,6 @@ func deepest(node *html.Node) *html.Node {
 		return deepest(node.FirstChild)
 	}
 	return node
-}
-
-func fetch(url, file string) {
-	if _, err := os.Stat(file); err == nil {
-		// fmt.Printf("File %s exists, skipping download\n", file)
-		return
-	}
-
-	out, err := os.Create(file)
-	fatal(err)
-	defer out.Close()
-
-	resp, err := http.Get(url)
-	fatal(err)
-	defer resp.Body.Close()
-
-	_, err = io.Copy(out, resp.Body)
-	fatal(err)
-	// fmt.Printf("Downloaded %s to %s (%d bytes) successfully\n", url, file, n)
-}
-
-func fatal(err error) {
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
 }
 
 // copy from import_html.go :/
