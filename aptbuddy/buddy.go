@@ -7,6 +7,13 @@ import (
 	"github.com/blevesearch/bleve/v2"
 )
 
+var (
+	HighlightNone        = []string{}
+	HighlightPackage     = []string{"Package"}
+	HighlightDescription = []string{"Description"}
+	HighlightDescAndTags = []string{"Description", "Tags"}
+)
+
 type Buddy struct {
 	index bleve.Index
 }
@@ -39,16 +46,28 @@ func New(translation string) (*Buddy, error) {
 	return &bud, err
 }
 
-func (buddy *Buddy) Search(q string) *bleve.SearchResult {
+func (buddy *Buddy) Search(q string, s int, hilight []string) *bleve.SearchResult {
 	query := bleve.NewQueryStringQuery(q)
 	searchRequest := bleve.NewSearchRequest(query)
+
+	// https://blevesearch.com/docs/Highlight%20Matches%20in%20Results/
+	if len(hilight) > 0 {
+		searchRequest.Highlight = bleve.NewHighlight()
+		for _, hl := range hilight {
+			searchRequest.Highlight.AddField(hl)
+		}
+	}
+
+	searchRequest.Size = s
+	fmt.Printf("Search: `%s`, showing max %d results ...\n", q, s)
 	searchResult, _ := buddy.index.Search(searchRequest)
 	return searchResult
 }
 
-func (buddy *Buddy) FieldDict(fieldname string, minCount uint64) error {
+func (buddy *Buddy) FieldDict(fieldname string, minCount uint64, maxCount uint64) error {
 	// = https://github.com/blevesearch/bleve/blob/master/cmd/bleve/cmd/dictionary.go
-	fmt.Printf("Dumping dictionary for field %s, for terms with a minium count of %d\n", fieldname, minCount)
+	fmt.Printf("Dumping dictionary for field %s, for terms with a minium count of %d, max %d\n",
+		fieldname, minCount, maxCount)
 	i, err := buddy.index.Advanced()
 	if err != nil {
 		return err
@@ -63,11 +82,13 @@ func (buddy *Buddy) FieldDict(fieldname string, minCount uint64) error {
 	}
 	de, err := d.Next()
 	for err == nil && de != nil {
-		if de.Count > minCount {
+		if de.Count > minCount && de.Count < maxCount {
 			fmt.Printf("%s - %d\n", de.Term, de.Count)
+			// todo: don't print, return sorted
 		}
 		de, err = d.Next()
 	}
+	println()
 	return nil
 }
 

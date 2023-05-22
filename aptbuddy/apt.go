@@ -117,21 +117,21 @@ func (b *Buddy) Debian2Bleve(translation string) error {
 }
 
 func (b *Buddy) Experiments() {
-	r := b.Search("0ad")
-	fmt.Printf("\n%+v\n", r)
-	fmt.Printf("%+v\n", r.MaxScore)
+	r := b.Search("0ad", 5, HighlightPackage)
+	fmt.Printf("%+v\n", r)
+	fmt.Printf("%+v\n", r.MaxScore) // panics here when using ansi highlighter?? :/
 
-	b.FieldDict("Description", 1000)
-	b.FieldDict("Section", 1)
+	b.FieldDict("Description", 1000, 999_999)
+	b.FieldDict("Section", 1, 999_999)
 
-	r = b.Search("Section:math")
-	fmt.Printf("\n%+v\n", r)
+	r = b.Search("Section:math", 10, HighlightDescription)
+	fmt.Printf("%+v\n", r)
 
-	b.FieldDict("Tags", 1)
-	r = b.Search(`Tags:"lang:ada"`)
-	fmt.Printf("\n%+v\n", r)
+	b.FieldDict("Tags", 1, 10)
+	r = b.Search(`Tags:"lang:ada"`, 100, HighlightDescription)
+	fmt.Printf("%+v\n", r)
 
-	b.FacetQueryExperiment()
+	// b.FacetQueryExperiment()
 }
 
 func (b *Buddy) FacetQueryExperiment() {
