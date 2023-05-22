@@ -63,6 +63,7 @@ func (b *Buddy) Debian2Bleve(translation string) error {
 	fileScanner := bufio.NewScanner(zr)
 
 	// mean caveat - https://stackoverflow.com/questions/8757389/reading-a-file-line-by-line-in-go
+	// IF you do NOT call fileScanner.Err() after fileScanner.Scan() completion. Lesson learned.
 	buf := make([]byte, maxCapacity)
 	fileScanner.Buffer(buf, maxCapacity)
 
@@ -115,6 +116,8 @@ func (b *Buddy) Debian2Bleve(translation string) error {
 			p.Tag += line
 		}
 	}
+
+	utility.Fatal(fileScanner.Err())
 
 	fmt.Printf("Indexing batch (%d docs)...\n", packagesCount)
 	err = b.index.Batch(batch)
