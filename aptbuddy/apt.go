@@ -28,7 +28,7 @@ type APTPackage struct {
 	Package         string
 	Description     string
 	Homepage        string
-	Tags            []string
+	Tag             string
 	Section         string
 	LongDescription string // depends on I18N ...
 }
@@ -50,11 +50,22 @@ func (b *Buddy) Debian2Bleve(translation string) error {
 	// And todo:
 	// add LongDescriptions
 	// add https://popcon.debian.org/source/by_inst for scoring? how to use in query?
+	//https://wiki.debian.org/DebianRepository/Format :
+	// A Packages index may contain __multiple versions of one binary package__, for the same
+	// architecture and/or multiple architectures (that is, all and the native architecture).
+	// -- see e.g. Package: linux-source
 	packGZ, err := os.Open(PackagesGZ)
 	utility.Fatal(err)
 	zr, err := gzip.NewReader(packGZ)
 	utility.Fatal(err)
+	maxCapacity := 128000
+
 	fileScanner := bufio.NewScanner(zr)
+
+	// mean caveat - https://stackoverflow.com/questions/8757389/reading-a-file-line-by-line-in-go
+	buf := make([]byte, maxCapacity)
+	fileScanner.Buffer(buf, maxCapacity)
+
 	fileScanner.Split(bufio.ScanLines)
 
 	var packagesRegEx = regexp.MustCompile(`^(\S+): (.*)`)
@@ -69,7 +80,7 @@ func (b *Buddy) Debian2Bleve(translation string) error {
 	for fileScanner.Scan() {
 		line := fileScanner.Text()
 		if line == "" {
-			//fmt.Printf("flush current package - batch index %s\n", pn)
+			// fmt.Printf("flush current package - batch index %s\n", pn)
 			packagesCount++
 			batch.Index(pn, p)
 			p = APTPackage{}
@@ -87,7 +98,7 @@ func (b *Buddy) Debian2Bleve(translation string) error {
 
 		pMatch := packagesRegEx.FindStringSubmatch(line)
 		if len(pMatch) == 3 {
-			//fmt.Printf("'%s' = '%s'\n", pMatch[1], pMatch[2])
+			// fmt.Printf("'%s' = '%s'\n", pMatch[1], pMatch[2])
 			cs = pMatch[1]
 		}
 		switch cs {
@@ -101,7 +112,7 @@ func (b *Buddy) Debian2Bleve(translation string) error {
 		case "Homepage":
 			p.Homepage = pMatch[2]
 		case "Tag":
-			p.Tags = append(p.Tags, line) // BS FIXME; explode ,
+			p.Tag += line
 		}
 	}
 
@@ -127,8 +138,8 @@ func (b *Buddy) Experiments() {
 	r = b.Search("Section:math", 10, HighlightDescription)
 	fmt.Printf("%+v\n", r)
 
-	b.FieldDict("Tags", 1, 10)
-	r = b.Search(`Tags:"lang:ada"`, 100, HighlightDescription)
+	b.FieldDict("Tag", 1, 10)
+	r = b.Search(`Tag:"lang:ada"`, 100, HighlightDescription)
 	fmt.Printf("%+v\n", r)
 
 	// b.FacetQueryExperiment()

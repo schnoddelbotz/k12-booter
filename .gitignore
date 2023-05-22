@@ -94,3 +94,6 @@ iOSInjectionProject/
 /sinebeep
 /List_of_ISO_3166_country_codes.html
 .DS_Store
+/aptbuddy_*.bleve
+/Packages.gz
+/Translation-*.bz2
