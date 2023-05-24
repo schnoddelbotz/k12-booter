@@ -88,10 +88,7 @@ fastlane/test_output
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
-/k12-booter
-/iso3166
-/flagit
-/sinebeep
+/bin
 /List_of_ISO_3166_country_codes.html
 .DS_Store
 /aptbuddy_*.bleve

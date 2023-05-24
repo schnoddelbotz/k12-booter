@@ -18,16 +18,9 @@ type Buddy struct {
 	index bleve.Index
 }
 
-func New(translation string) (*Buddy, error) {
+func FetchAndIndex(translation string) (*Buddy, error) {
 	var bud Buddy
 	var err error
-
-	// re-use existing .bleve index
-	if exists, _ := IndexExists(translation); exists {
-		bud.index, err = OpenIndex(translation)
-		fmt.Println("re-using existing .bleve index")
-		return &bud, err
-	}
 
 	// if no .bleve existed, download from debian ...
 	fmt.Printf("fetching packages+translation_%s.gz from debain ...\n", translation)
@@ -44,6 +37,11 @@ func New(translation string) (*Buddy, error) {
 	bud.Debian2Bleve(translation)
 	fmt.Printf("created new index, now open with %+v", bud.index.Stats())
 	return &bud, err
+}
+
+func Open(translation string) (*Buddy, error) {
+	idx, err := OpenIndex(translation)
+	return &Buddy{index: idx}, err
 }
 
 func (buddy *Buddy) Search(q string, s int, hilight []string) *bleve.SearchResult {
@@ -90,6 +88,32 @@ func (buddy *Buddy) FieldDict(fieldname string, minCount uint64, maxCount uint64
 	}
 	println()
 	return nil
+}
+
+func OpenIndex(translation string) (a bleve.Index, e error) {
+	a, e = bleve.Open(getIndexFilename(translation))
+	return
+}
+
+func IndexExists(translation string) (bool, error) {
+	idx, e := bleve.Open(getIndexFilename(translation))
+	if e != nil {
+		return false, e
+	}
+	return true, idx.Close()
+}
+
+func CreateIndex(translation string) error {
+	mapping := bleve.NewIndexMapping()
+	idx, err := bleve.New(getIndexFilename(translation), mapping)
+	if err != nil {
+		return err
+	}
+	return idx.Close()
+}
+
+func getIndexFilename(translation string) string {
+	return fmt.Sprintf("aptbuddy_%s.bleve", translation) // path?
 }
 
 func (buddy *Buddy) Close() error {

@@ -1,11 +1,20 @@
 
 K12_VERSION := $(shell git describe --tags | cut -dv -f2)
-LDFLAGS := -X main.AppVersion=$(K12_VERSION)
+LDFLAGS := -X schnoddelbotz/k12-booter/cmd/k12-booter/cmd.AppVersion=$(K12_VERSION)
 
-all: k12-booter
+all: k12-booter aptbuddy sinebeep
 
-k12-booter: *.go
-	go build -ldflags='$(LDFLAGS)'
+k12-booter: bin/k12-booter
+bin/k12-booter: cmd/k12-booter/main.go cmd/k12-booter/cmd/*.go
+	cd bin && go build -ldflags='$(LDFLAGS)' ../cmd/k12-booter
+
+aptbuddy: bin/aptbuddy
+bin/aptbuddy: cmd/aptbuddy/main.go cmd/aptbuddy/cmd/*.go
+	cd bin && go build -ldflags='$(LDFLAGS)' ../cmd/aptbuddy
+
+sinebeep: bin/sinebeep
+bin/sinebeep: cmd/sinebeep/main.go
+	cd bin && go build ../cmd/sinebeep
 
 internationalization/countrydata.go: iso3166
 	./iso3166 > internationalization/countrydata.go 
@@ -19,8 +28,7 @@ flagit: internationalization/flagit/*.go
 	banner -w 40 k12 | ./flagit 
 	cowsay k12-booter | lolcat
 
-sinebeep: sounds/sinebeep/*.go 
-	cd sounds/sinebeep && go build -o ../../sinebeep
+#
 
 playsine: sinebeep
 	./sinebeep -duration 150 cCdDefFgGaAb^:cCdDefFgGaAb^:cCdDefFgGaAbbAaGgFfeDdCcVbAaGgFfeDdCcVXbAaGgFfeDdCc
@@ -40,13 +48,15 @@ playsine: sinebeep
 	./sinebeep -duration 200 ^^cVee^cc,Vee^ccVefedddbb,ddbbdedcccaa,ccaacdcVbbb^aVb^aa & \
 	./sinebeep -duration 200 ^^^cVee^cc,Vee^ccVefedddbb,ddbbdedcccaa,ccaacdcVbbb^aVb^aa
 
-apt-bleve-experiment: k12-booter install-bleve-cli
-	./k12-booter -apt
+apt-bleve-experiment: aptbuddy install-bleve-cli
+	./bin/aptbuddy index
 	bleve query aptbuddy_en.bleve 'Section:math^100 Description:transitional^-100 Package:/common/^-100' --fields
 
 install-bleve-cli:
 	go install github.com/blevesearch/bleve/v2/cmd/bleve@latest
 
 clean:
-	rm -f k12-booter iso3166 flagit sinebeep
-	# rm -rf aptbuddy_en.bleve/
+	cd bin && rm -f k12-booter iso3166 flagit sinebeep aptbuddy
+
+realclean: clean 
+	rm -rf aptbuddy_en.bleve/ Packages.gz Translation-??.bz2
