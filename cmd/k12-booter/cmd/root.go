@@ -12,7 +12,7 @@ import (
 var cfgFile string
 
 var rootCmd = &cobra.Command{
-	Use:   "cmd",
+	Use:   "k12-booter",
 	Short: "A brief description of your application",
 	Long: `k12-booter is an EXPERIMENT, exploring ways to make OpenSource educational
 software more accessible - and ease deployment on one or more machines. 
