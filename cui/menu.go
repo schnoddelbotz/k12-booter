@@ -212,6 +212,23 @@ var AppMenu = []MenuItem{
 			return nil
 		},
 	},
+	{
+		Label:    "Toggle Teacher DNS SD",
+		Parent:   Menu_Preferences,
+		itemType: LinkFunc,
+		linkFunc: func(a *App) error {
+			a.destroyMenu()
+			handler := func(b bool) error {
+				a.printlnMain(fmt.Sprintf("> preference enable_teacher set to: %v", b))
+				viper.Set(ConfigEnableTeacher, b)
+				viper.WriteConfig()
+				a.DestroyDialogBool(a.gui, nil)
+				return nil
+			}
+			a.DisplayDialogBool("Enable teacher mode bonjour", viper.GetBool(ConfigEnableTeacher), handler)
+			return nil
+		},
+	},
 }
 
 func (app *App) menuLayoutFunc() (*gocui.View, error) {

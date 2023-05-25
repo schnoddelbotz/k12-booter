@@ -15,5 +15,5 @@ func RunPOST(output io.Writer) {
 		fmt.Fprintf(output, "POST %d", i)
 		time.Sleep(200 * time.Millisecond)
 	}
-	fmt.Fprintf(output, "POST DONE")
+	fmt.Fprintf(output, "POST DONE\n")
 }

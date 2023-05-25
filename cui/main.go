@@ -14,17 +14,18 @@ import (
 )
 
 const (
-	ViewTopMenu       = "topmenu"
-	ViewMain          = "main"
-	ViewShortcuts     = "shortcuts"
-	ViewCommand       = "command"
-	ViewLocale        = "locale"
-	ViewPrompt        = "prompt"
-	ViewHelp          = "help"
-	ViewMenu          = "menu"
-	ViewDialog        = "dialog"
-	ConfigDisablePOST = "disable_post"
-	ConfigDisableSFX  = "disable_sfx"
+	ViewTopMenu         = "topmenu"
+	ViewMain            = "main"
+	ViewShortcuts       = "shortcuts"
+	ViewCommand         = "command"
+	ViewLocale          = "locale"
+	ViewPrompt          = "prompt"
+	ViewHelp            = "help"
+	ViewMenu            = "menu"
+	ViewDialog          = "dialog"
+	ConfigDisablePOST   = "disable_post"
+	ConfigDisableSFX    = "disable_sfx"
+	ConfigEnableTeacher = "enable_teacher"
 )
 
 type App struct {

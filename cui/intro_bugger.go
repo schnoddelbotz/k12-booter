@@ -3,8 +3,11 @@ package cui
 import (
 	"fmt"
 	"log"
+	"os/user"
 	"schnoddelbotz/k12-booter/diagnostics"
+	"schnoddelbotz/k12-booter/dnssd"
 	"schnoddelbotz/k12-booter/sounds"
+	"schnoddelbotz/k12-booter/utility"
 	"time"
 
 	"github.com/jroimartin/gocui"
@@ -48,6 +51,18 @@ func (app *App) bugger() {
 		diagnostics.RunPOST(e)
 	}
 	go sounds.PlayIt(sounds.Maelstrom_AllRight, app.otoCtx)
+
+	if viper.GetBool(ConfigEnableTeacher) {
+		u, err := user.Current()
+		utility.Fatal(err)
+		app.gui.Update(func(g *gocui.Gui) error {
+			fmt.Fprintf(e, "Enabling DNS-SD/bonjour discovery of this node as teacher '%s'\n", u.Username)
+			return nil
+		})
+		go dnssd.RegisterTeacherService(u.Username)
+	}
+
+	time.Sleep(100 * time.Millisecond)
 	app.gui.Update(func(g *gocui.Gui) error {
 		fmt.Fprintf(e, "\n> k12-booter v%s (%s/%s) is ready\n", app.version, si.OS, si.Architecture)
 		return nil
