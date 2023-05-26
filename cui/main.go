@@ -5,6 +5,7 @@ import (
 	"log"
 	"schnoddelbotz/k12-booter/internationalization"
 	"schnoddelbotz/k12-booter/sounds"
+	"schnoddelbotz/k12-booter/ws"
 	"strings"
 	"time"
 
@@ -41,6 +42,7 @@ type App struct {
 	userCommands    chan string
 	version         string
 	otoCtx          *oto.Context
+	chatServer      *ws.ChatServer
 }
 
 type ViewIdentifier string

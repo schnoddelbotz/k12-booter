@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"schnoddelbotz/k12-booter/diagnostics"
 	"schnoddelbotz/k12-booter/sounds"
+	"strings"
 	"time"
 
 	"github.com/jroimartin/gocui"
@@ -50,9 +51,14 @@ func (app *App) userCommandExecutor() {
 		fmt.Fprintf(e, "< \033[33;1m%s\033[0m\n", x)
 		if f, ok := actionMap[x]; ok {
 			f()
+		} else if strings.HasPrefix(x, "all") {
+			if app.chatServer != nil {
+				// todo HANDLE input, publish if OK ... and let clients act upon. TRUST!!!?
+				app.chatServer.Publish([]byte("haha - teacher command " + x))
+			} else {
+				fmt.Fprintf(e, "> Error: \033[31;1m%s\033[0m not enabled in preferences\n", "bonjour/teacher-mode")
+			}
 		} else {
-			// next ... command with arguments m(
-
 			// for now ...
 			sounds.PlayIt(sounds.Maelstrom_MaleOop, app.otoCtx)
 			app.gui.Update(func(g *gocui.Gui) error {

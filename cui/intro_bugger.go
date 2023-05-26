@@ -8,6 +8,7 @@ import (
 	"schnoddelbotz/k12-booter/dnssd"
 	"schnoddelbotz/k12-booter/sounds"
 	"schnoddelbotz/k12-booter/utility"
+	"schnoddelbotz/k12-booter/ws"
 	"time"
 
 	"github.com/jroimartin/gocui"
@@ -60,6 +61,13 @@ func (app *App) bugger() {
 			return nil
 		})
 		go dnssd.RegisterTeacherService(u.Username)
+
+		app.gui.Update(func(g *gocui.Gui) error {
+			fmt.Fprintf(e, "Running teacher websocket server on port '%s'\n", ":8888")
+			return nil
+		})
+		app.chatServer = ws.NewChatServer()
+		go ws.RunWebsocketServer(":8888", app.chatServer)
 	}
 
 	time.Sleep(100 * time.Millisecond)
