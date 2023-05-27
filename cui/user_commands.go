@@ -2,6 +2,7 @@ package cui
 
 import (
 	"fmt"
+	"log"
 	"schnoddelbotz/k12-booter/diagnostics"
 	"schnoddelbotz/k12-booter/sounds"
 	"strings"
@@ -51,13 +52,35 @@ func (app *App) userCommandExecutor() {
 		fmt.Fprintf(e, "< \033[33;1m%s\033[0m\n", x)
 		if f, ok := actionMap[x]; ok {
 			f()
-		} else if strings.HasPrefix(x, "all") {
+		} else if strings.HasPrefix(x, "all") || x == "who" {
 			if app.chatServer != nil {
+				if x == "who" {
+					app.gui.Update(func(g *gocui.Gui) error {
+						who := app.chatServer.Who()
+						fmt.Fprintf(e, "> \033[37;1mwho\033[0m - %d users connected.\n", len(who))
+						for _, w := range who {
+							fmt.Fprintf(e, "> %s - details tbd\n", w)
+						}
+						return nil
+					})
+					continue
+				}
 				// todo HANDLE input, publish if OK ... and let clients act upon. TRUST!!!?
 				app.chatServer.Publish([]byte("haha - teacher command " + x))
 			} else {
 				fmt.Fprintf(e, "> Error: \033[31;1m%s\033[0m not enabled in preferences\n", "bonjour/teacher-mode")
 			}
+		} else if strings.HasPrefix(x, "join") {
+			if app.chatServer != nil {
+				log.Printf("teacher shall not / can not join other class")
+				continue
+			}
+			log.Println("Joining first teacher found on local network ...")
+			log.Println("Note: PoC. Not secure. Not ready for general use.")
+			log.Println("Should provide chooser, if no /well-known/ found or so.")
+			// todo:
+			// - browse / async
+			// - connct to first/given browse result /subscribe, process commands from teacher
 		} else {
 			// for now ...
 			sounds.PlayIt(sounds.Maelstrom_MaleOop, app.otoCtx)

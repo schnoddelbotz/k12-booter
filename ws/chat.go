@@ -52,6 +52,15 @@ func NewChatServer() *ChatServer {
 type subscriber struct {
 	msgs      chan []byte
 	closeSlow func()
+	name      string
+}
+
+func (cs *ChatServer) Who() []string {
+	var result []string
+	for s, _ := range cs.subscribers {
+		result = append(result, s.name)
+	}
+	return result
 }
 
 func (cs *ChatServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -117,6 +126,7 @@ func (cs *ChatServer) subscribe(ctx context.Context, c *websocket.Conn) error {
 		closeSlow: func() {
 			c.Close(websocket.StatusPolicyViolation, "connection too slow to keep up with messages")
 		},
+		name: "TODO",
 	}
 	cs.addSubscriber(s)
 	defer cs.deleteSubscriber(s)

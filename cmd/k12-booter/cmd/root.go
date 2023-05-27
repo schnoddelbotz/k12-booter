@@ -48,6 +48,7 @@ func initConfig() {
 		viper.SetConfigType("yaml")
 		viper.SetConfigName(".k12booter")
 	}
+	viper.SetEnvPrefix("K12B")
 	viper.AutomaticEnv() // read in environment variables that match
 
 	// If a config file is found, read it in.

@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/jroimartin/gocui"
+	"github.com/spf13/viper"
 )
 
 type HotKey struct {
@@ -32,6 +33,8 @@ const (
 	Label_Mask = "Mask"
 	Label_Quit = "Quit"
 	Label_Menu = "Menu"
+	Label_Join = "Join"
+	Label_Who  = "Who"
 	Label_CLS  = "CLS"
 )
 
@@ -122,6 +125,16 @@ func (app *App) keyHandlerMask(g *gocui.Gui, v *gocui.View) error {
 	return nil
 }
 
+func (app *App) keyHandlerJoin(g *gocui.Gui, v *gocui.View) error {
+	app.userCommands <- "join"
+	return nil
+}
+
+func (app *App) keyHandlerWho(g *gocui.Gui, v *gocui.View) error {
+	app.userCommands <- "who"
+	return nil
+}
+
 func (app *App) sendUserCommandCLS(g *gocui.Gui, v *gocui.View) error {
 	app.userCommands <- "cls"
 	return nil
@@ -181,13 +194,23 @@ func (app *App) handleUserCommand(g *gocui.Gui, v *gocui.View) error {
 }
 
 func (app *App) InitHotkeysWidget() {
+	HotKeyF3 := HotKey{
+		ViewName: HotKeyView_F3,
+		Key:      gocui.KeyF3,
+		Label:    Label_Join,
+		Handler:  app.keyHandlerJoin,
+	}
+	if viper.GetViper().GetBool(ConfigEnableTeacher) {
+		HotKeyF3.Label = Label_Who
+		HotKeyF3.Handler = app.keyHandlerWho
+	}
 	app.hotkeysWidget = &Widget{
 		Title: "",
 		Name:  "",
 		HotKeys: []HotKey{
 			{ViewName: HotKeyView_F1, Key: gocui.KeyF1, Label: Label_Help, Handler: app.keyHandlerHelp},
 			{ViewName: HotKeyView_F2, Key: gocui.KeyF2, Label: Label_Menu, Handler: app.keyHandlerToggleMenu},
-			{ViewName: HotKeyView_F3, Key: gocui.KeyF3, Handler: app.voidKeyHandler},
+			HotKeyF3,
 			{ViewName: HotKeyView_F4, Key: gocui.KeyF4, Handler: app.voidKeyHandler},
 			{ViewName: HotKeyView_F5, Key: gocui.KeyF5, Handler: app.voidKeyHandler},
 			{ViewName: HotKeyView_F6, Key: gocui.KeyF6, Handler: app.voidKeyHandler},
