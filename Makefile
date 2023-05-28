@@ -8,6 +8,9 @@ k12-booter: bin/k12-booter
 bin/k12-booter: cmd/k12-booter/main.go cmd/k12-booter/cmd/*.go
 	cd bin && go build -ldflags='$(LDFLAGS)' ../cmd/k12-booter
 
+run-k12b-teacher: k12-booter
+	env K12B_ENABLE_TEACHER=true ./bin/k12-booter
+
 aptbuddy: bin/aptbuddy
 bin/aptbuddy: cmd/aptbuddy/main.go cmd/aptbuddy/cmd/*.go
 	cd bin && go build -ldflags='$(LDFLAGS)' ../cmd/aptbuddy

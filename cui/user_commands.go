@@ -1,14 +1,18 @@
 package cui
 
 import (
+	"context"
 	"fmt"
-	"log"
 	"schnoddelbotz/k12-booter/diagnostics"
+	"schnoddelbotz/k12-booter/dnssd"
 	"schnoddelbotz/k12-booter/sounds"
+	"schnoddelbotz/k12-booter/utility"
+	"schnoddelbotz/k12-booter/ws"
 	"strings"
 	"time"
 
 	"github.com/jroimartin/gocui"
+	"github.com/pkg/browser"
 )
 
 func (app *App) userCommandExecutor() {
@@ -66,18 +70,65 @@ func (app *App) userCommandExecutor() {
 					continue
 				}
 				// todo HANDLE input, publish if OK ... and let clients act upon. TRUST!!!?
-				app.chatServer.Publish([]byte("haha - teacher command " + x))
+				url, _ := strings.CutPrefix(x, "all ")
+				app.chatServer.Publish([]byte(url))
 			} else {
 				fmt.Fprintf(e, "> Error: \033[31;1m%s\033[0m not enabled in preferences\n", "bonjour/teacher-mode")
 			}
 		} else if strings.HasPrefix(x, "join") {
 			if app.chatServer != nil {
-				log.Printf("teacher shall not / can not join other class")
+				app.gui.Update(func(g *gocui.Gui) error {
+					fmt.Fprintln(e, "> teacher shall not / can not join other class")
+					return nil
+				})
 				continue
 			}
-			log.Println("Joining first teacher found on local network ...")
-			log.Println("Note: PoC. Not secure. Not ready for general use.")
-			log.Println("Should provide chooser, if no /well-known/ found or so.")
+			if app.wsClientConn != nil {
+				app.gui.Update(func(g *gocui.Gui) error {
+					fmt.Fprintln(e, "> Cannot join more - already connected.")
+					return nil
+				})
+				continue
+			}
+			app.gui.Update(func(g *gocui.Gui) error {
+				fmt.Fprintln(e, "> PoC: Joining first teacher found on local network - browsing ...")
+				return nil
+			})
+			x := dnssd.BrowseSingle()
+			app.gui.Update(func(g *gocui.Gui) error {
+				fmt.Fprintf(e, "> Connecting to teacher %s at %s:%d\n", x.Instance, x.AddrIPv4, x.Port)
+				return nil
+			})
+			// conntect to ws IP now ...
+			var err error
+			app.wsClientConn, err = ws.ConnectToTeacherWS(fmt.Sprintf("http://%s:%d", x.AddrIPv4, x.Port))
+			utility.Fatal(err)
+
+			app.gui.Update(func(g *gocui.Gui) error {
+				fmt.Fprintln(e, "> Client connected successfully")
+				return nil
+			})
+
+			go func() {
+				ctx, cancel := context.WithTimeout(context.Background(), time.Minute*10)
+				defer cancel()
+
+				for {
+					_, message, err := app.wsClientConn.Read(ctx)
+					if err != nil {
+						utility.Fatal(err)
+					}
+					// log.Printf("Received %v", message)
+					app.gui.Update(func(g *gocui.Gui) error {
+						fmt.Fprintf(e, "> Received %v\n", string(message))
+						// HORROR DEMO FIXME SECURITY ETC. Thanks.
+						browser.OpenURL(string(message))
+						return nil
+					})
+				}
+			}()
+			// log.Println("Note: PoC. Not secure. Not ready for general use.")
+			// log.Println("Should provide chooser, if no /well-known/ found or so.")
 			// todo:
 			// - browse / async
 			// - connct to first/given browse result /subscribe, process commands from teacher

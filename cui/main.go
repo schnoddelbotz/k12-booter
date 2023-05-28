@@ -12,6 +12,7 @@ import (
 	"github.com/hajimehoshi/oto/v2"
 	"github.com/jroimartin/gocui"
 	"github.com/spf13/viper"
+	"nhooyr.io/websocket"
 )
 
 const (
@@ -42,7 +43,8 @@ type App struct {
 	userCommands    chan string
 	version         string
 	otoCtx          *oto.Context
-	chatServer      *ws.ChatServer
+	chatServer      *ws.ChatServer  // teacher server
+	wsClientConn    *websocket.Conn // pupil to teacher connection
 }
 
 type ViewIdentifier string

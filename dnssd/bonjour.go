@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 	"os/signal"
+	"schnoddelbotz/k12-booter/utility"
 	"time"
 
 	"github.com/oleksandr/bonjour"
@@ -35,6 +36,21 @@ func Browse() {
 	}
 
 	select {}
+}
+
+func BrowseSingle() *bonjour.ServiceEntry {
+	resolver, err := bonjour.NewResolver(nil)
+	utility.Fatal(err)
+	results := make(chan *bonjour.ServiceEntry)
+	err = resolver.Browse("_k12booter._tcp", "local.", results)
+	utility.Fatal(err)
+	var result *bonjour.ServiceEntry
+	for e := range results {
+		result = e
+		resolver.Exit <- true
+		return result
+	}
+	return nil
 }
 
 func Lookup(instance string) {
@@ -71,7 +87,11 @@ func RegisterTeacherService(teacherName string) {
 	// ... and all pupils' devices would do just that.
 
 	// Run registration (blocking call)
-	s, err := bonjour.Register(teacherName, "_k12booter._tcp", "", 9999, []string{"txtv=1", "app=k12booter"}, nil)
+	// &{ServiceRecord:{Instance:jan Service:_k12booter._tc|
+	// |p Domain:local. serviceName: serviceInstanceName: serviceTypeName:} HostName:j|
+	// |mbair.local. Port:9999 Text:[txtv=1 app=k12booter] TTL:3200 AddrIPv4:192.168.7|
+	// |8.144 AddrIPv6:fd2f:bf00:ae78:...}
+	s, err := bonjour.Register(teacherName, "_k12booter._tcp", "", 8888, []string{"txtv=1", "app=k12booter"}, nil)
 	if err != nil {
 		log.Fatalln(err.Error())
 	}
