@@ -44,11 +44,16 @@ func BrowseSingle() *bonjour.ServiceEntry {
 	results := make(chan *bonjour.ServiceEntry)
 	err = resolver.Browse("_k12booter._tcp", "local.", results)
 	utility.Fatal(err)
-	var result *bonjour.ServiceEntry
 	for e := range results {
-		result = e
+		if e.AddrIPv4 == nil && e.Instance != "" && e.Domain != "" {
+			// first response of k12-booter after startup+registration had IP=nil :-/
+			// happened on windows and linux if waiting for a teacher to pop up
+			// joining later would work. hack, did not look ... just retry m(
+			time.Sleep(1 * time.Second)
+			return BrowseSingle()
+		}
 		resolver.Exit <- true
-		return result
+		return e
 	}
 	return nil
 }
