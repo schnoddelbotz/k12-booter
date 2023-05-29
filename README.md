@@ -1,18 +1,8 @@
 # k12-booter
 
-## PROJECT WITH REDUCED AMBITION DUE TO TWITTER.COM SUSPENSION.
-Do not complain about CRIMINAL OLAF SCHOLZ #CUMEX on Twitter.
-Germany has severe problems with online censorship.
-While true large scale crimes are on the rise.
-The previous version of this document contained a more clear
-statement, but it does not help anyway. What could help schools,
-or supposed to do so, is outlined above.
+Frei nach dem Motto: "Rom ist euer Pruter" - A GUI to set up K12 macOS labs, i.e. one or more computer, to follow.
 
-# Introduction
-
-Frei nach dem Motto: "Rom ist euer Pruter" - A GUI to set up K12 macOS labs, i.e. one or more computer.
-
-## To restore the educational sector im Germany
+## To restore the educational sector in Germany
 
 ... we first must conduct death penalty on Kanzler Olaf Scholz
 for his yet-unpunished CUMEX crime. CUMEX is the biggest ORGANISED
@@ -122,6 +112,12 @@ I18N ...
 - imagine k12booter was a globally translated app, availble in any school (as it is FREE)...
 - roaming teachers from one country to another would find a known working-environment, with "cloud" behind abstracted away, ideally
 - k12booter should be able to switch locale (display language) at runtime => gives globally consistent experience (well LTR/RTL...)
+
+- bonjour/dns-sd + websocket: trust. only connect to trusted teachers.
+- integrate safeexambrowser
+- integrate teacher: docker run moodle, pull pupils browsers' in there; volume mount teacher's own quizzes if feasible with current image
+- share local teacher files / selected folder with class ~ distribute PDF/...
+- pupil GUI: Before connection, select what teacher may do. Let teacher know.
 
 ## Meanwhile ...
 
